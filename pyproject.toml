@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "human-physiology-ai999x"
+version = "1.0.0"
+description = "Offline human physiology calculator: cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR (CKD-EPI 2021), Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate, with steps, LaTeX and honest refusals (computed values, not medical advice)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "AI999X Labs", email = "support@ai999x.com"}, {name = "Ibnul Jaif Farabi", email = "ibnuljaiffarabi@ai999x.com"}]
+maintainers = [{name = "AI999X Labs", email = "support@ai999x.com"}]
+keywords = ["human physiology", "physiology", "cardiac output", "blood pressure", "vascular resistance", "Poiseuille", "lung volumes", "alveolar gas equation", "oxygen content", "oxyhemoglobin dissociation", "Henderson-Hasselbalch", "renal clearance", "GFR", "CKD-EPI 2021", "Nernst", "Goldman-Hodgkin-Katz", "cable theory", "body surface area", "basal metabolic rate", "ai999x", "offline", "cpu", "stem", "education", "step-by-step", "latex", "solver"]
+classifiers = ["License :: OSI Approved :: Apache Software License", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only", "Operating System :: OS Independent", "Intended Audience :: Education", "Intended Audience :: Science/Research", "Intended Audience :: Developers", "Topic :: Scientific/Engineering", "Topic :: Education", "Development Status :: 5 - Production/Stable"]
+dependencies = ["sympy>=1.12", "mpmath>=1.3"]
+
+[project.optional-dependencies]
+search = ["onnxruntime>=1.17", "tokenizers>=0.15", "numpy>=1.24"]
+plot = ["matplotlib>=3.7"]
+all = ["matplotlib>=3.7", "numpy>=1.24", "onnxruntime>=1.17", "tokenizers>=0.15"]
+
+[project.scripts]
+human-physiology-ai999x = "human_physiology_ai999x.cli:main"
+
+[project.urls]
+"Source" = "https://github.com/AI999X/human-physiology-ai999x"
+"Issues" = "https://github.com/AI999X/human-physiology-ai999x/issues"
+"Homepage" = "https://ai999x.com"
+"Hugging Face" = "https://huggingface.co/AI999X/human-physiology-ai999x"
+"Funding" = "https://buymeacoffee.com/ibnuljaiffarabi"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+human_physiology_ai999x = ["pack/*.json", "pack/*/*.json", "pack/*.sqlite", "pack/capabilities/*.py", "pack/search/*.onnx"]
