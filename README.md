@@ -4,7 +4,7 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/human-physiology-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/human-physiology-ai999x/)** · **[Guides](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.0
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.1.0
 
 Field: **Life Sciences** · Tasks: Question Answering, Sentence Similarity, Feature Extraction
 
@@ -20,26 +20,13 @@ human-physiology-ai999x is an offline, deterministic Python solver that answers 
 
 | Way to run it | For | Get it |
 |---|---|---|
-| **AI999X Human Physiology desktop app** 1.2.0 | Windows, Linux — this model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-human-physiology-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz) |
-| **AI999X desktop app** 1.2.0 | Windows, Linux — every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-1.2.0-linux-x86_64.tar.gz) |
-| **Command line** (`human-physiology`) | Windows, Linux — one program per model, offline, no Python | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz) |
+| **AI999X Human Physiology desktop app** 1.4.0 | Windows, Linux — this model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-human-physiology-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-human-physiology-1.4.0-linux-x86_64.tar.gz) |
+| **AI999X desktop app** 1.4.0 | Windows, Linux — every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz) |
+| **Command line** (`human-physiology`) | Windows, Linux — one program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz) |
 | **In your browser** | any device — nothing to install | [Compute on the model page](https://www.ai999x.com/models/human-physiology-ai999x/#try) |
 | **Python** | Python 3.10+ | `pip install human-physiology-ai999x` |
 
-Checksums: [SHA256SUMS](https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS) · every version: [https://www.ai999x.com/downloads/desktop/latest/](https://www.ai999x.com/downloads/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
-
-## Rust versions
-
-Human Physiology also comes as native programs compiled from Rust, version 1.2.0 of the AI999X desktop app and command line: they run offline on your computer and need no Python. Each file is in this repository's `rust/` folder, on the [GitHub release v1.0.0](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.0.0) and on the website.
-
-| Program | System | File | Size | Download | Use |
-|---|---|---|---|---|---|
-| Desktop app (Human Physiology) | Windows x86-64 | `ai999x-human-physiology-1.2.0-windows-x86_64.zip` | 7.1 MB | [Hub](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/rust/ai999x-human-physiology-1.2.0-windows-x86_64.zip) · [GitHub](https://github.com/AI999X/human-physiology-ai999x/releases/download/v1.0.0/ai999x-human-physiology-1.2.0-windows-x86_64.zip) · [website](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-human-physiology-1.2.0-windows-x86_64.zip) | unzip, then double-click `ai999x-human-physiology.exe` (no installer) |
-| Desktop app (Human Physiology) | Linux x86-64 | `ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz` | 8.0 MB | [Hub](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/rust/ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz) · [GitHub](https://github.com/AI999X/human-physiology-ai999x/releases/download/v1.0.0/ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz) · [website](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz) | extract, then run `./ai999x-human-physiology` (X11 or Wayland desktop) |
-| Command line (`human-physiology`) | Windows x86-64 | `ai999x-human-physiology-cli-1.2.0-windows-x86_64.zip` | 2.9 MB | [Hub](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/rust/ai999x-human-physiology-cli-1.2.0-windows-x86_64.zip) · [GitHub](https://github.com/AI999X/human-physiology-ai999x/releases/download/v1.0.0/ai999x-human-physiology-cli-1.2.0-windows-x86_64.zip) · [website (all models)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-windows-x86_64.zip) | unzip, then `human-physiology.exe ask "<question>"` or `human-physiology.exe solve <capability> name=value` |
-| Command line (`human-physiology`) | Linux x86-64 | `ai999x-human-physiology-cli-1.2.0-linux-x86_64.tar.gz` | 2.8 MB | [Hub](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/rust/ai999x-human-physiology-cli-1.2.0-linux-x86_64.tar.gz) · [GitHub](https://github.com/AI999X/human-physiology-ai999x/releases/download/v1.0.0/ai999x-human-physiology-cli-1.2.0-linux-x86_64.tar.gz) · [website (all models)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz) | extract, then `./human-physiology ask "<question>"` or `./human-physiology solve <capability> name=value` |
-
-The command-line archive holds `human-physiology` with a README of its commands and examples, the licence and the notice. Checksums: [`rust/SHA256SUMS`](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/rust/SHA256SUMS) (`sha256sum -c SHA256SUMS`).
+Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
 
 ## Quick start
 
@@ -50,11 +37,11 @@ Download **AI999X Human Physiology** for your system (above), unpack it and star
 Linux, from a terminal:
 
 ```bash
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-human-physiology-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz
-./ai999x-human-physiology-1.2.0-linux-x86_64/ai999x-human-physiology
+tar xzf ai999x-human-physiology-1.4.0-linux-x86_64.tar.gz
+./ai999x-human-physiology-1.4.0-linux-x86_64/ai999x-human-physiology
 ```
 
 ### Command line
@@ -62,23 +49,23 @@ tar xzf ai999x-human-physiology-1.2.0-linux-x86_64.tar.gz
 Linux:
 
 ```bash
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.2.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.2.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 human-physiology --version
 ```
 
 Windows (PowerShell):
 
 ```powershell
-$F = "ai999x-cli-1.2.0-windows-x86_64.zip"
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.2.0/$F" -OutFile $F
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.4.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.2.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 human-physiology --version
 ```
@@ -285,7 +272,7 @@ Browser: [open this capability on the model page](https://www.ai999x.com/models/
 
 | Property | Value |
 |---|---|
-| Package | `human-physiology-ai999x` 1.0.0 (import `human_physiology_ai999x`) |
+| Package | `human-physiology-ai999x` 1.1.0 (import `human_physiology_ai999x`) |
 | Type | Deterministic neuro-symbolic human physiology engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 96 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -319,7 +306,7 @@ human_physiology.ask("Who created you?").message
 # -> human-physiology-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.0.0.
+The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.1.0.
 
 ## How every answer is verified
 
@@ -458,10 +445,10 @@ _dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), w
 ## Citation
 
 ```bibtex
-@software{human_physiology_ai999x_1_0_0,
+@software{human_physiology_ai999x_1_1_0,
   title  = {human-physiology-ai999x: an offline, verified human physiology solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.0.0},
+  year   = {2026}, version = {1.1.0},
   url    = {https://huggingface.co/AI999X/human-physiology-ai999x}
 }
 ```
