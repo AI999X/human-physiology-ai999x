@@ -195,7 +195,7 @@ Call `solve("<id>", **inputs)` with plain numbers; the result's `values` holds e
 
 <a id="hp_cardiac_output"></a>
 
-### Cardiac output from heart rate and stroke volume — `hp_cardiac_output`
+### Cardiac output from heart rate and stroke volume, `hp_cardiac_output`
 
 Cardiac output $CO = HR$ x SV, in L/min and mL/min.
 
@@ -216,6 +216,14 @@ $$
 - **Method:** $CO = HR$ $SV / 1000$
 - **Assumes:** $HR > 0$; $SV > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![CO (cardiac output in L/min) against HR (heart rate in beats/min) from 36 to 108](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-cardiac-output-curve)
+
+*CO (cardiac output in L/min) against HR (heart rate in beats/min) from 36 to 108. One curve for each value of SV (stroke volume (e.g. in mL)): 7.0000e-05 m^3, 3.5000e-05 m^3, 0.00014 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, HR = 72, CO = 5.04.*
+
+![CO (cardiac output in L/min) over HR (heart rate in beats/min) from 36 to 108 and SV (stroke volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-cardiac-output-field)
+
+*CO (cardiac output in L/min) over HR (heart rate in beats/min) from 36 to 108 and SV (stroke volume (e.g. in mL)) from 3.5000e-05 m^3 to 0.000105 m^3: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 1.26 to dark 11.34); iso-lines at CO = 2, 4, 6, 8, 10. Marked: the worked example, HR = 72, SV = 7.0000e-05 m^3, CO = 5.04.*
 
 ```python
 human_physiology_ai999x.solve('hp_cardiac_output', HR=72, SV=7e-05)
@@ -239,7 +247,7 @@ human_physiology_ai999x.solve('hp_cardiac_output', HR=60, SV=7.999999999999999e-
 
 <a id="hp_stroke_volume_ef"></a>
 
-### Stroke volume and ejection fraction — `hp_stroke_volume_ef`
+### Stroke volume and ejection fraction: `hp_stroke_volume_ef`
 
 Stroke volume SV = EDV - ESV and ejection fraction EF = SV/EDV from end-diastolic and end-systolic volumes.
 
@@ -261,6 +269,14 @@ $$
 - **Method:** SV = EDV - ESV; EF = SV/EDV
 - **Assumes:** 0 <= ESV < EDV
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![EF (ejection fraction (fraction)) against EDV (end-diastolic volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-stroke-volume-ef-curve)
+
+*EF (ejection fraction (fraction)) against EDV (end-diastolic volume (e.g. in mL)) from 6.0000e-05 m^3 to 0.00018 m^3. One curve for each value of ESV (end-systolic volume (e.g. in mL)): 5.0000e-05 m^3, 2.5000e-05 m^3, 1.0000e-04 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, EDV = 0.00012 m^3, EF = 0.583333.*
+
+![EF (ejection fraction (fraction)) over EDV (end-diastolic volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-stroke-volume-ef-field)
+
+*EF (ejection fraction (fraction)) over EDV (end-diastolic volume (e.g. in mL)) from 6.0000e-05 m^3 to 0.00018 m^3 and ESV (end-systolic volume (e.g. in mL)) from 2.5000e-05 m^3 to 7.5000e-05 m^3: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.00793651 to dark 0.861111); iso-lines at EF = 0.2, 0.4, 0.6, 0.8; blank cells: inputs the capability refuses. Marked: the worked example, EDV = 0.00012 m^3, ESV = 5.0000e-05 m^3, EF = 0.583333.*
 
 ```python
 human_physiology_ai999x.solve('hp_stroke_volume_ef', EDV=0.00011999999999999999, ESV=4.9999999999999996e-05)
@@ -284,7 +300,7 @@ human_physiology_ai999x.solve('hp_stroke_volume_ef', EDV=0.00015, ESV=8.99999999
 
 <a id="hp_cardiac_index"></a>
 
-### Cardiac index and stroke volume index — `hp_cardiac_index`
+### Cardiac index and stroke volume index: `hp_cardiac_index`
 
 Cardiac index CI = CO/BSA, stroke volume $SV = CO/HR$ and stroke volume index SVI = CI/HR.
 
@@ -308,6 +324,10 @@ $$
 - **Assumes:** CO, BSA, $HR > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![CI (cardiac index in L/min/m^2) against BSA (body surface area (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-cardiac-index-curve)
+
+*CI (cardiac index in L/min/m^2) against BSA (body surface area (e.g. in m^2)) from 0.9 m^2 to 2.7 m^2. One curve for each value of CO (cardiac output (e.g. in L/min)): 8.4000e-05 m^3/s, 4.2000e-05 m^3/s, 0.000168 m^3/s. Other inputs as in the worked example: HR = 72. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, BSA = 1.8 m^2, CI = 2.8.*
+
 ```python
 human_physiology_ai999x.solve('hp_cardiac_index', CO=8.400000000000001e-05, BSA=1.8, HR=72)
 # -> CI = 2.8, SVI = 38.8889, SV = 70   (SOLVED)
@@ -330,7 +350,7 @@ human_physiology_ai999x.solve('hp_cardiac_index', CO=0.0001, BSA=2.0, HR=75)
 
 <a id="hp_fick_cardiac_output"></a>
 
-### Cardiac output by the Fick principle — `hp_fick_cardiac_output`
+### Cardiac output by the Fick principle: `hp_fick_cardiac_output`
 
 Cardiac output from oxygen consumption and the arteriovenous oxygen content difference: CO = VO2/(CaO2 - CvO2).
 
@@ -352,6 +372,10 @@ $$
 - **Method:** CO = VO2 / (10 (CaO2 - CvO2)) (contents per dL -> per L)
 - **Assumes:** $VO2 > 0$; 0 <= CvO2 < CaO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![CO (cardiac output in L/min) against CaO2 (arterial oxygen content in mL O2/dL) from 10 to 30](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fick-cardiac-output-curve)
+
+*CO (cardiac output in L/min) against CaO2 (arterial oxygen content in mL O2/dL) from 10 to 30. One curve for each value of VO2 (oxygen consumption (e.g. in mL/min)): 4.1667e-06 m^3/s, 2.0833e-06 m^3/s, 8.3333e-06 m^3/s. Other inputs as in the worked example: CvO2 = 15. 23 points per curve computed by human-physiology-ai999x; marked: the worked example, CaO2 = 20, CO = 5.*
 
 ```python
 human_physiology_ai999x.solve('hp_fick_cardiac_output', VO2=4.166666666666667e-06, CaO2=20, CvO2=15)
@@ -375,7 +399,7 @@ human_physiology_ai999x.solve('hp_fick_cardiac_output', VO2=5e-06, CaO2=19.5, Cv
 
 <a id="hp_fick_saturations"></a>
 
-### Fick cardiac output from hemoglobin, saturations and PO2 — `hp_fick_saturations`
+### Fick cardiac output from hemoglobin, saturations and PO2, `hp_fick_saturations`
 
 Arterial and mixed venous O2 contents (1.34 Hb $S + 0.003$ PO2) and the Fick cardiac output VO2/(CaO2 - CvO2).
 
@@ -402,6 +426,10 @@ $$
 - **Assumes:** saturations between 0 and 1; CvO2 < CaO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![CO (cardiac output in L/min) against SvO2 (mixed venous saturation (fraction)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fick-saturations-curve)
+
+*CO (cardiac output in L/min) against SvO2 (mixed venous saturation (fraction)) from 0.02 to 0.98. One curve for each value of SaO2 (arterial saturation (fraction)): 0.98, 0.26, 0.74. Other inputs as in the worked example: VO2 = 4.166666666666667e-06 m^3/s, Hb = 15, PaO2 = 12665.626804425001 Pa, PvO2 = 5332.8954966 Pa. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, SvO2 = 0.75, CO = 5.22139.*
+
 ```python
 human_physiology_ai999x.solve('hp_fick_saturations', VO2=4.166666666666667e-06, Hb=15, SaO2=0.98, SvO2=0.75, PaO2=12665.626804425001, PvO2=5332.8954966)
 # -> CO = 5.22139, CaO2 = 19.983, CvO2 = 15.195   (SOLVED)
@@ -418,7 +446,7 @@ human_physiology_ai999x.solve('hp_fick_saturations', VO2=4.166666666666667e-06, 
 
 <a id="hp_mean_arterial_pressure"></a>
 
-### Mean arterial pressure and pulse pressure — `hp_mean_arterial_pressure`
+### Mean arterial pressure and pulse pressure: `hp_mean_arterial_pressure`
 
 Pulse pressure PP = SBP - DBP and the estimated mean arterial pressure MAP = DBP + PP/3.
 
@@ -439,6 +467,14 @@ $$
 - **Method:** MAP = DBP + (SBP - DBP)/3
 - **Assumes:** SBP > DBP > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![MAP (mean arterial pressure in mmHg) against SBP (systolic pressure (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-mean-arterial-pressure-curve)
+
+*MAP (mean arterial pressure in mmHg) against SBP (systolic pressure (e.g. in mmHg)) from 7999.34 Pa to 23998 Pa. One curve for each value of DBP (diastolic pressure (e.g. in mmHg)): 10665.8 Pa, 5332.9 Pa. 25 points per curve computed by human-physiology-ai999x; marked: the worked example, SBP = 15998.7 Pa, MAP = 93.3333.*
+
+![MAP (mean arterial pressure in mmHg) over SBP (systolic pressure (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-mean-arterial-pressure-field)
+
+*MAP (mean arterial pressure in mmHg) over SBP (systolic pressure (e.g. in mmHg)) from 7999.34 Pa to 23998 Pa and DBP (diastolic pressure (e.g. in mmHg)) from 5332.9 Pa to 15998.7 Pa: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 46.6667 to dark 140); iso-lines at MAP = 60, 80, 100, 120; blank cells: inputs the capability refuses. Marked: the worked example, SBP = 15998.7 Pa, DBP = 10665.8 Pa, MAP = 93.3333.*
 
 ```python
 human_physiology_ai999x.solve('hp_mean_arterial_pressure', SBP=15998.6864898, DBP=10665.7909932)
@@ -462,7 +498,7 @@ human_physiology_ai999x.solve('hp_mean_arterial_pressure', SBP=19998.35811225, D
 
 <a id="hp_systemic_vascular_resistance"></a>
 
-### Systemic vascular resistance (total peripheral resistance) — `hp_systemic_vascular_resistance`
+### Systemic vascular resistance (total peripheral resistance), `hp_systemic_vascular_resistance`
 
 SVR = (MAP - CVP)/CO in Wood units (mmHg min/L) and in dyn s $cm^{-5}$ (exact factor 79.9934; customary 80).
 
@@ -484,6 +520,10 @@ $$
 - **Method:** SVR = (MAP - CVP)/CO; x 79.9934 for dyn s $cm^{-5}$
 - **Assumes:** MAP > CVP >= 0; $CO > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![SVR (systemic vascular resistance in mmHg min/L (Wood units)) against CO (cardiac output (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-systemic-vascular-resistance-curve)
+
+*SVR (systemic vascular resistance in mmHg min/L (Wood units)) against CO (cardiac output (e.g. in L/min)) from 4.1667e-05 m^3/s to 0.000125 m^3/s. One curve for each value of MAP (mean arterial pressure (e.g. in mmHg)): 12399 Pa, 6199.49 Pa, 24798 Pa. Other inputs as in the worked example: CVP = 399.96716224500005 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, CO = 8.3333e-05 m^3/s, SVR = 18.*
 
 ```python
 human_physiology_ai999x.solve('hp_systemic_vascular_resistance', MAP=12398.982029595001, CVP=399.96716224500005, CO=8.333333333333334e-05)
@@ -507,7 +547,7 @@ human_physiology_ai999x.solve('hp_systemic_vascular_resistance', MAP=13332.23874
 
 <a id="hp_pulmonary_vascular_resistance"></a>
 
-### Pulmonary vascular resistance and transpulmonary gradient — `hp_pulmonary_vascular_resistance`
+### Pulmonary vascular resistance and transpulmonary gradient, `hp_pulmonary_vascular_resistance`
 
 Transpulmonary gradient TPG = mPAP - PCWP and PVR = TPG/CO in Wood units and dyn s $cm^{-5.}$
 
@@ -531,6 +571,10 @@ $$
 - **Assumes:** mPAP > PCWP >= 0; $CO > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![PVR (pulmonary vascular resistance in Wood units) against CO (cardiac output (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-pulmonary-vascular-resistance-curve)
+
+*PVR (pulmonary vascular resistance in Wood units) against CO (cardiac output (e.g. in L/min)) from 4.1667e-05 m^3/s to 0.000125 m^3/s. One curve for each value of mPAP (mean pulmonary artery pressure (e.g. in mmHg)): 1999.84 Pa, 3999.67 Pa. Other inputs as in the worked example: PCWP = 1066.57909932 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, CO = 8.3333e-05 m^3/s, PVR = 1.4.*
+
 ```python
 human_physiology_ai999x.solve('hp_pulmonary_vascular_resistance', mPAP=1999.835811225, PCWP=1066.57909932, CO=8.333333333333334e-05)
 # -> PVR = 1.4, PVR_dyn = 111.991, TPG = 7   (SOLVED)
@@ -553,7 +597,7 @@ human_physiology_ai999x.solve('hp_pulmonary_vascular_resistance', mPAP=5332.8954
 
 <a id="hp_poiseuille_resistance"></a>
 
-### Poiseuille resistance of a blood vessel — `hp_poiseuille_resistance`
+### Poiseuille resistance of a blood vessel: `hp_poiseuille_resistance`
 
 Resistance to laminar flow of a cylindrical vessel $R = 8$ eta L/(pi r^4), in Pa $s/m^{3}$ and in mmHg min/mL.
 
@@ -575,6 +619,10 @@ $$
 - **Method:** $R = 8$ eta L/(pi r^4)
 - **Assumes:** eta, L, $r > 0$; steady laminar Newtonian flow in a rigid tube
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![R (resistance in Pa s/m^3) against r (vessel radius (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-poiseuille-resistance-curve)
+
+*R (resistance in Pa s/m^3) against r (vessel radius (e.g. in mm)) from 0.001 m to 0.003 m. One curve for each value of eta (blood viscosity in cP (mPa s)): 3.5, 1.75, 7. Other inputs as in the worked example: L = 0.1 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, r = 0.002 m, R = 5.5704e+07.*
 
 ```python
 human_physiology_ai999x.solve('hp_poiseuille_resistance', eta=3.5, L=0.1, r=0.002)
@@ -598,7 +646,7 @@ human_physiology_ai999x.solve('hp_poiseuille_resistance', eta=4, L=0.05, r=0.001
 
 <a id="hp_poiseuille_flow"></a>
 
-### Poiseuille flow, mean velocity and wall shear stress in a vessel — `hp_poiseuille_flow`
+### Poiseuille flow, mean velocity and wall shear stress in a vessel, `hp_poiseuille_flow`
 
 Laminar flow $Q = dP$ pi r^4/(8 eta L) through a vessel, its mean velocity and the wall shear stress 4 eta Q/(pi r^3).
 
@@ -624,6 +672,10 @@ $$
 - **Assumes:** all inputs > 0; steady laminar Newtonian flow
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Q (flow in mL/s) against r (vessel radius (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-poiseuille-flow-curve)
+
+*Q (flow in mL/s) against r (vessel radius (e.g. in mm)) from 0.001 m to 0.003 m. One curve for each value of dP (pressure drop along the vessel (e.g. in mmHg)): 1333.22 Pa, 666.612 Pa, 2666.45 Pa. Other inputs as in the worked example: eta = 3.5, L = 0.1 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, r = 0.002 m, Q = 23.934.*
+
 ```python
 human_physiology_ai999x.solve('hp_poiseuille_flow', dP=1333.22387415, eta=3.5, L=0.1, r=0.002)
 # -> Q = 23.934, Q_mL_min = 1436.04, v_mean = 190.461, tau_wall = 13.3322   (SOLVED)
@@ -646,7 +698,7 @@ human_physiology_ai999x.solve('hp_poiseuille_flow', dP=666.611937075, eta=3, L=0
 
 <a id="hp_radius_flow_ratio"></a>
 
-### Effect of a change of vessel radius on flow and resistance — `hp_radius_flow_ratio`
+### Effect of a change of vessel radius on flow and resistance, `hp_radius_flow_ratio`
 
 At the same pressure drop, flow scales as $r^{4}$ and resistance as $1/r^{4}$ (Poiseuille).
 
@@ -667,6 +719,14 @@ $$
 - **Method:** $Q_{2}/Q_{1} = (r_{2}/r_{1})^{4}$
 - **Assumes:** r1, $r_{2} > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![flow_ratio (new flow / initial flow) against r1 (initial radius (any unit)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-radius-flow-ratio-curve)
+
+*flow_ratio (new flow / initial flow) against r1 (initial radius (any unit)) from 0.5 to 1.5. One curve for each value of r2 (new radius (same unit)): 2, 1, 4. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, r1 = 1, flow_ratio = 16.*
+
+![flow_ratio (new flow / initial flow) over r1 (initial radius (any unit)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-radius-flow-ratio-field)
+
+*flow_ratio (new flow / initial flow) over r1 (initial radius (any unit)) from 0.5 to 1.5 and r2 (new radius (same unit)) from 1 to 3: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.197531 to dark 1296, logarithmic shading); iso-lines at flow_ratio = 1, 10, 100, 1000. Marked: the worked example, r1 = 1, r2 = 2, flow_ratio = 16.*
 
 ```python
 human_physiology_ai999x.solve('hp_radius_flow_ratio', r1=1, r2=2)
@@ -690,7 +750,7 @@ human_physiology_ai999x.solve('hp_radius_flow_ratio', r1=1, r2=0.8)
 
 <a id="hp_vessels_series_parallel"></a>
 
-### Total resistance of vascular beds in series or in parallel — `hp_vessels_series_parallel`
+### Total resistance of vascular beds in series or in parallel, `hp_vessels_series_parallel`
 
 Series beds add resistances; parallel beds (organ circulations) add conductances.
 
@@ -711,6 +771,10 @@ $$
 - **Method:** series: sum R; parallel: 1/sum(1/R)
 - **Assumes:** every resistance > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![R_total (total resistance (same unit)) for each option of arrangement (series or parallel), one run of human-physiology-ai999x per option: series: 11, parallel: 1](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-vessels-series-parallel-bars)
+
+*R_total (total resistance (same unit)) for each option of arrangement (series or parallel), one run of human-physiology-ai999x per option: series: 11, parallel: 1. The worked example uses parallel. Other inputs as in the worked example: R = [2, 3, 6].*
 
 ```python
 human_physiology_ai999x.solve('hp_vessels_series_parallel', R=[2, 3, 6], arrangement='parallel')
@@ -734,7 +798,7 @@ human_physiology_ai999x.solve('hp_vessels_series_parallel', R=[2, 3, 6], arrange
 
 <a id="hp_vessel_reynolds"></a>
 
-### Reynolds number of blood flow in a vessel — `hp_vessel_reynolds`
+### Reynolds number of blood flow in a vessel: `hp_vessel_reynolds`
 
 $Re = \rho$ v D/eta and the mean velocity at which Re reaches 2000 (the customary laminar limit).
 
@@ -758,6 +822,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Re (Reynolds number) against eta (viscosity in cP) from 1](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-vessel-reynolds-curve)
+
+*Re (Reynolds number) against eta (viscosity in cP) from 1.75 to 5.25. One curve for each value of rho (blood density (e.g. in kg/m^3)): 1060 kg/m^3, 530 kg/m^3, 2120 kg/m^3. Other inputs as in the worked example: v = 0.3 m/s, D = 0.025 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, eta = 3.5, Re = 2271.43.*
+
 ```python
 human_physiology_ai999x.solve('hp_vessel_reynolds', rho=1060.0, v=0.3, D=0.025, eta=3.5)
 # -> Re = 2271.43, v_critical = 26.4151   (SOLVED)
@@ -780,7 +848,7 @@ human_physiology_ai999x.solve('hp_vessel_reynolds', rho=1050.0, v=0.05, D=0.004,
 
 <a id="hp_laplace_wall_tension"></a>
 
-### Laplace wall tension and wall stress of a vessel or chamber — `hp_laplace_wall_tension`
+### Laplace wall tension and wall stress of a vessel or chamber, `hp_laplace_wall_tension`
 
 Law of Laplace: wall tension $T = P$ r (cylinder) or P $r/2$ (sphere) and wall stress T/h.
 
@@ -803,6 +871,10 @@ $$
 - **Method:** $T = P$ r (cylinder), P $r/2$ (sphere); stress = T/h
 - **Assumes:** P, r, $h > 0$; thin wall
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![T (wall tension in N/m) against P (transmural pressure (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-laplace-wall-tension-curve)
+
+*T (wall tension in N/m) against P (transmural pressure (e.g. in mmHg)) from 6666.12 Pa to 19998.4 Pa. One curve for each value of r (radius (e.g. in cm)): 0.015 m, 0.0075 m, 0.03 m. Other inputs as in the worked example: shape = cylinder, h = 0.002 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, P = 13332.2 Pa, T = 199.984.*
 
 ```python
 human_physiology_ai999x.solve('hp_laplace_wall_tension', P=13332.238741500001, r=0.015, shape='cylinder', h=0.002)
@@ -832,7 +904,7 @@ human_physiology_ai999x.solve('hp_laplace_wall_tension', P=13332.238741500001, r
 
 <a id="hp_vascular_compliance"></a>
 
-### Compliance and elastance — `hp_vascular_compliance`
+### Compliance and elastance: `hp_vascular_compliance`
 
 Compliance $C = dV/dP$ and its inverse, the elastance $E = dP/dV.$
 
@@ -853,6 +925,14 @@ $$
 - **Method:** $C = dV/dP$
 - **Assumes:** dV, $dP > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![C (compliance in mL/mmHg) against dP (pressure change (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-vascular-compliance-curve)
+
+*C (compliance in mL/mmHg) against dP (pressure change (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa. One curve for each value of dV (volume change (e.g. in mL)): 7.0000e-05 m^3, 3.5000e-05 m^3, 0.00014 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, dP = 5332.9 Pa, C = 1.75.*
+
+![C (compliance in mL/mmHg) over dV (volume change (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-vascular-compliance-field)
+
+*C (compliance in mL/mmHg) over dV (volume change (e.g. in mL)) from 3.5000e-05 m^3 to 0.000105 m^3 and dP (pressure change (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.583333 to dark 5.25); iso-lines at C = 1, 2, 3, 4, 5. Marked: the worked example, dV = 7.0000e-05 m^3, dP = 5332.9 Pa, C = 1.75.*
 
 ```python
 human_physiology_ai999x.solve('hp_vascular_compliance', dV=7e-05, dP=5332.8954966)
@@ -876,7 +956,7 @@ human_physiology_ai999x.solve('hp_vascular_compliance', dV=4.9999999999999996e-0
 
 <a id="hp_blood_velocity_area"></a>
 
-### Mean blood velocity from flow and total cross-sectional area — `hp_blood_velocity_area`
+### Mean blood velocity from flow and total cross-sectional area, `hp_blood_velocity_area`
 
 Continuity: mean velocity $v = Q/A$ (slow in the capillaries because their total area is large).
 
@@ -896,6 +976,14 @@ $$
 - **Method:** $v = Q/A$ (L/min -> cm^3/s)
 - **Assumes:** Q, $A > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![v (mean velocity in cm/s) against A (total cross-sectional area (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-blood-velocity-area-curve)
+
+*v (mean velocity in cm/s) against A (total cross-sectional area (e.g. in cm^2)) from 0.0002 m^2 to 0.0006 m^2. One curve for each value of Q (flow (e.g. in L/min)): 8.3333e-05 m^3/s, 4.1667e-05 m^3/s, 0.000166667 m^3/s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, A = 0.0004 m^2, v = 20.8333.*
+
+![v (mean velocity in cm/s) over Q (flow (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-blood-velocity-area-field)
+
+*v (mean velocity in cm/s) over Q (flow (e.g. in L/min)) from 4.1667e-05 m^3/s to 0.000125 m^3/s and A (total cross-sectional area (e.g. in cm^2)) from 0.0002 m^2 to 0.0006 m^2: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 6.94444 to dark 62.5); iso-lines at v = 10, 20, 30, 40, 50, 60. Marked: the worked example, Q = 8.3333e-05 m^3/s, A = 0.0004 m^2, v = 20.8333.*
 
 ```python
 human_physiology_ai999x.solve('hp_blood_velocity_area', Q=8.333333333333334e-05, A=0.0004)
@@ -919,7 +1007,7 @@ human_physiology_ai999x.solve('hp_blood_velocity_area', Q=8.333333333333334e-05,
 
 <a id="hp_bernoulli_pressure_drop"></a>
 
-### Bernoulli pressure drop across a narrowing — `hp_bernoulli_pressure_drop`
+### Bernoulli pressure drop across a narrowing, `hp_bernoulli_pressure_drop`
 
 Convective pressure drop 0.5 rho $(v_{2}^{2} - v_{1}^{2})$ across a stenosis or valve, and the simplified 4 $v^{2}$ (mmHg, v in m/s).
 
@@ -943,6 +1031,14 @@ $$
 - **Assumes:** $v_{2} > v_{1}  \geq  0$; inviscid steady flow
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-bernoulli-pressure-drop-dp-mmhg-vs-v1.svg)
+
+*dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), with rho = 1060 kg/m^3, v2 = 4 m/s. 31 points computed by human-physiology-ai999x; marked: v1 = 1, dP_mmHg = 59.6299.*
+
+![dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bernoulli-pressure-drop-curve)
+
+*dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)) from 0.1 m/s to 10 m/s on a logarithmic axis. One curve for each value of v2 (jet velocity (e.g. in m/s)): 4 m/s, 2 m/s, 8 m/s. Other inputs as in the worked example: rho = 1060.0 kg/m^3. 33 points per curve computed by human-physiology-ai999x; marked: the worked example, v1 = 1 m/s, dP_mmHg = 59.6299.*
+
 ```python
 human_physiology_ai999x.solve('hp_bernoulli_pressure_drop', v1=1.0, v2=4.0, rho=1060.0)
 # -> dP = 7950, dP_mmHg = 59.6299, dP_simplified = 64   (SOLVED)
@@ -965,7 +1061,7 @@ human_physiology_ai999x.solve('hp_bernoulli_pressure_drop', v1=0.5, v2=3.0, rho=
 
 <a id="hp_stroke_work"></a>
 
-### Stroke work and cardiac power — `hp_stroke_work`
+### Stroke work and cardiac power: `hp_stroke_work`
 
 External stroke work SW = MAP x SV (J and g m) and the cardiac power output SW x HR.
 
@@ -988,6 +1084,10 @@ $$
 - **Method:** SW = MAP SV (pressure-volume work); power = SW $HR/60$
 - **Assumes:** SV, MAP, $HR > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![SW (stroke work in J) against SV (stroke volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-stroke-work-curve)
+
+*SW (stroke work in J) against SV (stroke volume (e.g. in mL)) from 3.5000e-05 m^3 to 0.000105 m^3. One curve for each value of MAP (mean arterial (ejection) pressure (e.g. in mmHg)): 13332.2 Pa, 6666.12 Pa, 26664.5 Pa. Other inputs as in the worked example: HR = 72. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, SV = 7.0000e-05 m^3, SW = 0.933257.*
 
 ```python
 human_physiology_ai999x.solve('hp_stroke_work', SV=7e-05, MAP=13332.238741500001, HR=72)
@@ -1017,7 +1117,7 @@ human_physiology_ai999x.solve('hp_stroke_work', SV=7e-05, MAP=13332.238741500001
 
 <a id="hp_teichholz_volumes"></a>
 
-### Left-ventricular volumes and ejection fraction by the Teichholz formula — `hp_teichholz_volumes`
+### Left-ventricular volumes and ejection fraction by the Teichholz formula, `hp_teichholz_volumes`
 
 Teichholz volume $V = 7$ $D^{3}/(2.4 + D)$ from M-mode internal diameters, EF and fractional shortening.
 
@@ -1041,6 +1141,14 @@ $$
 - **Assumes:** 0 < LVIDs < LVIDd
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![EF (ejection fraction) against LVIDd (end-diastolic internal diameter (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-teichholz-volumes-curve)
+
+*EF (ejection fraction) against LVIDd (end-diastolic internal diameter (e.g. in cm)) from 0.025 m to 0.075 m. One curve for each value of LVIDs (end-systolic internal diameter (e.g. in cm)): 0.032 m, 0.016 m. 26 points per curve computed by human-physiology-ai999x; marked: the worked example, LVIDd = 0.05 m, EF = 0.653595.*
+
+![EF (ejection fraction) over LVIDs (end-systolic internal diameter (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-teichholz-volumes-field)
+
+*EF (ejection fraction) over LVIDs (end-systolic internal diameter (e.g. in cm)) from 0.016 m to 0.048 m and LVIDd (end-diastolic internal diameter (e.g. in cm)) from 0.025 m to 0.075 m: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.00143992 to dark 0.97597); iso-lines at EF = 0.2, 0.4, 0.6, 0.8; blank cells: inputs the capability refuses. Marked: the worked example, LVIDs = 0.032 m, LVIDd = 0.05 m, EF = 0.653595.*
+
 ```python
 human_physiology_ai999x.solve('hp_teichholz_volumes', LVIDd=0.05, LVIDs=0.032)
 # -> EDV = 118.243, ESV = 40.96, EF = 0.653595, FS = 0.36   (SOLVED)
@@ -1063,7 +1171,7 @@ human_physiology_ai999x.solve('hp_teichholz_volumes', LVIDd=0.055, LVIDs=0.045)
 
 <a id="hp_qt_correction"></a>
 
-### Heart-rate corrected QT interval (Bazett, Fridericia, Framingham) — `hp_qt_correction`
+### Heart-rate corrected QT interval (Bazett, Fridericia, Framingham), `hp_qt_correction`
 
 $RR = 60/HR$ and the corrected QT: Bazett QT/sqrt(RR), Fridericia $QT/RR^{1/3}$, Framingham $QT + 154$ $(1 - RR)$.
 
@@ -1087,6 +1195,14 @@ $$
 - **Assumes:** QT, $HR > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![QTc_Bazett (Bazett QTc in ms) against HR (heart rate in beats/min) from 37](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-qt-correction-curve)
+
+*QTc_Bazett (Bazett QTc in ms) against HR (heart rate in beats/min) from 37.5 to 112.5. One curve for each value of QT (measured QT interval (e.g. in ms)): 0.4 s, 0.2 s, 0.8 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, HR = 75, QTc_Bazett = 447.214.*
+
+![QTc_Bazett (Bazett QTc in ms) over QT (measured QT interval (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-qt-correction-field)
+
+*QTc_Bazett (Bazett QTc in ms) over QT (measured QT interval (e.g. in ms)) from 0.2 s to 0.6 s and HR (heart rate in beats/min) from 37.5 to 112.5: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 158.114 to dark 821.584); iso-lines at QTc_Bazett = 200, 400, 600, 800. Marked: the worked example, QT = 0.4 s, HR = 75, QTc_Bazett = 447.214.*
+
 ```python
 human_physiology_ai999x.solve('hp_qt_correction', QT=0.4, HR=75)
 # -> RR = 0.8, QTc_Bazett = 447.214, QTc_Fridericia = 430.887, QTc_Framingham = 430.8   (SOLVED)
@@ -1109,7 +1225,7 @@ human_physiology_ai999x.solve('hp_qt_correction', QT=0.36, HR=100)
 
 <a id="hp_qrs_axis"></a>
 
-### Mean QRS (electrical) axis from leads I and aVF — `hp_qrs_axis`
+### Mean QRS (electrical) axis from leads I and aVF, `hp_qrs_axis`
 
 The frontal-plane mean electrical axis atan2(aVF, I) in degrees (hexaxial convention: lead I at 0 deg, aVF $at +90$ deg).
 
@@ -1130,6 +1246,14 @@ $$
 - **Method:** axis = atan2(aVF, I)
 - **Assumes:** not both zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![axis (mean QRS axis in degrees (principal value)) against lead_I (net QRS deflection in lead I (mm or mV)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-qrs-axis-curve)
+
+*axis (mean QRS axis in degrees (principal value)) against lead_I (net QRS deflection in lead I (mm or mV)) from 0.05 to 5 on a logarithmic axis. One curve for each value of aVF (net QRS deflection in aVF (same unit)): -0.5, -0.25, -1. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, lead_I = 0.5, axis = -45.*
+
+![axis (mean QRS axis in degrees (principal value)) over lead_I (net QRS deflection in lead I (mm or mV)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-qrs-axis-field)
+
+*axis (mean QRS axis in degrees (principal value)) over lead_I (net QRS deflection in lead I (mm or mV)) from 0.05 to 5 and aVF (net QRS deflection in aVF (same unit)) from -0.75 to -0.25 (logarithmic horizontal axis): each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light -86.1859 to dark -2.86241); iso-lines at axis = -80, -60, -40, -20. Marked: the worked example, lead_I = 0.5, aVF = -0.5, axis = -45.*
 
 ```python
 human_physiology_ai999x.solve('hp_qrs_axis', lead_I=0.5, aVF=-0.5)
@@ -1153,7 +1277,7 @@ human_physiology_ai999x.solve('hp_qrs_axis', lead_I=-0.2, aVF=0.8)
 
 <a id="hp_starling_filtration"></a>
 
-### Starling forces and capillary filtration — `hp_starling_filtration`
+### Starling forces and capillary filtration: `hp_starling_filtration`
 
 Net filtration pressure (Pc - Pi) - sigma (pi_c - pi_i) and the filtration rate $Jv = Kf$ x NFP (glomerular or systemic capillaries).
 
@@ -1179,6 +1303,10 @@ $$
 - **Assumes:** $Kf > 0$; $0  \leq  \sigma  \leq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Jv (filtration rate in mL/min) against Pc (capillary hydrostatic pressure (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-starling-filtration-curve)
+
+*Jv (filtration rate in mL/min) against Pc (capillary hydrostatic pressure (e.g. in mmHg)) from 2333.14 Pa to 6999.43 Pa. One curve for each value of pic (capillary oncotic pressure (e.g. in mmHg)): 3733.03 Pa, 1866.51 Pa, 7466.05 Pa. Other inputs as in the worked example: Pi = 0.0 Pa, pii = 399.96716224500005 Pa, Kf = 0.5. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Pc = 4666.28 Pa, Jv = 5.*
+
 ```python
 human_physiology_ai999x.solve('hp_starling_filtration', Pc=4666.283559525, Pi=0.0, pic=3733.0268476200004, pii=399.96716224500005, Kf=0.5)
 # -> NFP = 10, Jv = 5   (SOLVED)
@@ -1201,7 +1329,7 @@ human_physiology_ai999x.solve('hp_starling_filtration', Pc=7332.731307825001, Pi
 
 <a id="hp_hydrostatic_pressure"></a>
 
-### Hydrostatic pressure of a blood column — `hp_hydrostatic_pressure`
+### Hydrostatic pressure of a blood column: `hp_hydrostatic_pressure`
 
 Pressure difference rho g h between two points a height h apart in a column of blood (posture effects).
 
@@ -1222,6 +1350,14 @@ $$
 - **Method:** $dP = \rho$ g h
 - **Assumes:** $\rho > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![dP_mmHg (pressure difference in mmHg) against h (height of the column (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hydrostatic-pressure-curve)
+
+*dP_mmHg (pressure difference in mmHg) against h (height of the column (e.g. in cm) (positive = the lower point)) from 0.65 m to 1.95 m. One curve for each value of rho (blood density (e.g. in kg/m^3)): 1060 kg/m^3, 530 kg/m^3, 2120 kg/m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, h = 1.3 m, dP_mmHg = 101.36.*
+
+![dP_mmHg (pressure difference in mmHg) over h (height of the column (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hydrostatic-pressure-field)
+
+*dP_mmHg (pressure difference in mmHg) over h (height of the column (e.g. in cm) (positive = the lower point)) from 0.65 m to 1.95 m and rho (blood density (e.g. in kg/m^3)) from 530 kg/m^3 to 1590 kg/m^3: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 25.34 to dark 228.06); iso-lines at dP_mmHg = 50, 100, 150, 200. Marked: the worked example, h = 1.3 m, rho = 1060 kg/m^3, dP_mmHg = 101.36.*
 
 ```python
 human_physiology_ai999x.solve('hp_hydrostatic_pressure', h=1.3, rho=1060.0)
@@ -1245,7 +1381,7 @@ human_physiology_ai999x.solve('hp_hydrostatic_pressure', h=0.5, rho=1000.0)
 
 <a id="hp_moens_korteweg"></a>
 
-### Pulse wave velocity by the Moens-Korteweg equation — `hp_moens_korteweg`
+### Pulse wave velocity by the Moens-Korteweg equation, `hp_moens_korteweg`
 
 Pulse wave velocity of a thin elastic tube PWV = sqrt(E h/(rho D)).
 
@@ -1267,6 +1403,10 @@ $$
 - **Method:** PWV = sqrt(E h /(rho D))
 - **Assumes:** all inputs > 0; thin-walled elastic tube
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![PWV (pulse wave velocity in m/s) against D (vessel diameter (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-moens-korteweg-curve)
+
+*PWV (pulse wave velocity in m/s) against D (vessel diameter (e.g. in mm)) from 0.0125 m to 0.0375 m. One curve for each value of E (wall elastic modulus (e.g. in kPa)): 500000 Pa, 250000 Pa, 1e+06 Pa. Other inputs as in the worked example: h = 0.0015 m, rho = 1060.0 kg/m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, D = 0.025 m, PWV = 5.31995.*
 
 ```python
 human_physiology_ai999x.solve('hp_moens_korteweg', E=500000.0, h=0.0015, D=0.025, rho=1060.0)
@@ -1290,7 +1430,7 @@ human_physiology_ai999x.solve('hp_moens_korteweg', E=1000000.0, h=0.001, D=0.02,
 
 <a id="hp_womersley_number"></a>
 
-### Womersley number of pulsatile blood flow — `hp_womersley_number`
+### Womersley number of pulsatile blood flow: `hp_womersley_number`
 
 $\alpha = r$ sqrt(omega rho/eta) with $\omega = 2$ pi $HR/60$: the ratio of pulsatile inertia to viscous forces.
 
@@ -1314,6 +1454,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![alpha (Womersley number) against eta (viscosity in cP) from 1](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-womersley-number-curve)
+
+*alpha (Womersley number) against eta (viscosity in cP) from 1.75 to 5.25. One curve for each value of r (vessel radius (e.g. in mm)): 0.0125 m, 0.00625 m, 0.025 m. Other inputs as in the worked example: HR = 72, rho = 1060.0 kg/m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, eta = 3.5, alpha = 18.889.*
+
 ```python
 human_physiology_ai999x.solve('hp_womersley_number', r=0.0125, HR=72, rho=1060.0, eta=3.5)
 # -> alpha = 18.889, omega = 7.53982   (SOLVED)
@@ -1336,7 +1480,7 @@ human_physiology_ai999x.solve('hp_womersley_number', r=0.002, HR=60, rho=1050.0,
 
 <a id="hp_qp_qs"></a>
 
-### Pulmonary-to-systemic flow ratio Qp/Qs — `hp_qp_qs`
+### Pulmonary-to-systemic flow ratio Qp/Qs: `hp_qp_qs`
 
 Qp/Qs = (SaO2 - SvO2)/(SpvO2 - SpaO2) from oxygen saturations (hemoglobin and dissolved O2 cancel or are neglected).
 
@@ -1358,6 +1502,10 @@ $$
 - **Method:** Fick principle applied to both circulations
 - **Assumes:** SaO2 > SvO2; SpvO2 > SpaO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Qp_Qs (pulmonary to systemic flow ratio) against SpaO2 (pulmonary artery saturation) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-qp-qs-curve)
+
+*Qp_Qs (pulmonary to systemic flow ratio) against SpaO2 (pulmonary artery saturation) from 0.02 to 0.98. One curve for each value of SvO2 (mixed venous saturation): 0.65, 0.26, 0.74. Other inputs as in the worked example: SaO2 = 0.95, SpvO2 = 0.98. 40 points per curve computed by human-physiology-ai999x; marked: the worked example, SpaO2 = 0.8, Qp_Qs = 1.66667.*
 
 ```python
 human_physiology_ai999x.solve('hp_qp_qs', SaO2=0.95, SvO2=0.65, SpvO2=0.98, SpaO2=0.8)
@@ -1381,7 +1529,7 @@ human_physiology_ai999x.solve('hp_qp_qs', SaO2=0.97, SvO2=0.7, SpvO2=0.98, SpaO2
 
 <a id="hp_shunt_fraction"></a>
 
-### Physiological shunt fraction (shunt equation) — `hp_shunt_fraction`
+### Physiological shunt fraction (shunt equation), `hp_shunt_fraction`
 
 Qs/Qt = (Cc'O2 - CaO2)/(Cc'O2 - CvO2) from end-capillary, arterial and mixed venous O2 contents.
 
@@ -1402,6 +1550,10 @@ $$
 - **Method:** mixing balance of shunted and capillary blood
 - **Assumes:** CcO2 >= CaO2 > CvO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Qs_Qt (shunt fraction) against CvO2 (mixed venous O2 content in mL/dL) from 7](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-shunt-fraction-curve)
+
+*Qs_Qt (shunt fraction) against CvO2 (mixed venous O2 content in mL/dL) from 7.5 to 22.5. One curve for each value of CcO2 (end-capillary O2 content in mL/dL): 21, 42. Other inputs as in the worked example: CaO2 = 20. 25 points per curve computed by human-physiology-ai999x; marked: the worked example, CvO2 = 15, Qs_Qt = 0.166667.*
 
 ```python
 human_physiology_ai999x.solve('hp_shunt_fraction', CcO2=21, CaO2=20, CvO2=15)
@@ -1425,7 +1577,7 @@ human_physiology_ai999x.solve('hp_shunt_fraction', CcO2=20.5, CaO2=18, CvO2=14)
 
 <a id="hp_lung_capacities"></a>
 
-### Lung capacities from the four lung volumes — `hp_lung_capacities`
+### Lung capacities from the four lung volumes, `hp_lung_capacities`
 
 Inspiratory capacity, functional residual capacity, vital capacity and total lung capacity from TV, IRV, ERV and RV.
 
@@ -1451,6 +1603,10 @@ $$
 - **Assumes:** TV, $RV > 0$; IRV, ERV >= 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![TLC (total lung capacity in mL) against IRV (inspiratory reserve volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-lung-capacities-curve)
+
+*TLC (total lung capacity in mL) against IRV (inspiratory reserve volume (e.g. in mL)) from 0.0015 m^3 to 0.0045 m^3. One curve for each value of RV (residual volume (e.g. in mL)): 0.0012 m^3, 0.0006 m^3, 0.0024 m^3. Other inputs as in the worked example: TV = 0.0005 m^3, ERV = 0.0010999999999999998 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, IRV = 0.003 m^3, TLC = 5800.*
+
 ```python
 human_physiology_ai999x.solve('hp_lung_capacities', TV=0.0005, IRV=0.003, ERV=0.0010999999999999998, RV=0.0012)
 # -> IC = 3500, FRC = 2300, VC = 4600, TLC = 5800   (SOLVED)
@@ -1473,7 +1629,7 @@ human_physiology_ai999x.solve('hp_lung_capacities', TV=0.00039999999999999996, I
 
 <a id="hp_minute_ventilation"></a>
 
-### Minute and alveolar ventilation — `hp_minute_ventilation`
+### Minute and alveolar ventilation: `hp_minute_ventilation`
 
 Minute ventilation $VE = VT$ x RR, alveolar ventilation $VA = (VT - VD)$ x RR and the dead-space fraction VD/VT.
 
@@ -1497,6 +1653,10 @@ $$
 - **Assumes:** $0  \leq  VD < VT$; $RR > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![VA (alveolar ventilation in L/min) against VT (tidal volume (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-minute-ventilation-curve)
+
+*VA (alveolar ventilation in L/min) against VT (tidal volume (e.g. in mL)) from 0.00025 m^3 to 0.00075 m^3. One curve for each value of RR (respiratory rate in breaths/min): 12, 6, 24. Other inputs as in the worked example: VD = 0.00015 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, VT = 0.0005 m^3, VA = 4.2.*
+
 ```python
 human_physiology_ai999x.solve('hp_minute_ventilation', VT=0.0005, RR=12, VD=0.00015)
 # -> VE = 6, VA = 4.2, VD_VT = 0.3   (SOLVED)
@@ -1519,7 +1679,7 @@ human_physiology_ai999x.solve('hp_minute_ventilation', VT=0.0003, RR=30, VD=0.00
 
 <a id="hp_bohr_dead_space"></a>
 
-### Physiological dead space by the Bohr (Enghoff) equation — `hp_bohr_dead_space`
+### Physiological dead space by the Bohr (Enghoff) equation, `hp_bohr_dead_space`
 
 VD/VT = (PaCO2 - PECO2)/PaCO2 and the dead-space volume, with arterial PCO2 standing for alveolar (Enghoff).
 
@@ -1541,6 +1701,10 @@ $$
 - **Method:** Bohr CO2 mass balance
 - **Assumes:** 0 <= PECO2 < PaCO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![VD_VT (dead space fraction) against PaCO2 (arterial PCO2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bohr-dead-space-curve)
+
+*VD_VT (dead space fraction) against PaCO2 (arterial PCO2 (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa. One curve for each value of PECO2 (mixed expired PCO2 (e.g. in mmHg)): 3733.03 Pa, 1866.51 Pa. Other inputs as in the worked example: VT = 0.0005 m^3. 24 points per curve computed by human-physiology-ai999x; marked: the worked example, PaCO2 = 5332.9 Pa, VD_VT = 0.3.*
 
 ```python
 human_physiology_ai999x.solve('hp_bohr_dead_space', PaCO2=5332.8954966, PECO2=3733.0268476200004, VT=0.0005)
@@ -1564,7 +1728,7 @@ human_physiology_ai999x.solve('hp_bohr_dead_space', PaCO2=6666.119370750001, PEC
 
 <a id="hp_alveolar_ventilation_co2"></a>
 
-### Alveolar ventilation from CO2 output and arterial PCO2 — `hp_alveolar_ventilation_co2`
+### Alveolar ventilation from CO2 output and arterial PCO2, `hp_alveolar_ventilation_co2`
 
 Alveolar ventilation equation VA (BTPS) = VCO2 (STPD) x 863/PaCO2, with $K = 760$ x $310.15/273.15$ mmHg.
 
@@ -1584,6 +1748,14 @@ $$
 - **Method:** VA = VCO2 K / PaCO2, $K = 760$ x $310.15/273.15$
 - **Assumes:** VCO2, PaCO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![VA (alveolar ventilation in L/min (BTPS)) against PaCO2 (arterial (alveolar) PCO2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-ventilation-co2-curve)
+
+*VA (alveolar ventilation in L/min (BTPS)) against PaCO2 (arterial (alveolar) PCO2 (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa. One curve for each value of VCO2 (CO2 output (e.g. in mL/min) (STPD)): 3.3333e-06 m^3/s, 1.6667e-06 m^3/s, 6.6667e-06 m^3/s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, PaCO2 = 5332.9 Pa, VA = 4.31474.*
+
+![VA (alveolar ventilation in L/min (BTPS)) over PaCO2 (arterial (alveolar) PCO2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-ventilation-co2-field)
+
+*VA (alveolar ventilation in L/min (BTPS)) over PaCO2 (arterial (alveolar) PCO2 (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa and VCO2 (CO2 output (e.g. in mL/min) (STPD)) from 1.6667e-06 m^3/s to 5.0000e-06 m^3/s: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 1.43825 to dark 12.9442); iso-lines at VA = 2, 4, 6, 8, 10, 12. Marked: the worked example, PaCO2 = 5332.9 Pa, VCO2 = 3.3333e-06 m^3/s, VA = 4.31474.*
 
 ```python
 human_physiology_ai999x.solve('hp_alveolar_ventilation_co2', VCO2=3.3333333333333333e-06, PaCO2=5332.8954966)
@@ -1607,7 +1779,7 @@ human_physiology_ai999x.solve('hp_alveolar_ventilation_co2', VCO2=4.166666666666
 
 <a id="hp_alveolar_gas_equation"></a>
 
-### Alveolar gas equation — `hp_alveolar_gas_equation`
+### Alveolar gas equation: `hp_alveolar_gas_equation`
 
 Inspired PO2 = FiO2 $(PB - PH2O)$ and alveolar PO2 by the simplified (PiO2 - PaCO2/R) and full (nitrogen-balance) alveolar gas equation.
 
@@ -1633,6 +1805,10 @@ $$
 - **Assumes:** 0 < FiO2 <= 1; Patm > PH2O; $0 < RQ  \leq  1.5$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![PAO2 (alveolar PO2, simplified equation, in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-gas-equation-curve)
+
+*PAO2 (alveolar PO2, simplified equation, in mmHg) against RQ (respiratory quotient) from 0.4 to 1.2. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 50662.5 Pa, 202650 Pa. Other inputs as in the worked example: FiO2 = 0.21, PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RQ = 0.8, PAO2 = 99.73.*
+
 ```python
 human_physiology_ai999x.solve('hp_alveolar_gas_equation', FiO2=0.21, Patm=101325.01443540001, PH2O=6266.152208505, PaCO2=5332.8954966, RQ=0.8)
 # -> PiO2 = 149.73, PAO2 = 99.73, PAO2_full = 101.83   (SOLVED)
@@ -1655,7 +1831,7 @@ human_physiology_ai999x.solve('hp_alveolar_gas_equation', FiO2=0.5, Patm=93325.6
 
 <a id="hp_aa_gradient"></a>
 
-### Alveolar-arterial oxygen gradient, a/A ratio and P/F ratio — `hp_aa_gradient`
+### Alveolar-arterial oxygen gradient, a/A ratio and P/F ratio, `hp_aa_gradient`
 
 PAO2 from the simplified alveolar gas equation, the A-a gradient PAO2 - PaO2, the a/A ratio and PaO2/FiO2.
 
@@ -1683,6 +1859,10 @@ $$
 - **Assumes:** 0 < FiO2 <= 1; computed PAO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-aa-gradient-curve)
+
+*Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0.4 to 1.2. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 50662.5 Pa, 202650 Pa. Other inputs as in the worked example: FiO2 = 0.21, PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa, PaO2 = 11999.01486735 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RQ = 0.8, Aa_gradient = 9.73.*
+
 ```python
 human_physiology_ai999x.solve('hp_aa_gradient', FiO2=0.21, Patm=101325.01443540001, PH2O=6266.152208505, PaCO2=5332.8954966, PaO2=11999.01486735, RQ=0.8)
 # -> PAO2 = 99.73, Aa_gradient = 9.73, a_A_ratio = 0.902437, PF_ratio = 428.571   (SOLVED)
@@ -1705,7 +1885,7 @@ human_physiology_ai999x.solve('hp_aa_gradient', FiO2=0.4, Patm=101325.0144354000
 
 <a id="hp_oxygen_content"></a>
 
-### Arterial oxygen content — `hp_oxygen_content`
+### Arterial oxygen content: `hp_oxygen_content`
 
 CaO2 = 1.34 x Hb x SaO2 + 0.003 x PaO2 (hemoglobin-bound plus dissolved oxygen).
 
@@ -1729,6 +1909,10 @@ $$
 - **Assumes:** $Hb > 0$; 0 <= SaO2 <= 1
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![CaO2 (oxygen content in mL O2/dL) against Hb (hemoglobin in g/dL) from 7](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-oxygen-content-curve)
+
+*CaO2 (oxygen content in mL O2/dL) against Hb (hemoglobin in g/dL) from 7.5 to 22.5. One curve for each value of SaO2 (arterial saturation): 0.98, 0.26, 0.74. Other inputs as in the worked example: PaO2 = 13332.238741500001 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Hb = 15, CaO2 = 19.998.*
+
 ```python
 human_physiology_ai999x.solve('hp_oxygen_content', Hb=15, SaO2=0.98, PaO2=13332.238741500001)
 # -> CaO2 = 19.998, bound = 19.698, dissolved = 0.3   (SOLVED)
@@ -1751,7 +1935,7 @@ human_physiology_ai999x.solve('hp_oxygen_content', Hb=12, SaO2=0.9, PaO2=7999.34
 
 <a id="hp_oxygen_delivery"></a>
 
-### Systemic oxygen delivery — `hp_oxygen_delivery`
+### Systemic oxygen delivery: `hp_oxygen_delivery`
 
 $DO2 = CO$ x CaO2 x 10 (mL O2/min), with CaO2 = 1.34 Hb SaO2 + 0.003 PaO2.
 
@@ -1775,6 +1959,10 @@ $$
 - **Assumes:** CO, $Hb > 0$; 0 <= SaO2 <= 1
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![DO2 (oxygen delivery in mL O2/min) against CO (cardiac output (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-oxygen-delivery-curve)
+
+*DO2 (oxygen delivery in mL O2/min) against CO (cardiac output (e.g. in L/min)) from 4.1667e-05 m^3/s to 0.000125 m^3/s. One curve for each value of Hb (hemoglobin in g/dL): 15, 7.5, 30. Other inputs as in the worked example: SaO2 = 0.98, PaO2 = 13332.238741500001 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, CO = 8.3333e-05 m^3/s, DO2 = 999.9.*
+
 ```python
 human_physiology_ai999x.solve('hp_oxygen_delivery', CO=8.333333333333334e-05, Hb=15, SaO2=0.98, PaO2=13332.238741500001)
 # -> DO2 = 999.9, CaO2 = 19.998   (SOLVED)
@@ -1797,7 +1985,7 @@ human_physiology_ai999x.solve('hp_oxygen_delivery', CO=6.666666666666667e-05, Hb
 
 <a id="hp_oxygen_consumption"></a>
 
-### Oxygen consumption and extraction ratio (reverse Fick) — `hp_oxygen_consumption`
+### Oxygen consumption and extraction ratio (reverse Fick), `hp_oxygen_consumption`
 
 $VO2 = CO$ (CaO2 - CvO2) x 10 and the oxygen extraction ratio (CaO2 - CvO2)/CaO2.
 
@@ -1825,6 +2013,10 @@ $$
 - **Assumes:** CvO2 < CaO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![VO2 (oxygen consumption in mL/min) against CO (cardiac output (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-oxygen-consumption-curve)
+
+*VO2 (oxygen consumption in mL/min) against CO (cardiac output (e.g. in L/min)) from 4.1667e-05 m^3/s to 0.000125 m^3/s. One curve for each value of Hb (hemoglobin in g/dL): 15, 7.5, 30. Other inputs as in the worked example: SaO2 = 0.98, SvO2 = 0.75, PaO2 = 13332.238741500001 Pa, PvO2 = 5332.8954966 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, CO = 8.3333e-05 m^3/s, VO2 = 240.15.*
+
 ```python
 human_physiology_ai999x.solve('hp_oxygen_consumption', CO=8.333333333333334e-05, Hb=15, SaO2=0.98, SvO2=0.75, PaO2=13332.238741500001, PvO2=5332.8954966)
 # -> VO2 = 240.15, O2ER = 0.240174, CaO2 = 19.998, CvO2 = 15.195   (SOLVED)
@@ -1847,7 +2039,7 @@ human_physiology_ai999x.solve('hp_oxygen_consumption', CO=0.0001, Hb=13, SaO2=0.
 
 <a id="hp_hill_saturation"></a>
 
-### Oxyhemoglobin saturation by the Hill equation — `hp_hill_saturation`
+### Oxyhemoglobin saturation by the Hill equation, `hp_hill_saturation`
 
 $SO2 = PO2^{n}/(PO2^{n} + P50^{n})$ for a Hill coefficient n and half-saturation pressure P50.
 
@@ -1868,6 +2060,10 @@ $$
 - **Method:** Hill equation
 - **Assumes:** $PO2  \geq  0$; P50, $n > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![SO2 (fractional saturation) against PO2 (partial pressure of O2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hill-saturation-curve)
+
+*SO2 (fractional saturation) against PO2 (partial pressure of O2 (e.g. in mmHg)) from 533.29 Pa to 53329 Pa on a logarithmic axis. One curve for each value of P50 (P50 (e.g. in mmHg)): 3573.04 Pa, 1786.52 Pa, 7146.08 Pa. Other inputs as in the worked example: n = 2.7. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, PO2 = 5332.9 Pa, SO2 = 0.746738.*
 
 ```python
 human_physiology_ai999x.solve('hp_hill_saturation', PO2=5332.8954966, P50=3573.0399827220003, n=2.7)
@@ -1897,7 +2093,7 @@ human_physiology_ai999x.solve('hp_hill_saturation', PO2=7999.3432449, P50=3599.7
 
 <a id="hp_hill_po2"></a>
 
-### PO2 at a given saturation by the Hill equation — `hp_hill_po2`
+### PO2 at a given saturation by the Hill equation, `hp_hill_po2`
 
 Inverse Hill equation $PO2 = P50$ (S/(1 - S))^$(1/n)$.
 
@@ -1918,6 +2114,10 @@ $$
 - **Method:** $PO2 = P50$ (S/(1-S))^$(1/n)$
 - **Assumes:** $0 < SO2 < 1$; P50, $n > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![PO2 (partial pressure of O2 in mmHg) against n (Hill coefficient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hill-po2-curve)
+
+*PO2 (partial pressure of O2 in mmHg) against n (Hill coefficient) from 0.27 to 27 on a logarithmic axis. One curve for each value of P50 (P50 (e.g. in mmHg)): 3573.04 Pa, 1786.52 Pa, 7146.08 Pa. Other inputs as in the worked example: SO2 = 0.75. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, n = 2.7, PO2 = 40.2575.*
 
 ```python
 human_physiology_ai999x.solve('hp_hill_po2', SO2=0.75, P50=3573.0399827220003, n=2.7)
@@ -1941,7 +2141,7 @@ human_physiology_ai999x.solve('hp_hill_po2', SO2=0.9, P50=3573.0399827220003, n=
 
 <a id="hp_hill_fit"></a>
 
-### Hill coefficient and P50 from two points of the dissociation curve — `hp_hill_fit`
+### Hill coefficient and P50 from two points of the dissociation curve, `hp_hill_fit`
 
 The Hill coefficient n and P50 of the curve through two measured (PO2, saturation) points (Hill plot slope).
 
@@ -1965,6 +2165,10 @@ $$
 - **Assumes:** $0 < S < 1$; saturation increases with PO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![P50 (P50 in mmHg) against S2 (saturation at P2) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hill-fit-curve)
+
+*P50 (P50 in mmHg) against S2 (saturation at P2) from 0.02 to 0.98, logarithmic output axis. One curve for each value of S1 (saturation at P1): 0.312124, 0.26, 0.74. Other inputs as in the worked example: P1 = 2666.4477483 Pa, P2 = 7999.3432449 Pa. 28 points per curve computed by human-physiology-ai999x; marked: the worked example, S2 = 0.898078, P50 = 26.8.*
+
 ```python
 human_physiology_ai999x.solve('hp_hill_fit', P1=2666.4477483, S1=0.312124018611, P2=7999.3432449, S2=0.898077644148)
 # -> n = 2.7, P50 = 26.8   (SOLVED)
@@ -1981,7 +2185,7 @@ human_physiology_ai999x.solve('hp_hill_fit', P1=2666.4477483, S1=0.312124018611,
 
 <a id="hp_severinghaus_saturation"></a>
 
-### Saturation by the Severinghaus (1979) dissociation equation — `hp_severinghaus_saturation`
+### Saturation by the Severinghaus (1979) dissociation equation, `hp_severinghaus_saturation`
 
 Standard human oxyhemoglobin curve S = 1/(23400/(PO2^3 + 150 PO2) + 1) (37 degC, pH 7.40, PCO2 40 mmHg).
 
@@ -2000,6 +2204,10 @@ $$
 - **Method:** Severinghaus equation
 - **Assumes:** $PO2 > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![SO2 (fractional saturation) against PO2 (partial pressure of O2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-severinghaus-saturation-curve)
+
+*SO2 (fractional saturation) against PO2 (partial pressure of O2 (e.g. in mmHg)) from 533.29 Pa to 53329 Pa on a logarithmic axis. 41 points computed by human-physiology-ai999x; marked: the worked example, PO2 = 5332.9 Pa, SO2 = 0.749465.*
 
 ```python
 human_physiology_ai999x.solve('hp_severinghaus_saturation', PO2=5332.8954966)
@@ -2023,7 +2231,7 @@ human_physiology_ai999x.solve('hp_severinghaus_saturation', PO2=13332.2387415000
 
 <a id="hp_severinghaus_po2"></a>
 
-### PO2 at a given saturation by the Severinghaus equation — `hp_severinghaus_po2`
+### PO2 at a given saturation by the Severinghaus equation, `hp_severinghaus_po2`
 
 Inverse of the Severinghaus curve: the real root of $P^{3} + 150$ $P = 23400$ $S/(1 - S)$.
 
@@ -2042,6 +2250,10 @@ $$
 - **Method:** Cardano root of the cubic, Newton polished
 - **Assumes:** $0 < SO2 < 1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![PO2 (partial pressure of O2 in mmHg) against SO2 (fractional saturation) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-severinghaus-po2-curve)
+
+*PO2 (partial pressure of O2 in mmHg) against SO2 (fractional saturation) from 0.02 to 0.98. 41 points computed by human-physiology-ai999x; marked: the worked example, SO2 = 0.749465, PO2 = 40.*
 
 ```python
 human_physiology_ai999x.solve('hp_severinghaus_po2', SO2=0.749464668094)
@@ -2065,7 +2277,7 @@ human_physiology_ai999x.solve('hp_severinghaus_po2', SO2=0.977465331279)
 
 <a id="hp_virtual_po2"></a>
 
-### Temperature, pH and PCO2 correction of the dissociation curve (Severinghaus) — `hp_virtual_po2`
+### Temperature, pH and PCO2 correction of the dissociation curve (Severinghaus), `hp_virtual_po2`
 
 Virtual $PO2 = PO2$ x 10^(0.024 $(37 - T) + 0.40$ $(pH - 7.40) + 0.06$ log10(40/PCO2)) and the saturation from the standard curve (Bohr effect).
 
@@ -2090,6 +2302,10 @@ $$
 - **Assumes:** $25  \leq  T  \leq  43$ degC; $6.8  \leq  pH  \leq  7.8$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![SO2 (fractional saturation) against PO2 (measured PO2 (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-virtual-po2-curve)
+
+*SO2 (fractional saturation) against PO2 (measured PO2 (e.g. in mmHg)) from 1066.58 Pa to 106658 Pa on a logarithmic axis. Other inputs as in the worked example: T = 312.15 K, pH = 7.3, PCO2 = 6666.119370750001 Pa. 41 points computed by human-physiology-ai999x; marked: the worked example, PO2 = 10665.8 Pa, SO2 = 0.922228.*
+
 ```python
 human_physiology_ai999x.solve('hp_virtual_po2', PO2=10665.7909932, T=312.15, pH=7.3, PCO2=6666.119370750001)
 # -> PO2_virtual = 64.4578, SO2 = 0.922228, factor = 0.805722   (SOLVED)
@@ -2112,7 +2328,7 @@ human_physiology_ai999x.solve('hp_virtual_po2', PO2=7999.3432449, T=310.15, pH=7
 
 <a id="hp_ph_henderson_hasselbalch"></a>
 
-### Blood pH by the Henderson-Hasselbalch equation — `hp_ph_henderson_hasselbalch`
+### Blood pH by the Henderson-Hasselbalch equation, `hp_ph_henderson_hasselbalch`
 
 $pH = 6.1 + log10$(HCO3/(0.03 PaCO2)) and the hydrogen-ion concentration in nmol/L.
 
@@ -2133,6 +2349,14 @@ $$
 - **Method:** pK' 6.1, CO2 solubility 0.03 mmol/L per mmHg
 - **Assumes:** HCO3, PaCO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![pH (pH) against HCO3 (bicarbonate (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-ph-henderson-hasselbalch-curve)
+
+*pH (pH) against HCO3 (bicarbonate (e.g. in mmol/L)) from 12 mol/m^3 to 36 mol/m^3. One curve for each value of PaCO2 (PCO2 (e.g. in mmHg)): 5332.9 Pa, 2666.45 Pa, 10665.8 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, HCO3 = 24 mol/m^3, pH = 7.40103.*
+
+![pH (pH) over HCO3 (bicarbonate (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-ph-henderson-hasselbalch-field)
+
+*pH (pH) over HCO3 (bicarbonate (e.g. in mmol/L)) from 12 mol/m^3 to 36 mol/m^3 and PaCO2 (PCO2 (e.g. in mmHg)) from 2666.45 Pa to 7999.34 Pa: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 6.92391 to dark 7.87815); iso-lines at pH = 7, 7.2, 7.4, 7.6, 7.8. Marked: the worked example, HCO3 = 24 mol/m^3, PaCO2 = 5332.9 Pa, pH = 7.40103.*
 
 ```python
 human_physiology_ai999x.solve('hp_ph_henderson_hasselbalch', HCO3=24.0, PaCO2=5332.8954966)
@@ -2156,7 +2380,7 @@ human_physiology_ai999x.solve('hp_ph_henderson_hasselbalch', HCO3=12.0, PaCO2=33
 
 <a id="hp_bicarbonate_from_ph"></a>
 
-### Bicarbonate from pH and PCO2 (Henderson-Hasselbalch) — `hp_bicarbonate_from_ph`
+### Bicarbonate from pH and PCO2 (Henderson-Hasselbalch), `hp_bicarbonate_from_ph`
 
 HCO3 = 0.03 PaCO2 x $10^{pH - 6.1}$.
 
@@ -2176,6 +2400,10 @@ $$
 - **Method:** Henderson-Hasselbalch solved for bicarbonate
 - **Assumes:** $6.5  \leq  pH  \leq  8.0$; PaCO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![HCO3 (bicarbonate in mmol/L) against pH (pH) from 6](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bicarbonate-from-ph-curve)
+
+*HCO3 (bicarbonate in mmol/L) against pH (pH) from 6.66 to 8.14. One curve for each value of PaCO2 (PCO2 (e.g. in mmHg)): 5332.9 Pa, 2666.45 Pa, 10665.8 Pa. 28 points per curve computed by human-physiology-ai999x; marked: the worked example, pH = 7.4, HCO3 = 23.9431.*
 
 ```python
 human_physiology_ai999x.solve('hp_bicarbonate_from_ph', pH=7.4, PaCO2=5332.8954966)
@@ -2199,7 +2427,7 @@ human_physiology_ai999x.solve('hp_bicarbonate_from_ph', pH=7.25, PaCO2=7999.3432
 
 <a id="hp_pco2_from_ph"></a>
 
-### PCO2 from pH and bicarbonate (Henderson-Hasselbalch) — `hp_pco2_from_ph`
+### PCO2 from pH and bicarbonate (Henderson-Hasselbalch), `hp_pco2_from_ph`
 
 PaCO2 = HCO3/(0.03 x $10^{pH - 6.1}$).
 
@@ -2219,6 +2447,10 @@ $$
 - **Method:** Henderson-Hasselbalch solved for PCO2
 - **Assumes:** $6.5  \leq  pH  \leq  8.0$; HCO3 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![PaCO2 (PCO2 in mmHg) against pH (pH) from 6](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-pco2-from-ph-curve)
+
+*PaCO2 (PCO2 in mmHg) against pH (pH) from 6.66 to 8.14. One curve for each value of HCO3 (bicarbonate (e.g. in mmol/L)): 24 mol/m^3, 12 mol/m^3, 48 mol/m^3. 28 points per curve computed by human-physiology-ai999x; marked: the worked example, pH = 7.4, PaCO2 = 40.095.*
 
 ```python
 human_physiology_ai999x.solve('hp_pco2_from_ph', pH=7.4, HCO3=24.0)
@@ -2242,7 +2474,7 @@ human_physiology_ai999x.solve('hp_pco2_from_ph', pH=7.2, HCO3=15.0)
 
 <a id="hp_anion_gap"></a>
 
-### Serum anion gap and albumin-corrected anion gap — `hp_anion_gap`
+### Serum anion gap and albumin-corrected anion gap, `hp_anion_gap`
 
 AG = Na - (Cl + HCO3) and the albumin-corrected value $AG + 2.5$ (4.0 - albumin in g/dL).
 
@@ -2266,6 +2498,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![AG (anion gap in mmol/L) against Na (sodium (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-anion-gap-curve)
+
+*AG (anion gap in mmol/L) against Na (sodium (e.g. in mmol/L)) from 70 mol/m^3 to 210 mol/m^3. One curve for each value of Cl (chloride (e.g. in mmol/L)): 104 mol/m^3, 52 mol/m^3, 208 mol/m^3. Other inputs as in the worked example: HCO3 = 24.0 mol/m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Na = 140 mol/m^3, AG = 12.*
+
 ```python
 human_physiology_ai999x.solve('hp_anion_gap', Na=140.0, Cl=104.0, HCO3=24.0)
 # -> AG = 12, AG_corrected = 12   (SOLVED)
@@ -2288,7 +2524,7 @@ human_physiology_ai999x.solve('hp_anion_gap', Na=140.0, Cl=104.0, HCO3=24.0, alb
 
 <a id="hp_fick_diffusion"></a>
 
-### Fick's law of diffusion across a membrane — `hp_fick_diffusion`
+### Fick's law of diffusion across a membrane: `hp_fick_diffusion`
 
 Steady diffusive flux $J = D$ A dC/T across a barrier of thickness T, and the diffusion time $T^{2}/(2D)$.
 
@@ -2312,6 +2548,10 @@ $$
 - **Assumes:** D, A, $T > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![J (diffusion rate in mmol/s) against T (membrane thickness (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fick-diffusion-curve)
+
+*J (diffusion rate in mmol/s) against T (membrane thickness (e.g. in um)) from 1.0000e-06 m to 3.0000e-06 m. One curve for each value of D (diffusion coefficient (e.g. in cm^2/s)): 1.5000e-09 m^2/s, 7.5000e-10 m^2/s, 3.0000e-09 m^2/s. Other inputs as in the worked example: A = 0.0002 m^2, dC = 0.5 mol/m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, T = 2.0000e-06 m, J = 7.5000e-05.*
+
 ```python
 human_physiology_ai999x.solve('hp_fick_diffusion', D=1.5000000000000002e-09, A=0.0002, dC=0.5, T=2e-06)
 # -> J = 7.5e-05, t_diffusion = 0.00133333   (SOLVED)
@@ -2334,7 +2574,7 @@ human_physiology_ai999x.solve('hp_fick_diffusion', D=2e-09, A=0.0001, dC=1.0, T=
 
 <a id="hp_respiratory_mechanics"></a>
 
-### Static and dynamic compliance and airway resistance — `hp_respiratory_mechanics`
+### Static and dynamic compliance and airway resistance, `hp_respiratory_mechanics`
 
 Static compliance VT/(Pplat - PEEP), dynamic compliance VT/(Ppeak - PEEP), airway resistance (Ppeak - Pplat)/flow and driving pressure.
 
@@ -2361,6 +2601,10 @@ $$
 - **Assumes:** Ppeak >= Pplat > PEEP >= 0; constant flow
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![C_static (static compliance in mL/cmH2O) against Pplat (plateau pressure in cmH2O) from 10 to 30](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-respiratory-mechanics-curve)
+
+*C_static (static compliance in mL/cmH2O) against Pplat (plateau pressure in cmH2O) from 10 to 30. One curve for each value of VT (tidal volume (e.g. in mL)): 0.0005 m^3, 0.00025 m^3, 0.001 m^3. Other inputs as in the worked example: Ppeak = 25, PEEP = 5, flow = 0.001 m^3/s. 23 points per curve computed by human-physiology-ai999x; marked: the worked example, Pplat = 20, C_static = 33.3333.*
+
 ```python
 human_physiology_ai999x.solve('hp_respiratory_mechanics', VT=0.0005, Ppeak=25, Pplat=20, PEEP=5, flow=0.001)
 # -> C_static = 33.3333, C_dynamic = 25, R_aw = 5, driving_pressure = 15   (SOLVED)
@@ -2383,7 +2627,7 @@ human_physiology_ai999x.solve('hp_respiratory_mechanics', VT=0.00045, Ppeak=30, 
 
 <a id="hp_respiratory_time_constant"></a>
 
-### Respiratory time constant and passive exhalation — `hp_respiratory_time_constant`
+### Respiratory time constant and passive exhalation, `hp_respiratory_time_constant`
 
 $\tau = R$ C, the fraction of the volume exhaled after time t, $1 - e^{-t/\tau}$, and 3 tau (about 95 %).
 
@@ -2406,6 +2650,10 @@ $$
 - **Method:** single-compartment passive emptying
 - **Assumes:** R, $C > 0$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![tau (time constant in s) against R (airway resistance in cmH2O s/L) from 2](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-respiratory-time-constant-curve)
+
+*tau (time constant in s) against R (airway resistance in cmH2O s/L) from 2.5 to 7.5. One curve for each value of C (compliance in mL/cmH2O): 50, 25, 100. Other inputs as in the worked example: t = 0.5 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, R = 5, tau = 0.25.*
 
 ```python
 human_physiology_ai999x.solve('hp_respiratory_time_constant', R=5, C=50, t=0.5)
@@ -2435,7 +2683,7 @@ human_physiology_ai999x.solve('hp_respiratory_time_constant', R=5, C=50)
 
 <a id="hp_alveolar_laplace_pressure"></a>
 
-### Laplace pressure of an alveolus — `hp_alveolar_laplace_pressure`
+### Laplace pressure of an alveolus: `hp_alveolar_laplace_pressure`
 
 Pressure needed to keep a spherical alveolus open, $P = 2$ gamma/r (why surfactant matters).
 
@@ -2456,6 +2704,14 @@ $$
 - **Method:** $P = 2$ gamma / r
 - **Assumes:** gamma, $r > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![P_cmH2O (collapsing pressure in cmH2O) against r (alveolar radius (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-laplace-pressure-curve)
+
+*P_cmH2O (collapsing pressure in cmH2O) against r (alveolar radius (e.g. in um)) from 5.0000e-05 m to 0.00015 m. One curve for each value of gamma (surface tension (e.g. in mN/m)): 0.025 N/m, 0.0125 N/m, 0.05 N/m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, r = 1.0000e-04 m, P_cmH2O = 5.09858.*
+
+![P_cmH2O (collapsing pressure in cmH2O) over gamma (surface tension (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-laplace-pressure-field)
+
+*P_cmH2O (collapsing pressure in cmH2O) over gamma (surface tension (e.g. in mN/m)) from 0.0125 N/m to 0.0375 N/m and r (alveolar radius (e.g. in um)) from 5.0000e-05 m to 0.00015 m: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 1.69953 to dark 15.2957); iso-lines at P_cmH2O = 2.5, 5, 7.5, 10, 12.5. Marked: the worked example, gamma = 0.025 N/m, r = 1.0000e-04 m, P_cmH2O = 5.09858.*
 
 ```python
 human_physiology_ai999x.solve('hp_alveolar_laplace_pressure', gamma=0.025, r=9.999999999999999e-05)
@@ -2479,7 +2735,7 @@ human_physiology_ai999x.solve('hp_alveolar_laplace_pressure', gamma=0.005, r=4.9
 
 <a id="hp_barometric_altitude"></a>
 
-### Barometric pressure and inspired PO2 at altitude — `hp_barometric_altitude`
+### Barometric pressure and inspired PO2 at altitude, `hp_barometric_altitude`
 
 Standard-atmosphere barometric pressure $P = 101325$ (1 - 0.0065 $h/288.15)^(g$ M/(R L)) and the humidified inspired PO2.
 
@@ -2501,6 +2757,10 @@ $$
 - **Method:** ICAO standard troposphere (lapse 6.5 K/km)
 - **Assumes:** $0  \leq  h  \leq  11000$ m
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![Patm (barometric pressure in mmHg) against h (altitude (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-barometric-altitude-curve)
+
+*Patm (barometric pressure in mmHg) against h (altitude (e.g. in m)) from 300 m to 30000 m on a logarithmic axis. 32 points computed by human-physiology-ai999x; marked: the worked example, h = 3000 m, Patm = 525.861.*
 
 ```python
 human_physiology_ai999x.solve('hp_barometric_altitude', h=3000.0)
@@ -2524,7 +2784,7 @@ human_physiology_ai999x.solve('hp_barometric_altitude', h=5000.0, FiO2=0.21)
 
 <a id="hp_gas_volume_conversion"></a>
 
-### ATPS to BTPS and STPD gas volume conversion — `hp_gas_volume_conversion`
+### ATPS to BTPS and STPD gas volume conversion, `hp_gas_volume_conversion`
 
 A spirometer volume measured at ambient temperature and pressure, saturated (ATPS), converted to body (BTPS) and standard dry (STPD) conditions.
 
@@ -2548,6 +2808,10 @@ $$
 - **Assumes:** Patm > PH2O; Patm > 47 mmHg
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![V_BTPS (volume at BTPS in L) against Patm (barometric pressure (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-gas-volume-conversion-curve)
+
+*V_BTPS (volume at BTPS in L) against Patm (barometric pressure (e.g. in mmHg)) from 10132.5 Pa to 1.01325e+06 Pa on a logarithmic axis. One curve for each value of V (measured volume (e.g. in L)): 0.001 m^3, 0.0005 m^3, 0.002 m^3. Other inputs as in the worked example: T = 295.15 K, PH2O = 2639.7832708170004 Pa. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Patm = 101325 Pa, V_BTPS = 1.09091.*
+
 ```python
 human_physiology_ai999x.solve('hp_gas_volume_conversion', V=0.001, T=295.15, Patm=101325.01443540001, PH2O=2639.7832708170004)
 # -> V_BTPS = 1.09091, V_STPD = 0.901351   (SOLVED)
@@ -2570,7 +2834,7 @@ human_physiology_ai999x.solve('hp_gas_volume_conversion', V=0.0025, T=298.15, Pa
 
 <a id="hp_weir_energy_expenditure"></a>
 
-### Respiratory quotient and energy expenditure (Weir equation) — `hp_weir_energy_expenditure`
+### Respiratory quotient and energy expenditure (Weir equation), `hp_weir_energy_expenditure`
 
 RQ = VCO2/VO2 and resting energy expenditure by the abbreviated Weir equation (3.941 $VO2 + 1.106$ VCO2) x 1440 kcal/day (L/min).
 
@@ -2592,6 +2856,14 @@ $$
 - **Method:** Weir (1949) without urinary nitrogen
 - **Assumes:** VO2, VCO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![EE (energy expenditure in kcal/day) against VO2 (oxygen consumption (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-weir-energy-expenditure-curve)
+
+*EE (energy expenditure in kcal/day) against VO2 (oxygen consumption (e.g. in mL/min)) from 2.0833e-06 m^3/s to 6.2500e-06 m^3/s. One curve for each value of VCO2 (CO2 production (e.g. in mL/min)): 3.3333e-06 m^3/s, 1.6667e-06 m^3/s, 6.6667e-06 m^3/s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, VO2 = 4.1667e-06 m^3/s, EE = 1737.29.*
+
+![EE (energy expenditure in kcal/day) over VO2 (oxygen consumption (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-weir-energy-expenditure-field)
+
+*EE (energy expenditure in kcal/day) over VO2 (oxygen consumption (e.g. in mL/min)) from 2.0833e-06 m^3/s to 6.2500e-06 m^3/s and VCO2 (CO2 production (e.g. in mL/min)) from 1.6667e-06 m^3/s to 5.0000e-06 m^3/s: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 868.644 to dark 2605.93); iso-lines at EE = 1000, 1500, 2000, 2500. Marked: the worked example, VO2 = 4.1667e-06 m^3/s, VCO2 = 3.3333e-06 m^3/s, EE = 1737.29.*
 
 ```python
 human_physiology_ai999x.solve('hp_weir_energy_expenditure', VO2=4.166666666666667e-06, VCO2=3.3333333333333333e-06)
@@ -2615,7 +2887,7 @@ human_physiology_ai999x.solve('hp_weir_energy_expenditure', VO2=5e-06, VCO2=4.5e
 
 <a id="hp_fev1_fvc_ratio"></a>
 
-### FEV1/FVC ratio — `hp_fev1_fvc_ratio`
+### FEV1/FVC ratio: `hp_fev1_fvc_ratio`
 
 The fraction of the forced vital capacity exhaled in the first second.
 
@@ -2636,6 +2908,14 @@ $$
 - **Method:** FEV1 / FVC
 - **Assumes:** 0 < FEV1 <= FVC
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![ratio (FEV1/FVC) against FVC (forced vital capacity (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fev1-fvc-ratio-curve)
+
+*ratio (FEV1/FVC) against FVC (forced vital capacity (e.g. in L)) from 0.002 m^3 to 0.006 m^3. One curve for each value of FEV1 (forced expiratory volume in the first second (e.g. in L)): 0.0032 m^3, 0.0016 m^3. 22 points per curve computed by human-physiology-ai999x; marked: the worked example, FVC = 0.004 m^3, ratio = 0.8.*
+
+![ratio (FEV1/FVC) over FVC (forced vital capacity (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fev1-fvc-ratio-field)
+
+*ratio (FEV1/FVC) over FVC (forced vital capacity (e.g. in L)) from 0.002 m^3 to 0.006 m^3 and FEV1 (forced expiratory volume in the first second (e.g. in L)) from 0.0016 m^3 to 0.0048 m^3: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.266667 to dark 1); iso-lines at ratio = 0.4, 0.6, 0.8; blank cells: inputs the capability refuses. Marked: the worked example, FVC = 0.004 m^3, FEV1 = 0.0032 m^3, ratio = 0.8.*
 
 ```python
 human_physiology_ai999x.solve('hp_fev1_fvc_ratio', FEV1=0.0032, FVC=0.004)
@@ -2659,7 +2939,7 @@ human_physiology_ai999x.solve('hp_fev1_fvc_ratio', FEV1=0.0015, FVC=0.003)
 
 <a id="hp_renal_clearance"></a>
 
-### Renal clearance of a substance (inulin GFR) — `hp_renal_clearance`
+### Renal clearance of a substance (inulin GFR), `hp_renal_clearance`
 
 Clearance $C = U$ V/P (equal to GFR for inulin) and the urinary excretion rate U V.
 
@@ -2681,6 +2961,10 @@ $$
 - **Method:** $C = U$ V / P
 - **Assumes:** $U  \geq  0$; V, $P > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![C (clearance in mL/min) against P (plasma concentration in mg/dL) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-renal-clearance-curve)
+
+*C (clearance in mL/min) against P (plasma concentration in mg/dL) from 0.02 to 0.98. One curve for each value of U (urine concentration in mg/dL): 30, 15, 60. Other inputs as in the worked example: V = 1.6666666666666667e-08 m^3/s. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, P = 0.25, C = 120.*
 
 ```python
 human_physiology_ai999x.solve('hp_renal_clearance', U=30, V=1.6666666666666667e-08, P=0.25)
@@ -2704,7 +2988,7 @@ human_physiology_ai999x.solve('hp_renal_clearance', U=100, V=2.5e-08, P=1.2)
 
 <a id="hp_creatinine_clearance_timed"></a>
 
-### Creatinine clearance from a timed urine collection — `hp_creatinine_clearance_timed`
+### Creatinine clearance from a timed urine collection, `hp_creatinine_clearance_timed`
 
 Urine flow from a timed collection, creatinine clearance U V/P and its value normalized to 1.73 $m^{2.}$
 
@@ -2730,6 +3014,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![CrCl (creatinine clearance in mL/min) against hours (collection time (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-creatinine-clearance-timed-curve)
+
+*CrCl (creatinine clearance in mL/min) against hours (collection time (e.g. in h)) from 43200 s to 129600 s. One curve for each value of Ucr (urine creatinine in mg/dL): 100, 50, 200. Other inputs as in the worked example: Vurine = 0.0014399999999999999 m^3, Pcr = 1. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, hours = 86400 s, CrCl = 100.*
+
 ```python
 human_physiology_ai999x.solve('hp_creatinine_clearance_timed', Ucr=100, Vurine=0.0014399999999999999, hours=86400.0, Pcr=1)
 # -> urine_flow = 1, CrCl = 100, CrCl_normalized = 100   (SOLVED)
@@ -2752,7 +3040,7 @@ human_physiology_ai999x.solve('hp_creatinine_clearance_timed', Ucr=80, Vurine=0.
 
 <a id="hp_pah_renal_flow"></a>
 
-### Renal plasma and blood flow from PAH clearance — `hp_pah_renal_flow`
+### Renal plasma and blood flow from PAH clearance, `hp_pah_renal_flow`
 
 Effective renal plasma flow = PAH clearance, true RPF = eRPF/E (PAH extraction) and RBF = RPF/(1 - Hct).
 
@@ -2778,6 +3066,10 @@ $$
 - **Assumes:** 0 <= Hct < 1; $0 < E  \leq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![RBF (renal blood flow in mL/min) against Hct (hematocrit (fraction)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-pah-renal-flow-curve)
+
+*RBF (renal blood flow in mL/min) against Hct (hematocrit (fraction)) from 0.02 to 0.98. One curve for each value of E (PAH extraction ratio (optional; complete extraction, the effective flow, if omitted)): 0.9, 0.26. Other inputs as in the worked example: U_PAH = 600, V = 1.6666666666666667e-08 m^3/s, P_PAH = 1. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Hct = 0.45, RBF = 1212.12.*
+
 ```python
 human_physiology_ai999x.solve('hp_pah_renal_flow', U_PAH=600, V=1.6666666666666667e-08, P_PAH=1, Hct=0.45, E=0.9)
 # -> eRPF = 600, RPF = 666.667, RBF = 1212.12   (SOLVED)
@@ -2800,7 +3092,7 @@ human_physiology_ai999x.solve('hp_pah_renal_flow', U_PAH=650, V=1.66666666666666
 
 <a id="hp_filtration_fraction"></a>
 
-### Filtration fraction — `hp_filtration_fraction`
+### Filtration fraction: `hp_filtration_fraction`
 
 The fraction of renal plasma flow filtered at the glomerulus, FF = GFR/RPF.
 
@@ -2821,6 +3113,14 @@ $$
 - **Method:** FF = GFR / RPF
 - **Assumes:** 0 < GFR < RPF
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![FF (filtration fraction) against RPF (renal plasma flow (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-filtration-fraction-curve)
+
+*FF (filtration fraction) against RPF (renal plasma flow (e.g. in mL/min)) from 5.0000e-06 m^3/s to 1.5000e-05 m^3/s. One curve for each value of GFR (glomerular filtration rate (e.g. in mL/min)): 2.0000e-06 m^3/s, 1.0000e-06 m^3/s, 4.0000e-06 m^3/s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RPF = 1.0000e-05 m^3/s, FF = 0.2.*
+
+![FF (filtration fraction) over GFR (glomerular filtration rate (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-filtration-fraction-field)
+
+*FF (filtration fraction) over GFR (glomerular filtration rate (e.g. in mL/min)) from 1.0000e-06 m^3/s to 3.0000e-06 m^3/s and RPF (renal plasma flow (e.g. in mL/min)) from 5.0000e-06 m^3/s to 1.5000e-05 m^3/s: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.0666667 to dark 0.6); iso-lines at FF = 0.1, 0.2, 0.3, 0.4, 0.5. Marked: the worked example, GFR = 2.0000e-06 m^3/s, RPF = 1.0000e-05 m^3/s, FF = 0.2.*
 
 ```python
 human_physiology_ai999x.solve('hp_filtration_fraction', GFR=2e-06, RPF=1e-05)
@@ -2844,7 +3144,7 @@ human_physiology_ai999x.solve('hp_filtration_fraction', GFR=1.6666666666666667e-
 
 <a id="hp_free_water_clearance"></a>
 
-### Osmolar and free water clearance — `hp_free_water_clearance`
+### Osmolar and free water clearance: `hp_free_water_clearance`
 
 Osmolar clearance Cosm = Uosm V/Posm and free water clearance CH2O = V - Cosm (negative when the urine is concentrated).
 
@@ -2866,6 +3166,10 @@ $$
 - **Method:** $CH2O = V$ (1 - Uosm/Posm)
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![CH2O (free water clearance in mL/min) against Posm (plasma osmolality in mOsm/kg) from 30 to 3000 on a logarithmic axis](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-free-water-clearance-curve)
+
+*CH2O (free water clearance in mL/min) against Posm (plasma osmolality in mOsm/kg) from 30 to 3000 on a logarithmic axis. One curve for each value of Uosm (urine osmolality in mOsm/kg): 150, 75, 300. Other inputs as in the worked example: V = 3.3333333333333334e-08 m^3/s. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Posm = 300, CH2O = 1.*
 
 ```python
 human_physiology_ai999x.solve('hp_free_water_clearance', V=3.3333333333333334e-08, Uosm=150, Posm=300)
@@ -2889,7 +3193,7 @@ human_physiology_ai999x.solve('hp_free_water_clearance', V=1.6666666666666667e-0
 
 <a id="hp_fractional_excretion"></a>
 
-### Fractional excretion of a solute — `hp_fractional_excretion`
+### Fractional excretion of a solute: `hp_fractional_excretion`
 
 FE = (Ux Pcr)/(Px Ucr): the fraction of the filtered load excreted, with creatinine clearance as GFR (e.g. FENa).
 
@@ -2913,6 +3217,10 @@ $$
 - **Assumes:** Px, Ucr, Pcr > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![FE_percent (fractional excretion in %) against Px (plasma concentration of the solute (same unit)) from 70 to 210](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fractional-excretion-curve)
+
+*FE_percent (fractional excretion in %) against Px (plasma concentration of the solute (same unit)) from 70 to 210. One curve for each value of Ux (urine concentration of the solute (any unit)): 40, 20, 80. Other inputs as in the worked example: Ucr = 100, Pcr = 1. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Px = 140, FE_percent = 0.285714.*
+
 ```python
 human_physiology_ai999x.solve('hp_fractional_excretion', Ux=40, Px=140, Ucr=100, Pcr=1)
 # -> FE = 0.00285714, FE_percent = 0.285714   (SOLVED)
@@ -2935,7 +3243,7 @@ human_physiology_ai999x.solve('hp_fractional_excretion', Ux=2, Px=140, Ucr=120, 
 
 <a id="hp_egfr_ckd_epi_2021"></a>
 
-### Estimated GFR by the CKD-EPI 2021 creatinine equation — `hp_egfr_ckd_epi_2021`
+### Estimated GFR by the CKD-EPI 2021 creatinine equation, `hp_egfr_ckd_epi_2021`
 
 eGFR = 142 min(Scr/k, 1)^a max(Scr/k, 1)^-1.200 0.9938^age (x 1.012 female), the race-free 2021 CKD-EPI creatinine equation (computed value only).
 
@@ -2956,6 +3264,14 @@ $$
 - **Method:** CKD-EPI 2021: $k = 0.7/0.9$, $a = -0.241/-0.302$ (female/male)
 - **Assumes:** Scr > 0; 18 <= age <= 120
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![eGFR (estimated GFR in mL/min normalized to standard body surface area) against Scr (serum creatinine in mg/dL) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-egfr-ckd-epi-2021-curve)
+
+*eGFR (estimated GFR in mL/min normalized to standard body surface area) against Scr (serum creatinine in mg/dL) from 0.1 to 10 on a logarithmic axis. One curve for each value of age (age in years): 50, 25, 100. Other inputs as in the worked example: sex = male. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Scr = 1, eGFR = 91.6915.*
+
+![eGFR (estimated GFR in mL/min normalized to standard body surface area) over Scr (serum creatinine in mg/dL) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-egfr-ckd-epi-2021-field)
+
+*eGFR (estimated GFR in mL/min normalized to standard body surface area) over Scr (serum creatinine in mg/dL) from 0.1 to 10 and age (age in years) from 25 to 75 (logarithmic horizontal axis): each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 4.95226 to dark 236.018); iso-lines at eGFR = 50, 100, 150, 200. Other inputs as in the worked example: sex = male. Marked: the worked example, Scr = 1, age = 50, eGFR = 91.6915.*
 
 ```python
 human_physiology_ai999x.solve('hp_egfr_ckd_epi_2021', Scr=1, age=50, sex='male')
@@ -2985,7 +3301,7 @@ human_physiology_ai999x.solve('hp_egfr_ckd_epi_2021', Scr=0.6, age=30, sex='fema
 
 <a id="hp_egfr_ckd_epi_2021_cys"></a>
 
-### Estimated GFR by the CKD-EPI 2021 creatinine-cystatin C equation — `hp_egfr_ckd_epi_2021_cys`
+### Estimated GFR by the CKD-EPI 2021 creatinine-cystatin C equation, `hp_egfr_ckd_epi_2021_cys`
 
 The race-free 2021 CKD-EPI equation from serum creatinine and cystatin C (computed value only).
 
@@ -3007,6 +3323,10 @@ $$
 - **Method:** 135 min(Scr/k,1)^a max(Scr/k,1)^-0.544 min(Scys/0.8,1)^-0.323 max(Scys/0.8,1)^-0.778 0.9961^age (x 0.963 female)
 - **Assumes:** Scr, Scys > 0; 18 <= age <= 120
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![eGFR (estimated GFR in mL/min normalized to standard body surface area) against Scys (serum cystatin C (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-egfr-ckd-epi-2021-cys-curve)
+
+*eGFR (estimated GFR in mL/min normalized to standard body surface area) against Scys (serum cystatin C (e.g. in mg/L)) from 0.0001 kg/m^3 to 0.01 kg/m^3 on a logarithmic axis. One curve for each value of Scr (serum creatinine in mg/dL): 1, 0.5, 2. Other inputs as in the worked example: age = 50, sex = male. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Scys = 0.001 kg/m^3, eGFR = 88.144.*
 
 ```python
 human_physiology_ai999x.solve('hp_egfr_ckd_epi_2021_cys', Scr=1, Scys=0.001, age=50, sex='male')
@@ -3030,7 +3350,7 @@ human_physiology_ai999x.solve('hp_egfr_ckd_epi_2021_cys', Scr=0.8, Scys=0.000900
 
 <a id="hp_cockcroft_gault"></a>
 
-### Creatinine clearance by the Cockcroft-Gault equation — `hp_cockcroft_gault`
+### Creatinine clearance by the Cockcroft-Gault equation, `hp_cockcroft_gault`
 
 Estimated creatinine clearance (140 - age) x weight/(72 x Scr), x 0.85 for female (computed value only).
 
@@ -3052,6 +3372,10 @@ $$
 - **Method:** Cockcroft-Gault (1976)
 - **Assumes:** 18 <= age < 140; weight, Scr > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![CrCl (estimated creatinine clearance in mL/min) against Scr (serum creatinine in mg/dL) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-cockcroft-gault-curve)
+
+*CrCl (estimated creatinine clearance in mL/min) against Scr (serum creatinine in mg/dL) from 0.5 to 1.5. One curve for each value of weight (body weight (e.g. in kg)): 72 kg, 36 kg, 144 kg. Other inputs as in the worked example: age = 60, sex = male. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Scr = 1, CrCl = 80.*
 
 ```python
 human_physiology_ai999x.solve('hp_cockcroft_gault', age=60, weight=72.0, Scr=1, sex='male')
@@ -3075,7 +3399,7 @@ human_physiology_ai999x.solve('hp_cockcroft_gault', age=70, weight=60.0, Scr=1.2
 
 <a id="hp_tubular_handling"></a>
 
-### Filtered load, excretion and net tubular reabsorption or secretion — `hp_tubular_handling`
+### Filtered load, excretion and net tubular reabsorption or secretion, `hp_tubular_handling`
 
 Filtered load GFR x Px, excretion rate Ux x V and net reabsorption (positive) or secretion (negative) as their difference.
 
@@ -3100,6 +3424,10 @@ $$
 - **Assumes:** GFR, $V > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![reabsorbed (net reabsorption in mg/min (negative = net secretion)) against GFR (GFR (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-tubular-handling-curve)
+
+*reabsorbed (net reabsorption in mg/min (negative = net secretion)) against GFR (GFR (e.g. in mL/min)) from 1.0000e-06 m^3/s to 3.0000e-06 m^3/s. One curve for each value of Px (plasma concentration in mg/dL): 100, 50, 200. Other inputs as in the worked example: Ux = 0, V = 1.6666666666666667e-08 m^3/s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, GFR = 2.0000e-06 m^3/s, reabsorbed = 120.*
+
 ```python
 human_physiology_ai999x.solve('hp_tubular_handling', GFR=2e-06, Px=100, Ux=0, V=1.6666666666666667e-08)
 # -> filtered_load = 120, excreted = 0, reabsorbed = 120   (SOLVED)
@@ -3122,7 +3450,7 @@ human_physiology_ai999x.solve('hp_tubular_handling', GFR=2.0833333333333334e-06,
 
 <a id="hp_glucose_titration"></a>
 
-### Glucose titration curve (ideal transport maximum) — `hp_glucose_titration`
+### Glucose titration curve (ideal transport maximum), `hp_glucose_titration`
 
 Filtered, reabsorbed (at most Tm) and excreted glucose and the plasma threshold Tm/GFR, ignoring splay.
 
@@ -3147,6 +3475,10 @@ $$
 - **Assumes:** GFR, $Tm > 0$; Pglucose >= 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![excreted (excreted in mg/min) against Tm (transport maximum (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-glucose-titration-curve)
+
+*excreted (excreted in mg/min) against Tm (transport maximum (e.g. in mg/min)) from 6.2500e-07 kg/s to 6.2500e-05 kg/s on a logarithmic axis. One curve for each value of Pglucose (plasma glucose in mg/dL): 400, 200, 800. Other inputs as in the worked example: GFR = 2.0833333333333334e-06 m^3/s. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, Tm = 6.2500e-06 kg/s, excreted = 125.*
+
 ```python
 human_physiology_ai999x.solve('hp_glucose_titration', GFR=2.0833333333333334e-06, Pglucose=400, Tm=6.25e-06)
 # -> filtered_load = 500, reabsorbed = 375, excreted = 125, threshold = 300   (SOLVED)
@@ -3169,7 +3501,7 @@ human_physiology_ai999x.solve('hp_glucose_titration', GFR=2e-06, Pglucose=100, T
 
 <a id="hp_plasma_osmolality"></a>
 
-### Calculated and effective plasma osmolality and the osmolal gap — `hp_plasma_osmolality`
+### Calculated and effective plasma osmolality and the osmolal gap, `hp_plasma_osmolality`
 
 Calculated osmolality 2 Na + glucose/18 + BUN/2.8, effective osmolality (tonicity) 2 Na + glucose/18 and, with a measured value, the osmolal gap.
 
@@ -3194,6 +3526,14 @@ $$
 - **Assumes:** $Na > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![calculated (calculated osmolality in mOsm/kg) against Na (sodium (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-plasma-osmolality-curve)
+
+*calculated (calculated osmolality in mOsm/kg) against Na (sodium (e.g. in mmol/L)) from 70 mol/m^3 to 210 mol/m^3. Other inputs as in the worked example: glucose = 90, BUN = 14. 31 points computed by human-physiology-ai999x; marked: the worked example, Na = 140 mol/m^3, calculated = 290.*
+
+![calculated (calculated osmolality in mOsm/kg) over Na (sodium (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-plasma-osmolality-field)
+
+*calculated (calculated osmolality in mOsm/kg) over Na (sodium (e.g. in mmol/L)) from 70 mol/m^3 to 210 mol/m^3 and glucose (glucose in mg/dL) from 45 to 135: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 147.5 to dark 432.5); iso-lines at calculated = 150, 200, 250, 300, 350, 400. Other inputs as in the worked example: BUN = 14. Marked: the worked example, Na = 140 mol/m^3, glucose = 90, calculated = 290.*
+
 ```python
 human_physiology_ai999x.solve('hp_plasma_osmolality', Na=140.0, glucose=90, BUN=14)
 # -> calculated = 290, effective = 285   (SOLVED)
@@ -3216,7 +3556,7 @@ human_physiology_ai999x.solve('hp_plasma_osmolality', Na=135.0, glucose=180, BUN
 
 <a id="hp_body_fluid_compartments"></a>
 
-### Body fluid compartments — `hp_body_fluid_compartments`
+### Body fluid compartments: `hp_body_fluid_compartments`
 
 Total body water (60 % of weight by default), intracellular $2/3$, extracellular $1/3$, interstitial $3/4$ and plasma $1/4$ of the ECF.
 
@@ -3241,6 +3581,10 @@ $$
 - **Assumes:** weight > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![TBW (total body water in L) against weight (body weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-body-fluid-compartments-curve)
+
+*TBW (total body water in L) against weight (body weight (e.g. in kg)) from 35 kg to 105 kg. 31 points computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, TBW = 42.*
+
 ```python
 human_physiology_ai999x.solve('hp_body_fluid_compartments', weight=70.0)
 # -> TBW = 42, ICF = 28, ECF = 14, ISF = 10.5, plasma = 3.5   (SOLVED)
@@ -3263,7 +3607,7 @@ human_physiology_ai999x.solve('hp_body_fluid_compartments', weight=60.0, TBW_fra
 
 <a id="hp_watson_total_body_water"></a>
 
-### Total body water by the Watson equations — `hp_watson_total_body_water`
+### Total body water by the Watson equations: `hp_watson_total_body_water`
 
 Watson (1980): male $2.447 - 0.09516$ age + 0.1074 $H + 0.3362$ W; female -2.097 + 0.1069 $H + 0.2466$ W (litres).
 
@@ -3285,6 +3629,10 @@ $$
 - **Method:** Watson anthropometric regression
 - **Assumes:** adult; height, weight > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![TBW (total body water in L) against height (height (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-watson-total-body-water-curve)
+
+*TBW (total body water in L) against height (height (e.g. in cm)) from 0.875 m to 2.625 m. One curve for each value of weight (weight (e.g. in kg)): 70 kg, 35 kg, 140 kg. Other inputs as in the worked example: age = 40, sex = male. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, height = 1.75 m, TBW = 40.9696.*
 
 ```python
 human_physiology_ai999x.solve('hp_watson_total_body_water', age=40, height=1.75, weight=70.0, sex='male')
@@ -3308,7 +3656,7 @@ human_physiology_ai999x.solve('hp_watson_total_body_water', age=40, height=1.650
 
 <a id="hp_solution_osmolarity"></a>
 
-### Osmolarity of a solution — `hp_solution_osmolarity`
+### Osmolarity of a solution: `hp_solution_osmolarity`
 
 Molarity from a mass concentration and the osmolarity (particles per formula unit, times the osmotic coefficient).
 
@@ -3332,6 +3680,10 @@ $$
 - **Assumes:** conc, molar mass > 0; $1  \leq  i  \leq  6$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![osmolarity (osmolarity in mOsm/L) against molar_mass (molar mass (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-solution-osmolarity-curve)
+
+*osmolarity (osmolarity in mOsm/L) against molar_mass (molar mass (e.g. in g/mol)) from 0.02922 kg/mol to 0.08766 kg/mol. One curve for each value of conc (mass concentration (e.g. in g/L)): 9 kg/m^3, 4.5 kg/m^3, 18 kg/m^3. Other inputs as in the worked example: i = 2. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, molar_mass = 0.05844 kg/mol, osmolarity = 308.008.*
+
 ```python
 human_physiology_ai999x.solve('hp_solution_osmolarity', conc=9.0, molar_mass=0.05844, i=2)
 # -> molarity = 154.004, osmolarity = 308.008   (SOLVED)
@@ -3354,7 +3706,7 @@ human_physiology_ai999x.solve('hp_solution_osmolarity', conc=50.0, molar_mass=0.
 
 <a id="hp_osmotic_pressure"></a>
 
-### Osmotic pressure by van 't Hoff's law — `hp_osmotic_pressure`
+### Osmotic pressure by van 't Hoff's law: `hp_osmotic_pressure`
 
 $pi = c$ R T for an osmolarity c, in Pa, mmHg and atm (about 19.3 mmHg per mOsm/L at 37 degC).
 
@@ -3376,6 +3728,10 @@ $$
 - **Method:** $pi = c$ R T (ideal dilute solution)
 - **Assumes:** osm >= 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![pi_mmHg (osmotic pressure in mmHg) against osm (osmolarity (or osmolarity difference) in mOsm/L) from 150 to 450](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-osmotic-pressure-curve)
+
+*pi_mmHg (osmotic pressure in mmHg) against osm (osmolarity (or osmolarity difference) in mOsm/L) from 150 to 450. 31 points computed by human-physiology-ai999x; marked: the worked example, osm = 300, pi_mmHg = 5802.62.*
 
 ```python
 human_physiology_ai999x.solve('hp_osmotic_pressure', osm=300)
@@ -3399,7 +3755,7 @@ human_physiology_ai999x.solve('hp_osmotic_pressure', osm=10, T=298.15)
 
 <a id="hp_fluid_shift"></a>
 
-### Two-compartment fluid shift after adding a solution (Darrow-Yannet) — `hp_fluid_shift`
+### Two-compartment fluid shift after adding a solution (Darrow-Yannet), `hp_fluid_shift`
 
 New osmolality and intracellular and extracellular volumes at osmotic equilibrium after a volume of solution enters the ECF.
 
@@ -3425,6 +3781,14 @@ $$
 - **Assumes:** TBW, Posm, V_added > 0; C_added >= 0; solute stays in the ECF, water moves freely
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![osm_final (final osmolality in mOsm/kg) against TBW (initial total body water (e](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-fluid-shift-osm-final-vs-tbw.svg)
+
+*osm_final (final osmolality in mOsm/kg) against TBW (initial total body water (e.g. in L)), with C_added = 0, Posm = 290, V_added = 0.002 m^3. 31 points computed by human-physiology-ai999x; marked: TBW = 0.042, osm_final = 276.818.*
+
+![osm_final (final osmolality in mOsm/kg) against TBW (initial total body water (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-fluid-shift-curve)
+
+*osm_final (final osmolality in mOsm/kg) against TBW (initial total body water (e.g. in L)) from 0.0042 m^3 to 0.42 m^3 on a logarithmic axis. One curve for each value of Posm (initial osmolality in mOsm/kg): 290, 145, 580. Other inputs as in the worked example: V_added = 0.002 m^3, C_added = 0. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, TBW = 0.042 m^3, osm_final = 276.818.*
+
 ```python
 human_physiology_ai999x.solve('hp_fluid_shift', TBW=0.042, Posm=290, V_added=0.002, C_added=0)
 # -> osm_final = 276.818, ICF = 29.3333, ECF = 14.6667   (SOLVED)
@@ -3447,7 +3811,7 @@ human_physiology_ai999x.solve('hp_fluid_shift', TBW=0.042, Posm=290, V_added=0.0
 
 <a id="hp_gibbs_donnan"></a>
 
-### Gibbs-Donnan equilibrium with an impermeant anion — `hp_gibbs_donnan`
+### Gibbs-Donnan equilibrium with an impermeant anion, `hp_gibbs_donnan`
 
 Equilibrium NaCl distribution across a membrane when one side holds impermeant anions (charge concentration A) facing a large bath of NaCl c: concentrations, Donnan ratio, potential and osmotic excess.
 
@@ -3473,6 +3837,14 @@ $$
 - **Assumes:** A, $c > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Na_in (Na+ inside in mmol/L) against A (impermeant anion charge concentration inside in mEq/L) from 2 to 200 on a logarithmic axis](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-gibbs-donnan-curve)
+
+*Na_in (Na+ inside in mmol/L) against A (impermeant anion charge concentration inside in mEq/L) from 2 to 200 on a logarithmic axis. One curve for each value of c (bath NaCl concentration (e.g. in mmol/L)): 150 mol/m^3, 75 mol/m^3, 300 mol/m^3. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, A = 20, Na_in = 160.333.*
+
+![Na_in (Na+ inside in mmol/L) over c (bath NaCl concentration (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-gibbs-donnan-field)
+
+*Na_in (Na+ inside in mmol/L) over c (bath NaCl concentration (e.g. in mmol/L)) from 75 mol/m^3 to 225 mol/m^3 and A (impermeant anion charge concentration inside in mEq/L) from 2 to 200 (logarithmic vertical axis): each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 76.0067 to dark 346.221); iso-lines at Na_in = 100, 150, 200, 250, 300. Marked: the worked example, c = 150 mol/m^3, A = 20, Na_in = 160.333.*
+
 ```python
 human_physiology_ai999x.solve('hp_gibbs_donnan', A=20, c=150.0)
 # -> Na_in = 160.333, Cl_in = 140.333, r = 1.06889, V_mV = -1.78046, osmotic_excess = 0.665928   (SOLVED)
@@ -3495,7 +3867,7 @@ human_physiology_ai999x.solve('hp_gibbs_donnan', A=10, c=100.0, T=298.15)
 
 <a id="hp_nernst_potential"></a>
 
-### Nernst equilibrium potential of an ion — `hp_nernst_potential`
+### Nernst equilibrium potential of an ion: `hp_nernst_potential`
 
 $E = (RT/zF)$ ln(Cout/Cin) in mV for an ion of valence z.
 
@@ -3518,6 +3890,14 @@ $$
 - **Method:** Nernst equation
 - **Assumes:** z a nonzero whole number; concentrations > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![E (equilibrium potential in mV) against Cout (extracellular concentration in mM), with Cin = 140, z = 1](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-nernst-potential-e-vs-cout.svg)
+
+*E (equilibrium potential in mV) against Cout (extracellular concentration in mM), with Cin = 140, z = 1. 31 points computed by human-physiology-ai999x; marked: Cout = 4, E = -95.0226.*
+
+![E (equilibrium potential in mV) against Cout (extracellular concentration in mM) from 2 to 6](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-nernst-potential-curve)
+
+*E (equilibrium potential in mV) against Cout (extracellular concentration in mM) from 2 to 6. One curve for each value of Cin (intracellular concentration in mM): 140, 70, 280. Other inputs as in the worked example: z = 1. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Cout = 4, E = -95.0226.*
 
 ```python
 human_physiology_ai999x.solve('hp_nernst_potential', z=1, Cout=4, Cin=140)
@@ -3547,7 +3927,7 @@ human_physiology_ai999x.solve('hp_nernst_potential', z=2, Cout=2.5, Cin=0.0001)
 
 <a id="hp_ghk_voltage"></a>
 
-### Resting membrane potential by the Goldman-Hodgkin-Katz equation — `hp_ghk_voltage`
+### Resting membrane potential by the Goldman-Hodgkin-Katz equation, `hp_ghk_voltage`
 
 $Vm = (RT/F)$ ln((PK K_o + PNa Na_o + PCl Cl_i)/(PK K_i + PNa Na_i + PCl Cl_o)) with relative permeabilities.
 
@@ -3576,6 +3956,10 @@ $$
 - **Assumes:** $PK > 0$; PNa, PCl >= 0; concentrations > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Vm (membrane potential in mV) against K_o (extracellular K+ in mM) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-ghk-voltage-curve)
+
+*Vm (membrane potential in mV) against K_o (extracellular K+ in mM) from 0.4 to 40 on a logarithmic axis. One curve for each value of K_i (intracellular K+ in mM): 140, 70, 280. Other inputs as in the worked example: PK = 1, PNa = 0.04, PCl = 0.45, Na_o = 145, Na_i = 12, Cl_o = 116, Cl_i = 4.2. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, K_o = 4, Vm = -74.896.*
+
 ```python
 human_physiology_ai999x.solve('hp_ghk_voltage', PK=1, PNa=0.04, PCl=0.45, K_o=4, K_i=140, Na_o=145, Na_i=12, Cl_o=116, Cl_i=4.2)
 # -> Vm = -74.896   (SOLVED)
@@ -3598,7 +3982,7 @@ human_physiology_ai999x.solve('hp_ghk_voltage', PK=1, PNa=0.05, PCl=0, K_o=5, K_
 
 <a id="hp_chord_conductance"></a>
 
-### Membrane potential by the chord conductance equation — `hp_chord_conductance`
+### Membrane potential by the chord conductance equation, `hp_chord_conductance`
 
 Steady potential at which the ohmic ionic currents cancel: Vm = (gK EK + gNa ENa + gCl ECl)/(gK + gNa + gCl).
 
@@ -3623,6 +4007,10 @@ $$
 - **Assumes:** conductances >= 0, not all zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![Vm (membrane potential in mV) against gNa (Na+ conductance (same unit)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-chord-conductance-curve)
+
+*Vm (membrane potential in mV) against gNa (Na+ conductance (same unit)) from 0.005 to 0.5 on a logarithmic axis. One curve for each value of EK (K+ equilibrium potential (e.g. in mV)): -0.095 V, -0.0475 V, -0.19 V. Other inputs as in the worked example: gK = 1, gCl = 0.3, ENa = 0.067 V, ECl = -0.09 V. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, gNa = 0.05, Vm = -87.8889.*
+
 ```python
 human_physiology_ai999x.solve('hp_chord_conductance', gK=1, gNa=0.05, gCl=0.3, EK=-0.095, ENa=0.067, ECl=-0.09)
 # -> Vm = -87.8889   (SOLVED)
@@ -3645,7 +4033,7 @@ human_physiology_ai999x.solve('hp_chord_conductance', gK=10, gNa=1, gCl=0, EK=-0
 
 <a id="hp_ionic_current"></a>
 
-### Ionic current and driving force — `hp_ionic_current`
+### Ionic current and driving force: `hp_ionic_current`
 
 Ohmic ionic current $I = g$ (Vm - E) (positive = outward) and the driving force Vm - E.
 
@@ -3667,6 +4055,10 @@ $$
 - **Method:** $I = g$ (Vm - E); nS x $mV = pA$
 - **Assumes:** $g  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![I (current in pA (positive outward)) against g (conductance (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-ionic-current-curve)
+
+*I (current in pA (positive outward)) against g (conductance (e.g. in nS)) from 5.0000e-09 S to 1.5000e-08 S. One curve for each value of E (equilibrium potential of the ion (e.g. in mV)): -0.095 V, -0.0475 V, -0.19 V. Other inputs as in the worked example: Vm = -0.07 V. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, g = 1.0000e-08 S, I = 250.*
 
 ```python
 human_physiology_ai999x.solve('hp_ionic_current', g=1e-08, Vm=-0.07, E=-0.095)
@@ -3690,7 +4082,7 @@ human_physiology_ai999x.solve('hp_ionic_current', g=2e-09, Vm=-0.07, E=0.06)
 
 <a id="hp_membrane_time_constant"></a>
 
-### Membrane time constant and charging — `hp_membrane_time_constant`
+### Membrane time constant and charging: `hp_membrane_time_constant`
 
 $tau_m = Rm$ Cm (specific membrane resistance times capacitance) and the fraction of the final voltage reached after t.
 
@@ -3712,6 +4104,10 @@ $$
 - **Method:** $\tau = Rm$ Cm; V(t)/$V_{inf} = $1 - e$^{\frac{-t}{\tau}}$
 - **Assumes:** Rm, $Cm > 0$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![tau (membrane time constant in ms) against Rm (specific membrane resistance in ohm cm^2) from 10000 to 30000](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-membrane-time-constant-curve)
+
+*tau (membrane time constant in ms) against Rm (specific membrane resistance in ohm cm^2) from 10000 to 30000. One curve for each value of Cm (specific membrane capacitance (e.g. in uF/cm^2)): 0.01 F/m^2, 0.005 F/m^2, 0.02 F/m^2. Other inputs as in the worked example: t = 0.01 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Rm = 20000, tau = 20.*
 
 ```python
 human_physiology_ai999x.solve('hp_membrane_time_constant', Rm=20000, Cm=0.009999999999999998, t=0.01)
@@ -3741,7 +4137,7 @@ human_physiology_ai999x.solve('hp_membrane_time_constant', Rm=20000, Cm=0.009999
 
 <a id="hp_length_constant"></a>
 
-### Length constant of an axon and steady-state attenuation — `hp_length_constant`
+### Length constant of an axon and steady-state attenuation, `hp_length_constant`
 
 $\lambda = sqrt$(Rm d/(4 Ri)) of a passive fibre and the steady voltage fraction $e^{-x/\lambda}$ at distance x.
 
@@ -3764,6 +4160,10 @@ $$
 - **Method:** $\lambda = sqrt$(rm/ri)
 - **Assumes:** Rm, Ri, $d > 0$; $x  \geq  0$; semi-infinite passive cable
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![lambda (length constant in mm) against Ri (axoplasm resistivity in ohm cm) from 50 to 150](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-length-constant-curve)
+
+*lambda (length constant in mm) against Ri (axoplasm resistivity in ohm cm) from 50 to 150. One curve for each value of Rm (specific membrane resistance in ohm cm^2): 20000, 10000, 40000. Other inputs as in the worked example: d = 9.999999999999999e-06 m, x = 0.001 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Ri = 100, lambda = 2.23607.*
 
 ```python
 human_physiology_ai999x.solve('hp_length_constant', Rm=20000, Ri=100, d=9.999999999999999e-06, x=0.001)
@@ -3793,7 +4193,7 @@ human_physiology_ai999x.solve('hp_length_constant', Rm=20000, Ri=100, d=9.999999
 
 <a id="hp_conduction_velocity_scaling"></a>
 
-### Conduction velocity scaling with fibre diameter — `hp_conduction_velocity_scaling`
+### Conduction velocity scaling with fibre diameter, `hp_conduction_velocity_scaling`
 
 Conduction velocity is proportional to diameter for myelinated fibres and to its square root for unmyelinated fibres.
 
@@ -3817,6 +4217,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![v2 (conduction velocity of the other fibre in m/s) against d1 (diameter of that fibre (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-conduction-velocity-scaling-curve)
+
+*v2 (conduction velocity of the other fibre in m/s) against d1 (diameter of that fibre (e.g. in um)) from 5.0000e-06 m to 1.5000e-05 m. One curve for each value of v1 (known conduction velocity (e.g. in m/s)): 60 m/s, 30 m/s, 120 m/s. Other inputs as in the worked example: d2 = 4.9999999999999996e-06 m, fiber = myelinated. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, d1 = 1.0000e-05 m, v2 = 30.*
+
 ```python
 human_physiology_ai999x.solve('hp_conduction_velocity_scaling', v1=60.0, d1=9.999999999999999e-06, d2=4.9999999999999996e-06, fiber='myelinated')
 # -> v2 = 30, ratio = 0.5   (SOLVED)
@@ -3839,7 +4243,7 @@ human_physiology_ai999x.solve('hp_conduction_velocity_scaling', v1=1.0, d1=1e-06
 
 <a id="hp_nerve_conduction_velocity"></a>
 
-### Nerve conduction velocity from two stimulation sites — `hp_nerve_conduction_velocity`
+### Nerve conduction velocity from two stimulation sites, `hp_nerve_conduction_velocity`
 
 NCV = distance between stimulation sites / difference of the response latencies $(mm/ms = m/s)$.
 
@@ -3860,6 +4264,10 @@ $$
 - **Method:** NCV = d / (t_p - t_d)
 - **Assumes:** latency_proximal > latency_distal
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![NCV (conduction velocity in m/s) against latency_proximal (latency from the proximal site (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-nerve-conduction-velocity-curve)
+
+*NCV (conduction velocity in m/s) against latency_proximal (latency from the proximal site (e.g. in ms)) from 0.00425 s to 0.01275 s. One curve for each value of distance (distance between stimulation sites (e.g. in mm)): 0.25 m, 0.125 m, 0.5 m. Other inputs as in the worked example: latency_distal = 0.0035 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, latency_proximal = 0.0085 s, NCV = 50.*
 
 ```python
 human_physiology_ai999x.solve('hp_nerve_conduction_velocity', distance=0.25, latency_proximal=0.0085, latency_distal=0.0035)
@@ -3883,7 +4291,7 @@ human_physiology_ai999x.solve('hp_nerve_conduction_velocity', distance=0.3, late
 
 <a id="hp_membrane_charge"></a>
 
-### Charge and number of ions to change the membrane potential — `hp_membrane_charge`
+### Charge and number of ions to change the membrane potential, `hp_membrane_charge`
 
 $Q = Cm$ A dV and the number of monovalent ions it represents (why few ions cross in an action potential).
 
@@ -3905,6 +4313,10 @@ $$
 - **Method:** $Q = C$ A dV; ions = |Q|/e
 - **Assumes:** Cm, area > 0; dV not 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![ions (number of monovalent ions) against Cm (specific membrane capacitance (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-membrane-charge-curve)
+
+*ions (number of monovalent ions) against Cm (specific membrane capacitance (e.g. in uF/cm^2)) from 0.005 F/m^2 to 0.015 F/m^2. One curve for each value of dV (voltage change (e.g. in mV)): 0.1 V, 0.05 V, 0.2 V. Other inputs as in the worked example: area = 1e-09 m^2. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, Cm = 0.01 F/m^2, ions = 6.24151e+06.*
 
 ```python
 human_physiology_ai999x.solve('hp_membrane_charge', Cm=0.009999999999999998, dV=0.1, area=1e-09)
@@ -3928,7 +4340,7 @@ human_physiology_ai999x.solve('hp_membrane_charge', Cm=0.009, dV=0.08, area=5e-1
 
 <a id="hp_strength_duration"></a>
 
-### Threshold current for a pulse width (strength-duration curve) — `hp_strength_duration`
+### Threshold current for a pulse width (strength-duration curve), `hp_strength_duration`
 
 Threshold current for a pulse of width t from rheobase and chronaxie: Lapicque (exponential RC) and Weiss (linear charge) forms.
 
@@ -3950,6 +4362,10 @@ $$
 - **Method:** Lapicque: tau = chronaxie/ln 2; Weiss: linear charge law
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![I_lapicque (threshold current by the Lapicque (exponential) law, in the unit of the rheobase) against t (pulse width (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-strength-duration-curve)
+
+*I_lapicque (threshold current by the Lapicque (exponential) law, in the unit of the rheobase) against t (pulse width (e.g. in ms)) from 5.0000e-05 s to 0.005 s on a logarithmic axis. One curve for each value of rheobase (rheobase current (any unit, e.g. mA)): 1, 0.5, 2. Other inputs as in the worked example: chronaxie = 0.0005 s. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, t = 0.0005 s, I_lapicque = 2.*
 
 ```python
 human_physiology_ai999x.solve('hp_strength_duration', rheobase=1, chronaxie=0.0005, t=0.0005)
@@ -3979,7 +4395,7 @@ human_physiology_ai999x.solve('hp_strength_duration', rheobase=0.4, chronaxie=0.
 
 <a id="hp_hill_force_velocity"></a>
 
-### Hill muscle force-velocity relation — `hp_hill_force_velocity`
+### Hill muscle force-velocity relation: `hp_hill_force_velocity`
 
 Hill's equation (F + a)$(v + b) = (F_{0} + a)$ b: force at shortening velocity v, the power F v and vmax = b $F_{0}/a.$
 
@@ -4004,6 +4420,10 @@ $$
 - **Assumes:** F0, a, $b > 0$; 0 <= v <= vmax
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![F (force in N) against b (Hill constant b (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hill-force-velocity-curve)
+
+*F (force in N) against b (Hill constant b (e.g. in m/s)) from 0.03 m/s to 3 m/s on a logarithmic axis. One curve for each value of F0 (isometric force (e.g. in N)): 100 N, 50 N, 200 N. Other inputs as in the worked example: a = 25.0 N, v = 0.1 m/s. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, b = 0.3 m/s, F = 68.75.*
+
 ```python
 human_physiology_ai999x.solve('hp_hill_force_velocity', F0=100.0, a=25.0, b=0.3, v=0.1)
 # -> F = 68.75, power = 6.875, vmax = 1.2   (SOLVED)
@@ -4026,7 +4446,7 @@ human_physiology_ai999x.solve('hp_hill_force_velocity', F0=400.0, a=80.0, b=0.5,
 
 <a id="hp_muscle_max_power"></a>
 
-### Maximal power of a muscle from Hill's equation — `hp_muscle_max_power`
+### Maximal power of a muscle from Hill's equation, `hp_muscle_max_power`
 
 The shortening velocity of maximal power v_opt = b (sqrt(1 + F0/a) - 1), the force there and the maximal power.
 
@@ -4051,6 +4471,10 @@ $$
 - **Assumes:** F0, a, $b > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![P_max (maximal power in W) against F0 (isometric force (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-muscle-max-power-curve)
+
+*P_max (maximal power in W) against F0 (isometric force (e.g. in N)) from 10 N to 1000 N on a logarithmic axis. One curve for each value of b (Hill constant b (e.g. in m/s)): 0.3 m/s, 0.15 m/s, 0.6 m/s. Other inputs as in the worked example: a = 25.0 N. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, F0 = 100 N, P_max = 11.459.*
+
 ```python
 human_physiology_ai999x.solve('hp_muscle_max_power', F0=100.0, a=25.0, b=0.3)
 # -> v_opt = 0.37082, F_opt = 30.9017, P_max = 11.459, vmax = 1.2   (SOLVED)
@@ -4073,7 +4497,7 @@ human_physiology_ai999x.solve('hp_muscle_max_power', F0=400.0, a=80.0, b=0.5)
 
 <a id="hp_bmi"></a>
 
-### Body mass index — `hp_bmi`
+### Body mass index: `hp_bmi`
 
 BMI = weight/height^2 $(kg/m^{2})$.
 
@@ -4093,6 +4517,14 @@ $$
 - **Method:** BMI = W / H^2 (H in m)
 - **Assumes:** weight, height > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![BMI (body mass index in kg/m^2) against height (height (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmi-curve)
+
+*BMI (body mass index in kg/m^2) against height (height (e.g. in cm)) from 0.875 m to 2.625 m. One curve for each value of weight (weight (e.g. in kg)): 70 kg, 35 kg, 140 kg. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, height = 1.75 m, BMI = 22.8571.*
+
+![BMI (body mass index in kg/m^2) over height (height (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmi-field)
+
+*BMI (body mass index in kg/m^2) over height (height (e.g. in cm)) from 0.875 m to 2.625 m and weight (weight (e.g. in kg)) from 35 kg to 105 kg: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 5.07937 to dark 137.143); iso-lines at BMI = 25, 50, 75, 100, 125. Marked: the worked example, height = 1.75 m, weight = 70 kg, BMI = 22.8571.*
 
 ```python
 human_physiology_ai999x.solve('hp_bmi', weight=70.0, height=1.75)
@@ -4116,7 +4548,7 @@ human_physiology_ai999x.solve('hp_bmi', weight=95.0, height=1.82)
 
 <a id="hp_body_surface_area"></a>
 
-### Body surface area (DuBois, Mosteller, Haycock, Gehan-George) — `hp_body_surface_area`
+### Body surface area (DuBois, Mosteller, Haycock, Gehan-George), `hp_body_surface_area`
 
 Body surface area by the DuBois (1916), Mosteller (1987), Haycock (1978) and Gehan-George (1970) formulas.
 
@@ -4140,6 +4572,14 @@ $$
 - **Assumes:** weight, height > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![BSA_Mosteller (Mosteller BSA in m^2) against weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-body-surface-area-curve)
+
+*BSA_Mosteller (Mosteller BSA in m^2) against weight (weight (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of height (height (e.g. in cm)): 1.75 m, 0.875 m, 3.5 m. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, BSA_Mosteller = 1.84466.*
+
+![BSA_Mosteller (Mosteller BSA in m^2) over weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-body-surface-area-field)
+
+*BSA_Mosteller (Mosteller BSA in m^2) over weight (weight (e.g. in kg)) from 35 kg to 105 kg and height (height (e.g. in cm)) from 0.875 m to 2.625 m: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 0.922331 to dark 2.76699); iso-lines at BSA_Mosteller = 1, 1.5, 2, 2.5. Marked: the worked example, weight = 70 kg, height = 1.75 m, BSA_Mosteller = 1.84466.*
+
 ```python
 human_physiology_ai999x.solve('hp_body_surface_area', weight=70.0, height=1.75)
 # -> BSA_DuBois = 1.84814, BSA_Mosteller = 1.84466, BSA_Haycock = 1.84678, BSA_GehanGeorge = 1.85385   (SOLVED)
@@ -4162,7 +4602,7 @@ human_physiology_ai999x.solve('hp_body_surface_area', weight=55.0, height=1.6)
 
 <a id="hp_bmr_harris_benedict"></a>
 
-### Basal metabolic rate by the Harris-Benedict equation — `hp_bmr_harris_benedict`
+### Basal metabolic rate by the Harris-Benedict equation, `hp_bmr_harris_benedict`
 
 Harris-Benedict BMR, original (1919) or revised by Roza and Shizgal (1984), in kcal/day and kJ/day (computed value).
 
@@ -4186,6 +4626,10 @@ $$
 - **Method:** published linear coefficients
 - **Assumes:** adult; weight, height > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![BMR (basal metabolic rate in kcal/day) against weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmr-harris-benedict-curve)
+
+*BMR (basal metabolic rate in kcal/day) against weight (weight (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of height (height (e.g. in cm)): 1.75 m, 0.875 m, 3.5 m. Other inputs as in the worked example: age = 30, sex = male, version = original. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, BMR = 1702.01.*
 
 ```python
 human_physiology_ai999x.solve('hp_bmr_harris_benedict', weight=70.0, height=1.75, age=30, sex='male', version='original')
@@ -4221,7 +4665,7 @@ human_physiology_ai999x.solve('hp_bmr_harris_benedict', weight=60.0, height=1.65
 
 <a id="hp_bmr_mifflin_st_jeor"></a>
 
-### Resting energy expenditure by the Mifflin-St Jeor equation — `hp_bmr_mifflin_st_jeor`
+### Resting energy expenditure by the Mifflin-St Jeor equation, `hp_bmr_mifflin_st_jeor`
 
 Mifflin-St Jeor (1990): 10 $W + 6.25$ $H - 5$ $A + 5$ (male) $or - 161$ (female), kcal/day (computed value).
 
@@ -4245,6 +4689,10 @@ $$
 - **Assumes:** adult; weight, height > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![REE (resting energy expenditure in kcal/day) against weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmr-mifflin-st-jeor-curve)
+
+*REE (resting energy expenditure in kcal/day) against weight (weight (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of height (height (e.g. in cm)): 1.75 m, 0.875 m, 3.5 m. Other inputs as in the worked example: age = 30, sex = male. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, REE = 1648.75.*
+
 ```python
 human_physiology_ai999x.solve('hp_bmr_mifflin_st_jeor', weight=70.0, height=1.75, age=30, sex='male')
 # -> REE = 1648.75, REE_kJ = 6898.37   (SOLVED)
@@ -4267,7 +4715,7 @@ human_physiology_ai999x.solve('hp_bmr_mifflin_st_jeor', weight=60.0, height=1.65
 
 <a id="hp_bmr_katch_mcardle"></a>
 
-### Basal metabolic rate by the Katch-McArdle equation — `hp_bmr_katch_mcardle`
+### Basal metabolic rate by the Katch-McArdle equation, `hp_bmr_katch_mcardle`
 
 Lean body mass W (1 - body fat) and BMR = 370 + 21.6 LBM in kcal/day (computed value).
 
@@ -4288,6 +4736,14 @@ $$
 - **Method:** Katch-McArdle
 - **Assumes:** weight > 0; 0 <= body fat < 1
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![BMR (basal metabolic rate in kcal/day) against weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmr-katch-mcardle-curve)
+
+*BMR (basal metabolic rate in kcal/day) against weight (weight (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of body_fat (body fat fraction): 0.2, 0.26, 0.74. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, BMR = 1579.6.*
+
+![BMR (basal metabolic rate in kcal/day) over weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-bmr-katch-mcardle-field)
+
+*BMR (basal metabolic rate in kcal/day) over weight (weight (e.g. in kg)) from 35 kg to 105 kg and body_fat (body fat fraction) from 0.02 to 0.98: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 385.12 to dark 2592.64); iso-lines at BMR = 500, 1000, 1500, 2000, 2500. Marked: the worked example, weight = 70 kg, body_fat = 0.2, BMR = 1579.6.*
 
 ```python
 human_physiology_ai999x.solve('hp_bmr_katch_mcardle', weight=70.0, body_fat=0.2)
@@ -4311,7 +4767,7 @@ human_physiology_ai999x.solve('hp_bmr_katch_mcardle', weight=80.0, body_fat=0.25
 
 <a id="hp_met_energy"></a>
 
-### Energy expenditure of an activity from METs — `hp_met_energy`
+### Energy expenditure of an activity from METs, `hp_met_energy`
 
 1 MET = 3.5 mL O2/kg/min; oxygen uptake MET x 3.5 x W and energy MET x 3.5 x $W/200$ kcal/min.
 
@@ -4335,6 +4791,10 @@ $$
 - **Assumes:** all inputs > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![kcal (total energy in kcal) against MET (activity intensity in METs) from 4 to 12](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-met-energy-curve)
+
+*kcal (total energy in kcal) against MET (activity intensity in METs) from 4 to 12. One curve for each value of weight (weight (e.g. in kg)): 70 kg, 35 kg, 140 kg. Other inputs as in the worked example: duration = 1800.0 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, MET = 8, kcal = 294.*
+
 ```python
 human_physiology_ai999x.solve('hp_met_energy', MET=8, weight=70.0, duration=1800.0)
 # -> VO2 = 1960, kcal_per_min = 9.8, kcal = 294   (SOLVED)
@@ -4357,7 +4817,7 @@ human_physiology_ai999x.solve('hp_met_energy', MET=3.5, weight=60.0, duration=36
 
 <a id="hp_atwater_energy"></a>
 
-### Food energy by the Atwater factors — `hp_atwater_energy`
+### Food energy by the Atwater factors: `hp_atwater_energy`
 
 Energy from macronutrients with the general Atwater factors 4 (carbohydrate), 9 (fat), 4 (protein) and 7 (alcohol) kcal/g.
 
@@ -4381,6 +4841,10 @@ $$
 - **Assumes:** amounts >= 0, not all zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![kcal (energy in kcal) against carbohydrate (carbohydrate (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-atwater-energy-curve)
+
+*kcal (energy in kcal) against carbohydrate (carbohydrate (e.g. in g)) from 0.15 kg to 0.45 kg. One curve for each value of fat (fat (e.g. in g)): 0.07 kg, 0.035 kg, 0.14 kg. Other inputs as in the worked example: protein = 0.08 kg. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, carbohydrate = 0.3 kg, kcal = 2150.*
+
 ```python
 human_physiology_ai999x.solve('hp_atwater_energy', carbohydrate=0.3, fat=0.07, protein=0.08)
 # -> kcal = 2150, kJ = 8995.6   (SOLVED)
@@ -4403,7 +4867,7 @@ human_physiology_ai999x.solve('hp_atwater_energy', carbohydrate=0.3, fat=0.07, p
 
 <a id="hp_body_fat_from_density"></a>
 
-### Body fat from body density (Siri and Brozek) — `hp_body_fat_from_density`
+### Body fat from body density (Siri and Brozek), `hp_body_fat_from_density`
 
 Percent body fat by Siri $(495/D - 450)$ and Brozek $(457/D - 414.2)$ from whole-body density.
 
@@ -4423,6 +4887,14 @@ $$
 - **Method:** two-compartment models
 - **Assumes:** 0.9 < density < 1.2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![fat_Siri (body fat in % (Siri)) against density (body density (e](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-body-fat-from-density-fat-siri-vs-density.svg)
+
+*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)). 9 points computed by human-physiology-ai999x; marked: density = 1050, fat_Siri = 21.4286.*
+
+![fat_Siri (body fat in % (Siri)) against density (body density (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-body-fat-from-density-curve)
+
+*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)) from 945 kg/m^3 to 1155 kg/m^3. 31 points computed by human-physiology-ai999x; marked: the worked example, density = 1050 kg/m^3, fat_Siri = 21.4286.*
 
 ```python
 human_physiology_ai999x.solve('hp_body_fat_from_density', density=1050.0000000000002)
@@ -4446,7 +4918,7 @@ human_physiology_ai999x.solve('hp_body_fat_from_density', density=1070.000000000
 
 <a id="hp_hydrostatic_weighing"></a>
 
-### Body density and fat by hydrostatic weighing — `hp_hydrostatic_weighing`
+### Body density and fat by hydrostatic weighing, `hp_hydrostatic_weighing`
 
 Body volume (Ma - Mw)/rho_w - RV - GI gas, body density and Siri percent fat.
 
@@ -4472,6 +4944,10 @@ $$
 - **Assumes:** mass_water < mass_air; computed density $0.9-1.2$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hydrostatic-weighing-curve)
+
+*fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of mass_water (underwater mass (e.g. in kg)): 3 kg, 1.5 kg, 6 kg. Other inputs as in the worked example: water_density = 995.7000000000002 kg/m^3, RV = 0.0012 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, mass_air = 70 kg, fat_Siri = 16.6389.*
+
 ```python
 human_physiology_ai999x.solve('hp_hydrostatic_weighing', mass_air=70.0, mass_water=3.0, water_density=995.7000000000002, RV=0.0012)
 # -> volume = 65.9893, density = 1.06078, fat_Siri = 16.6389   (SOLVED)
@@ -4494,7 +4970,7 @@ human_physiology_ai999x.solve('hp_hydrostatic_weighing', mass_air=80.0, mass_wat
 
 <a id="hp_lean_body_mass_boer"></a>
 
-### Lean body mass by the Boer formula — `hp_lean_body_mass_boer`
+### Lean body mass by the Boer formula: `hp_lean_body_mass_boer`
 
 Boer (1984): male 0.407 $W + 0.267$ $H - 19.2$, female 0.252 $W + 0.473$ $H - 48.3$ (kg), and the remaining fat mass.
 
@@ -4516,6 +4992,14 @@ $$
 - **Method:** Boer anthropometric formula
 - **Assumes:** 0 < LBM < weight
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![LBM (lean body mass in kg) against weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-lean-body-mass-boer-curve)
+
+*LBM (lean body mass in kg) against weight (weight (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of height (height (e.g. in cm)): 1.75 m, 0.875 m. Other inputs as in the worked example: sex = male. 26 points per curve computed by human-physiology-ai999x; marked: the worked example, weight = 70 kg, LBM = 56.015.*
+
+![LBM (lean body mass in kg) over weight (weight (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-lean-body-mass-boer-field)
+
+*LBM (lean body mass in kg) over weight (weight (e.g. in kg)) from 35 kg to 105 kg and height (height (e.g. in cm)) from 0.875 m to 2.625 m: each of the 21 × 15 cells is one run of human-physiology-ai999x, shaded by its value (light 18.4075 to dark 93.6225); iso-lines at LBM = 20, 40, 60, 80; blank cells: inputs the capability refuses. Other inputs as in the worked example: sex = male. Marked: the worked example, weight = 70 kg, height = 1.75 m, LBM = 56.015.*
 
 ```python
 human_physiology_ai999x.solve('hp_lean_body_mass_boer', weight=70.0, height=1.75, sex='male')
@@ -4539,7 +5023,7 @@ human_physiology_ai999x.solve('hp_lean_body_mass_boer', weight=60.0, height=1.65
 
 <a id="hp_heart_rate_reserve"></a>
 
-### Maximal heart rate, heart rate reserve and Karvonen target — `hp_heart_rate_reserve`
+### Maximal heart rate, heart rate reserve and Karvonen target, `hp_heart_rate_reserve`
 
 Estimated maximal heart rate (220 - age; Tanaka $208 - 0.7$ age), the reserve HRmax - HRrest and the Karvonen target HRrest + intensity x reserve.
 
@@ -4564,6 +5048,10 @@ $$
 - **Assumes:** 5 <= age <= 100; HR_rest below HRmax
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
+![target (Karvonen target heart rate in beats/min) against intensity (exercise intensity (fraction of reserve)) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-heart-rate-reserve-curve)
+
+*target (Karvonen target heart rate in beats/min) against intensity (exercise intensity (fraction of reserve)) from 0.02 to 0.98. One curve for each value of age (age in years): 40, 20, 80. Other inputs as in the worked example: HR_rest = 60. 41 points per curve computed by human-physiology-ai999x; marked: the worked example, intensity = 0.7, target = 144.*
+
 ```python
 human_physiology_ai999x.solve('hp_heart_rate_reserve', age=40, HR_rest=60, intensity=0.7)
 # -> HRmax = 180, HRmax_Tanaka = 180, HRR = 120, target = 144   (SOLVED)
@@ -4586,7 +5074,7 @@ human_physiology_ai999x.solve('hp_heart_rate_reserve', age=55, HR_rest=65, inten
 
 <a id="hp_elimination_half_life"></a>
 
-### First-order elimination: rate constant and half-life from clearance and volume — `hp_elimination_half_life`
+### First-order elimination: rate constant and half-life from clearance and volume, `hp_elimination_half_life`
 
 Physiology of a one-compartment first-order process: $k = CL/Vd$, half-life ln $2/k$ and the fraction remaining after t (not a dosing recommendation).
 
@@ -4609,6 +5097,10 @@ $$
 - **Method:** $k = CL/Vd$; $t_{1}/2 = ln$ $2 / k$; $C/C_{0} = exp$(-k t)
 - **Assumes:** CL, $Vd > 0$; $t  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![half_life (half-life in h) against CL (clearance (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-elimination-half-life-curve)
+
+*half_life (half-life in h) against CL (clearance (e.g. in L/h)) from 6.9444e-07 m^3/s to 2.0833e-06 m^3/s. One curve for each value of Vd (volume of distribution (e.g. in L)): 0.05 m^3, 0.025 m^3, 0.1 m^3. Other inputs as in the worked example: t = 43200.0 s. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, CL = 1.3889e-06 m^3/s, half_life = 6.93147.*
 
 ```python
 human_physiology_ai999x.solve('hp_elimination_half_life', CL=1.3888888888888887e-06, Vd=0.05, t=43200.0)
