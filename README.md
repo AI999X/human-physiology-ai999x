@@ -4,11 +4,11 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/human-physiology-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/human-physiology-ai999x/)** · **[Guides](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.5.0
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.0
 
 Field: **Life Sciences** · Tasks: Question Answering
 
-human-physiology-ai999x is an offline, deterministic human physiology solver written in Rust: a desktop app, a command-line program, a browser module and a Python package. It answers human physiology questions with verified results from 96 certified capabilities, gives 692 documented answers identically on Windows and Linux, and refuses rather than guesses when an answer cannot be verified.
+human-physiology-ai999x is an offline, deterministic human physiology solver written in Rust: a desktop app, a command-line program, a browser module and a Python package. It answers human physiology questions with verified results from 98 certified capabilities, gives 711 documented answers identically on Windows and Linux, and refuses rather than guesses when an answer cannot be verified.
 
 **human-physiology-ai999x** reads a question in plain English (or a typed call), picks a certified human physiology capability, computes the answer exactly, checks it, and returns the result with its steps, units, LaTeX and assumptions, or a refusal that says what is missing. It runs fully offline on any CPU, needs no GPU, no API key and no internet, and is built to give **zero wrong answers**: when it is not sure, it refuses instead of guessing.
 
@@ -20,13 +20,13 @@ human-physiology-ai999x is an offline, deterministic human physiology solver wri
 
 | Way to run it | For | Get it |
 |---|---|---|
-| **AI999X Human Physiology desktop app** 1.5.0 | Windows, Linux. This model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz) |
-| **AI999X desktop app** 1.5.0 | Windows, Linux. Every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz) |
-| **Command line** (`human-physiology`) | Windows, Linux. One program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz) |
+| **AI999X Human Physiology desktop app** 1.6.0 | Windows, Linux. This model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz) |
+| **AI999X desktop app** 1.6.0 | Windows, Linux. Every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz) |
+| **Command line** (`human-physiology`) | Windows, Linux. One program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz) |
 | **In your browser** | any device. Nothing to install | [Compute on the model page](https://www.ai999x.com/models/human-physiology-ai999x/#try) |
 | **Python** | Python 3.10+ | `pip install human-physiology-ai999x` |
 
-Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
+Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
 
 ## Quick start
 
@@ -37,11 +37,11 @@ Download **AI999X Human Physiology** for your system (above), unpack it and star
 Linux, from a terminal:
 
 ```bash
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz
-./ai999x-human-physiology-1.5.0-linux-x86_64/ai999x-human-physiology
+tar xzf ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz
+./ai999x-human-physiology-1.6.0-linux-x86_64/ai999x-human-physiology
 ```
 
 ### Command line
@@ -49,23 +49,23 @@ tar xzf ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz
 Linux:
 
 ```bash
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.5.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.5.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.6.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.6.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 human-physiology --version
 ```
 
 Windows (PowerShell):
 
 ```powershell
-$F = "ai999x-cli-1.5.0-windows-x86_64.zip"
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/$F" -OutFile $F
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.6.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.5.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.6.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 human-physiology --version
 ```
@@ -139,6 +139,35 @@ pip install human-physiology-ai999x
 ## Worked examples in every form
 
 The same worked example from the command line, from Python and in the browser. Each command-line output is what the program printed.
+
+### Red-cell indices: MCV, MCH and MCHC
+
+Mean corpuscular volume MCV = Hct/RBC, mean corpuscular hemoglobin MCH = Hb/RBC and mean corpuscular hemoglobin concentration MCHC = Hb/Hct, from the hematocrit, hemoglobin and red-cell count.
+
+Command line:
+
+```console
+$ human-physiology solve hp_red_cell_indices Hct=0.45 Hb=15 RBC=5
+MCV = 90
+MCH = 30
+MCHC = 33.33333333
+  by: Red-cell indices: MCV, MCH and MCHC  (MCV = Hct x 1000 / RBC; MCH = Hb x 10 / RBC; MCHC = Hb / Hct)
+  Hct = 0.45
+  Hb = 15
+  RBC = 5
+  assumes: 0 < Hct < 1; Hb, RBC > 0
+```
+
+Python:
+
+```python
+import human_physiology_ai999x as m
+
+a = m.solve("hp_red_cell_indices", Hct="0.45", Hb="15", RBC="5")
+print(a.values or (a.value, a.unit))
+```
+
+Browser: [open this capability on the model page](https://www.ai999x.com/models/human-physiology-ai999x/#cap-hp_red_cell_indices) and press **Compute in your browser**.
 
 ### Body density and fat by hydrostatic weighing
 
@@ -228,37 +257,6 @@ Browser: [open this capability on the model page](https://www.ai999x.com/models/
 
 _What this means:_ Body mass index is calculated by dividing weight in kilograms by the square of height in meters. For this case, with a weight of 70 kg and a height of 175 cm, the resulting value is 22.8571. This metric provides a simple estimate of body fat based on height and weight that applies to adult men and women.
 
-### Body surface area (DuBois, Mosteller, Haycock, Gehan-George)
-
-Body surface area by the DuBois (1916), Mosteller (1987), Haycock (1978) and Gehan-George (1970) formulas.
-
-Command line:
-
-```console
-$ human-physiology solve hp_body_surface_area "weight=70 kg" "height=175 cm"
-BSA_DuBois = 1.848143018
-BSA_Mosteller = 1.844661968
-BSA_Haycock = 1.846776349
-BSA_GehanGeorge = 1.853853298
-  by: Body surface area (DuBois, Mosteller, Haycock, Gehan-George)  (published power-law formulas)
-  weight = 70 kg
-  height = 1.75 m
-  assumes: weight, height > 0
-```
-
-Python:
-
-```python
-import human_physiology_ai999x as m
-
-a = m.solve("hp_body_surface_area", weight="70 kg", height="175 cm")
-print(a.values or (a.value, a.unit))
-```
-
-Browser: [open this capability on the model page](https://www.ai999x.com/models/human-physiology-ai999x/#cap-hp_body_surface_area) and press **Compute in your browser**.
-
-_What this means:_ This calculation determines body surface area using four established formulas. Based on a weight of 70 kg and a height of 175 cm, the Mosteller method yields 1.84466. The DuBois formula produces 1.84814, while Haycock results in 1.84678 and Gehan-George gives 1.85385. These values are critical for scaling physiological parameters such as cardiac output or drug dosages to individual body size.
-
 ## Documentation
 
 - **Rust user guide**: the command line, every capability with a command and what it printed: [PDF](https://huggingface.co/AI999X/human-physiology-ai999x/blob/main/docs/human_physiology_ai999x_rust_guide.pdf) · [Markdown](https://huggingface.co/AI999X/human-physiology-ai999x/blob/main/docs/human_physiology_ai999x_rust_guide.md)
@@ -269,7 +267,7 @@ _What this means:_ This calculation determines body surface area using four esta
 ## Highlights
 
 - **Verified, not generated.** Every answer is computed by a certified human physiology capability and checked (substituted back, dimension-checked or compared with an independent computation) before it is returned.
-- **Zero wrong answers by design.** Seven explicit outcomes (SOLVED, NEEDS_INPUT, AMBIGUOUS, INVALID_INPUT, OUT_OF_SCOPE, UNRECOGNIZED_FORMAT, INTERNAL_ERROR), never a silent guess. Every one of its 692 documented answers is reproduced exactly on every tested platform.
+- **Zero wrong answers by design.** Seven explicit outcomes (SOLVED, NEEDS_INPUT, AMBIGUOUS, INVALID_INPUT, OUT_OF_SCOPE, UNRECOGNIZED_FORMAT, INTERNAL_ERROR), never a silent guess. Every one of its 711 documented answers is reproduced exactly on every tested platform.
 - **Plain-English questions and a guaranteed typed interface.** `ask()` reads documented question forms; `solve(capability_id, **inputs)` always solves a supported task with valid inputs.
 - **Explains itself.** Steps, formulas in LaTeX, units, assumptions and the model used, ready for notebooks, tutoring apps and homework checkers.
 - **Native and in the browser.** Every capability also computes natively in Rust: the desktop app and the `human-physiology` command line for Windows and Linux, and WebAssembly on the model page, no Python, no network.
@@ -280,11 +278,11 @@ _What this means:_ This calculation determines body surface area using four esta
 
 | Property | Value |
 |---|---|
-| Package | `human-physiology-ai999x` 1.5.0 (import `human_physiology_ai999x`) |
+| Package | `human-physiology-ai999x` 1.6.0 (import `human_physiology_ai999x`) |
 | Type | Deterministic neuro-symbolic human physiology engine (rule-based reading + certified symbolic capabilities) |
-| Capabilities | 96 certified procedures |
+| Capabilities | 98 certified procedures |
 | Knowledge pack | version 1.0.0 |
-| Golden answers | 692 documented answers, identical on every tested platform |
+| Golden answers | 711 documented answers, identical on every tested platform |
 | Platforms tested | Windows (Python 3.13), Linux x86-64 (Python 3.10, 3.11, 3.12, 3.13, 3.14) |
 | Runtime | CPU only, offline; no GPU, no network, no API key |
 | License | Apache-2.0 |
@@ -314,7 +312,7 @@ human_physiology.ask("Who created you?").message
 # -> human-physiology-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.5.0.
+The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.6.0.
 
 ## How every answer is verified
 
@@ -389,15 +387,15 @@ Each question was put to `human-physiology-ai999x`; the answer is the one it ret
 
 </details>
 
-**Body mass index** · _Body composition_
+**Red-cell indices: MCV, MCH and MCHC** · _Blood_
 
-> body mass index: weight = 70 kg, height = 175 cm
+> red cell indices: Hct = 0.45, Hb = 15, RBC = 5
 
-→ **BMI = 22.85714286**
+→ **MCV = 90, MCH = 30, MCHC = 33.33333333**
 
 <details><summary>Steps</summary>
 
-- Body mass index: weight = 70 kg, height = 175 cm → BMI = 22.85714286
+- Red-cell indices: MCV, MCH and MCHC: Hct = 0.45, Hb = 15, RBC = 5 → MCV = 90, MCH = 30, MCHC = 33.33333333
 
 </details>
 
@@ -431,7 +429,7 @@ _dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), w
 
 ## Capabilities
 
-96 certified procedures. A few of them:
+98 certified procedures. A few of them:
 
 - **Procedures:** ATPS to BTPS and STPD gas volume conversion; Alveolar gas equation; Alveolar ventilation from CO2 output and arterial PCO2; Alveolar-arterial oxygen gradient, a/A ratio and P/F ratio; Arterial oxygen content; Barometric pressure and inspired PO2 at altitude; Basal metabolic rate by the Harris-Benedict equation; Basal metabolic rate by the Katch-McArdle equation; Bernoulli pressure drop across a narrowing; Bicarbonate from pH and PCO2 (Henderson-Hasselbalch); Blood pH by the Henderson-Hasselbalch equation; Body density and fat by hydrostatic weighing; Body fat from body density (Siri and Brozek); Body fluid compartments; Body mass index; Body surface area (DuBois, Mosteller, Haycock, Gehan-George); Calculated and effective plasma osmolality and the osmolal gap; Cardiac index and stroke volume index; Cardiac output by the Fick principle; Cardiac output from heart rate and stroke volume; Charge and number of ions to change the membrane potential; Compliance and elastance; Conduction velocity scaling with fibre diameter; Creatinine clearance by the Cockcroft-Gault equation …
 
@@ -453,10 +451,10 @@ _dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), w
 ## Citation
 
 ```bibtex
-@software{human_physiology_ai999x_1_5_0,
+@software{human_physiology_ai999x_1_6_0,
   title  = {human-physiology-ai999x: an offline, verified human physiology solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.5.0},
+  year   = {2026}, version = {1.6.0},
   url    = {https://huggingface.co/AI999X/human-physiology-ai999x}
 }
 ```
@@ -473,7 +471,7 @@ Created and engineered by **Ibnul Jaif Farabi** · **[AI999X](https://huggingfac
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.5.0`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.5.0) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.0`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.6.0) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 

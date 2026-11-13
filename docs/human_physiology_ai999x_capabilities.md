@@ -18,6 +18,7 @@ result.show()
 
 | topic | capabilities |
 |---|---|
+| Blood / red cells | [Red-cell indices: MCV, MCH and MCHC](#hp_red_cell_indices) |
 | Body composition / anthropometry | [Body mass index](#hp_bmi), [Body surface area (DuBois, Mosteller, Haycock, Gehan-George)](#hp_body_surface_area), [Lean body mass by the Boer formula](#hp_lean_body_mass_boer) |
 | Body composition / densitometry | [Body fat from body density (Siri and Brozek)](#hp_body_fat_from_density), [Body density and fat by hydrostatic weighing](#hp_hydrostatic_weighing) |
 | Body fluids / compartments | [Body fluid compartments](#hp_body_fluid_compartments), [Total body water by the Watson equations](#hp_watson_total_body_water) |
@@ -26,7 +27,7 @@ result.show()
 | Cardiovascular / blood pressure | [Mean arterial pressure and pulse pressure](#hp_mean_arterial_pressure), [Hydrostatic pressure of a blood column](#hp_hydrostatic_pressure) |
 | Cardiovascular / cardiac output | [Cardiac output from heart rate and stroke volume](#hp_cardiac_output), [Stroke volume and ejection fraction](#hp_stroke_volume_ef), [Cardiac index and stroke volume index](#hp_cardiac_index), [Cardiac output by the Fick principle](#hp_fick_cardiac_output), [Fick cardiac output from hemoglobin, saturations and PO2](#hp_fick_saturations), [Left-ventricular volumes and ejection fraction by the Teichholz formula](#hp_teichholz_volumes) |
 | Cardiovascular / cardiac work | [Stroke work and cardiac power](#hp_stroke_work) |
-| Cardiovascular / electrocardiogram | [Heart-rate corrected QT interval (Bazett, Fridericia, Framingham)](#hp_qt_correction), [Mean QRS (electrical) axis from leads I and aVF](#hp_qrs_axis) |
+| Cardiovascular / electrocardiogram | [Heart-rate corrected QT interval (Bazett, Fridericia, Framingham)](#hp_qt_correction), [Mean QRS (electrical) axis from leads I and aVF](#hp_qrs_axis), [Heart rate from the ECG (R-R interval or grid boxes)](#hp_ecg_heart_rate) |
 | Cardiovascular / flow and resistance | [Systemic vascular resistance (total peripheral resistance)](#hp_systemic_vascular_resistance), [Pulmonary vascular resistance and transpulmonary gradient](#hp_pulmonary_vascular_resistance), [Poiseuille resistance of a blood vessel](#hp_poiseuille_resistance), [Poiseuille flow, mean velocity and wall shear stress in a vessel](#hp_poiseuille_flow), [Effect of a change of vessel radius on flow and resistance](#hp_radius_flow_ratio), [Total resistance of vascular beds in series or in parallel](#hp_vessels_series_parallel), [Reynolds number of blood flow in a vessel](#hp_vessel_reynolds), [Mean blood velocity from flow and total cross-sectional area](#hp_blood_velocity_area), [Bernoulli pressure drop across a narrowing](#hp_bernoulli_pressure_drop), [Womersley number of pulsatile blood flow](#hp_womersley_number) |
 | Cardiovascular / microcirculation | [Starling forces and capillary filtration](#hp_starling_filtration) |
 | Cardiovascular / shunts | [Pulmonary-to-systemic flow ratio Qp/Qs](#hp_qp_qs) |
@@ -192,6 +193,8 @@ Call `solve("<id>", **inputs)` with plain numbers; the result's `values` holds e
 | hp_lean_body_mass_boer | Lean body mass by the Boer formula | weight, height, sex | LBM, fat_mass |
 | hp_heart_rate_reserve | Maximal heart rate, heart rate reserve and Karvonen target | age, HR_rest, intensity | HRmax, HRmax_Tanaka, HRR, target |
 | hp_elimination_half_life | First-order elimination: rate constant and half-life from clearance and volume | CL, Vd, t | k, half_life, fraction_remaining |
+| hp_red_cell_indices | Red-cell indices: MCV, MCH and MCHC | Hct, Hb, RBC | MCV, MCH, MCHC |
+| hp_ecg_heart_rate | Heart rate from the ECG (R-R interval or grid boxes) | RR, small_boxes, large_boxes, speed | HR, RR, RR_ms |
 
 <a id="hp_cardiac_output"></a>
 
@@ -5127,3 +5130,117 @@ human_physiology_ai999x.solve('hp_elimination_half_life', CL=1.3888888888888887e
 | elimination half-life: Vd = 50 L, t = 12 h | NEEDS_INPUT | hp_elimination_half_life needs CL (clearance (e.g. in L/h)). Example: solve('hp_elimination_half_life', CL='1.38889e-06  |
 | elimination half-life: CL = 5 L/h, Vd = 50 L, t = 12 h, zz = 1 | UNRECOGNIZED_FORMAT | I could not match this question to a documented form, so I will not guess. Every form: human_physiology_ai999x.templates |
 | elimination half-life: CL = 0 L/h, Vd = 50 L, t = 12 h | INVALID_INPUT | First-order elimination: rate constant and half-life from clearance and volume: CL must be positive. |
+
+<a id="hp_red_cell_indices"></a>
+
+### Red-cell indices: MCV, MCH and MCHC, `hp_red_cell_indices`
+
+Mean corpuscular volume MCV = Hct/RBC, mean corpuscular hemoglobin MCH = Hb/RBC and mean corpuscular hemoglobin concentration MCHC = Hb/Hct, from the hematocrit, hemoglobin and red-cell count.
+
+$$
+MCV = \frac{Hct}{RBC},\quad MCH = \frac{Hb}{RBC},\quad MCHC = \frac{Hb}{Hct}
+$$
+
+| input | meaning | condition |
+|---|---|---|
+| `Hct` | hematocrit (fraction) |  |
+| `Hb` | hemoglobin in g/dL |  |
+| `RBC` | red-cell count in $10^{12}$ cells/L (= $10^{6}$ cells/uL) |  |
+
+| output | meaning |
+|---|---|
+| `MCV` | mean corpuscular volume in fL |
+| `MCH` | mean corpuscular hemoglobin in pg |
+| `MCHC` | mean corpuscular hemoglobin concentration in g/dL |
+
+- **Method:** MCV = Hct x 1000 / RBC; MCH = Hb x 10 / RBC; MCHC = Hb / Hct
+- **Assumes:** 0 < Hct < 1; Hb, RBC > 0
+- **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![MCV (mean corpuscular volume in fL) against RBC (red-cell count in 10^12 cells/L (= 10^6 cells/uL)) from 2](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-red-cell-indices-curve)
+
+*MCV (mean corpuscular volume in fL) against RBC (red-cell count in 10^12 cells/L (= 10^6 cells/uL)) from 2.5 to 7.5. One curve for each value of Hct (hematocrit (fraction)): 0.45, 0.26, 0.74. Other inputs as in the worked example: Hb = 15. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RBC = 5, MCV = 90.*
+
+```python
+human_physiology_ai999x.solve('hp_red_cell_indices', Hct=0.45, Hb=15, RBC=5)
+# -> MCV = 90, MCH = 30, MCHC = 33.3333   (SOLVED)
+```
+
+```python
+human_physiology_ai999x.solve('hp_red_cell_indices', Hct=0.3, Hb=8, RBC=4)
+# -> MCV = 75, MCH = 20, MCHC = 26.6667   (SOLVED)
+```
+
+**Questions in words (documented forms), as executed:**
+
+| question | outcome | result |
+|---|---|---|
+| red cell indices: Hct = 0.45, Hb = 15, RBC = 5 | SOLVED | MCV = 90, MCH = 30, MCHC = 33.3333 |
+| red cell indices: Hct = 0.3, Hb = 8, RBC = 4 | SOLVED | MCV = 75, MCH = 20, MCHC = 26.6667 |
+| red cell indices: Hb = 15, RBC = 5 | NEEDS_INPUT | hp_red_cell_indices needs Hct (hematocrit (fraction)). Example: solve('hp_red_cell_indices', Hct=0.45, Hb=15, RBC=5). |
+| red cell indices: Hct = 0.45, Hb = 15, RBC = 5, zz = 1 | UNRECOGNIZED_FORMAT | I could not match this question to a documented form, so I will not guess. Every form: human_physiology_ai999x.templates |
+| red cell indices: Hct = 45%, Hb = 15, RBC = 5 | SOLVED | MCV = 90, MCH = 30, MCHC = 33.3333 |
+| red cell indices: Hct = 0.45, Hb = 15, RBC = 0 | INVALID_INPUT | Red-cell indices: MCV, MCH and MCHC: RBC must be positive. |
+
+<a id="hp_ecg_heart_rate"></a>
+
+### Heart rate from the ECG (R-R interval or grid boxes), `hp_ecg_heart_rate`
+
+The heart rate of a regular rhythm from the R-R interval, or from the number of small (1 mm) or large (5 mm) boxes between two R waves at the paper speed (25 mm/s unless stated: 1500/small boxes, 300/large boxes).
+
+$$
+HR = \frac{60}{RR},\quad RR = \frac{n\,\ell_{box}}{v_{paper}}
+$$
+
+| input | meaning | condition |
+|---|---|---|
+| `RR` | R-R interval (e.g. in s) (give one of RR, small_boxes, large_boxes) |  |
+| `small_boxes` | number of small (1 mm) boxes between two R waves |  |
+| `large_boxes` | number of large (5 mm) boxes between two R waves |  |
+| `speed` | paper speed in mm/s (default 25) |  |
+
+| output | meaning |
+|---|---|
+| `HR` | heart rate in beats/min |
+| `RR` | R-R interval in s |
+| `RR_ms` | R-R interval in ms |
+
+- **Method:** $HR = 60 / RR$; RR = boxes x box length / paper speed (1500/small boxes, 300/large boxes at 25 mm/s)
+- **Assumes:** exactly one of RR, small boxes, large boxes; regular rhythm; $20  \leq  HR  \leq  300$ beats/min; 1 small box = 1 mm, 1 large box = 5 mm, paper speed 25 mm/s unless stated
+- **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
+
+![HR (heart rate in beats/min) against RR (R-R interval (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-ecg-heart-rate-curve)
+
+*HR (heart rate in beats/min) against RR (R-R interval (e.g. in s) (give one of RR, small_boxes, large_boxes)) from 0.4 s to 1.2 s. 31 points computed by human-physiology-ai999x; marked: the worked example, RR = 0.8 s, HR = 75.*
+
+```python
+human_physiology_ai999x.solve('hp_ecg_heart_rate', RR=0.8)
+# -> HR = 75, RR = 0.8, RR_ms = 800   (SOLVED)
+```
+
+```python
+human_physiology_ai999x.solve('hp_ecg_heart_rate', large_boxes=4)
+# -> HR = 75, RR = 0.8, RR_ms = 800   (SOLVED)
+```
+
+```python
+human_physiology_ai999x.solve('hp_ecg_heart_rate', small_boxes=15, speed=25)
+# -> HR = 100, RR = 0.6, RR_ms = 600   (SOLVED)
+```
+
+```python
+human_physiology_ai999x.solve('hp_ecg_heart_rate', small_boxes=20, speed=50)
+# -> HR = 150, RR = 0.4, RR_ms = 400   (SOLVED)
+```
+
+**Questions in words (documented forms), as executed:**
+
+| question | outcome | result |
+|---|---|---|
+| heart rate from the ECG: RR = 0.8 s | SOLVED | HR = 75, RR = 0.8, RR_ms = 800 |
+| heart rate from the ECG: large_boxes = 4 | SOLVED | HR = 75, RR = 0.8, RR_ms = 800 |
+| heart rate from the ECG: small_boxes = 15, speed = 25 | SOLVED | HR = 100, RR = 0.6, RR_ms = 600 |
+| heart rate from the ECG: small_boxes = 20, speed = 50 | SOLVED | HR = 150, RR = 0.4, RR_ms = 400 |
+| ECG heart rate: RR = 800 ms | SOLVED | HR = 75, RR = 0.8, RR_ms = 800 |
+| heart rate from the ECG: RR = 0.8 s, large_boxes = 4 | INVALID_INPUT | Heart rate from the ECG (R-R interval or grid boxes): give exactly one of the R-R interval RR, the number of small boxes |
+| heart rate from the ECG: large_boxes = 0.5 | INVALID_INPUT | Heart rate from the ECG (R-R interval or grid boxes): the heart rate must lie between 20 and 300 beats/min. |

@@ -11,7 +11,7 @@ Topics: cardiovascular (cardiac output, stroke volume and ejection fraction, car
 principle, mean arterial and pulse pressure, systemic and pulmonary vascular resistance, Poiseuille resistance and
 flow, vessels in series and parallel, Reynolds and Womersley numbers in vessels, Laplace wall tension, compliance,
 mean velocity and cross-sectional area, Bernoulli pressure drop, stroke work, Teichholz volumes, QT correction,
-the mean QRS axis, Starling filtration, hydrostatic pressure, Moens-Korteweg pulse wave velocity, Qp/Qs and the
+heart rate from the ECG (R-R interval or grid boxes), the mean QRS axis, Starling filtration, hydrostatic pressure, Moens-Korteweg pulse wave velocity, Qp/Qs and the
 physiological shunt); respiratory (lung volumes and capacities, minute and alveolar ventilation, the Bohr dead space,
 alveolar ventilation from CO2 output, the alveolar gas equation, the A-a gradient, oxygen content, delivery,
 consumption and extraction, the Hill equation and its two-point fit, the Severinghaus oxygen dissociation curve and
@@ -20,7 +20,7 @@ respiratory mechanics and the time constant, the Laplace pressure of an alveolus
 ATPS/BTPS/STPD conversions, the respiratory quotient and the Weir equation, FEV1/FVC); renal (clearance, creatinine
 clearance from a timed urine, PAH plasma and blood flow, filtration fraction, free water clearance, fractional
 excretion, CKD-EPI 2021 creatinine and creatinine-cystatin C eGFR, Cockcroft-Gault, tubular handling, the glucose
-titration curve, plasma and effective osmolality); body fluids (compartments, the Watson total body water,
+titration curve, plasma and effective osmolality); blood (red-cell indices MCV, MCH, MCHC); body fluids (compartments, the Watson total body water,
 osmolarity of a solution, van 't Hoff osmotic pressure, the two-compartment fluid shift, the Gibbs-Donnan
 equilibrium); nerve and muscle (Nernst, Goldman-Hodgkin-Katz, chord conductance, ionic current, membrane time and
 length constants, conduction velocity scaling and measurement, membrane charge, strength-duration curves, the Hill
@@ -3199,6 +3199,125 @@ _add("hp_elimination_half_life", name="First-order elimination: rate constant an
                _ex({"CL": 3, "Vd": 40, "t": 24}, {"k": 0.075, "half_life": 9.24196240747, "fraction_remaining": 0.165298888222}),
                _ex({"CL": 5, "Vd": 50}, {"k": 0.1, "half_life": 6.9314718056})],
      extra_q=[_bad({"CL": 0, "Vd": 50, "t": 12})], level="intermediate")
+
+
+# ================================================================================================ core gaps (2026-11-12)
+# Blood: the red-cell indices. Heart: the heart rate read from an ECG (R-R interval or grid boxes). Conventions: Hct a
+# fraction, Hb in g/dL, the red-cell count in 10^12 cells/L (= 10^6 cells/uL); MCV in fL, MCH in pg, MCHC in g/dL.
+# ECG paper: 1 small box = 1 mm, 1 large box = 5 mm, standard speed 25 mm/s unless stated (then 300/large boxes and
+# 1500/small boxes); exactly one of the R-R interval, the small-box count and the large-box count is given; heart
+# rates outside 20-300 beats/min are refused as not a heart rhythm reading.
+def red_cell_indices(Hct, Hb, RBC):
+    Hct = _fr(Hct, "Hct", open_lo=True, open_hi=True)
+    Hb, RBC = _pos(Hb, "Hb"), _pos(RBC, "RBC")
+    return _rnd({"MCV": Hct * 1000.0 / RBC, "MCH": Hb * 10.0 / RBC, "MCHC": Hb / Hct})
+
+
+def ref_red_cell_indices(Hct, Hb, RBC):
+    # per cell in SI: one litre of blood holds RBC x 1e12 cells; volume per cell (L) and hemoglobin per cell (g),
+    # MCHC as hemoglobin mass per cell over cell volume (not Hb/Hct)
+    cells_per_L = RBC * 1e12
+    vol_L = Hct / cells_per_L                       # litres of cells per cell
+    hb_g = Hb * 10.0 / cells_per_L                  # g/dL -> g/L, per cell
+    MCV = vol_L * 1e15
+    MCH = hb_g * 1e12
+    MCHC = hb_g / vol_L / 10.0                      # g/L -> g/dL
+    return {"MCV": MCV, "MCH": MCH, "MCHC": MCHC}
+
+
+_add("hp_red_cell_indices", name="Red-cell indices: MCV, MCH and MCHC", topic="blood / red cells",
+     purpose="Mean corpuscular volume MCV = Hct/RBC, mean corpuscular hemoglobin MCH = Hb/RBC and mean corpuscular hemoglobin concentration MCHC = Hb/Hct, from the hematocrit, hemoglobin and red-cell count.",
+     inputs=[_n("Hct", "hematocrit (fraction)", pct=True), _n("Hb", "hemoglobin in g/dL"), _n("RBC", "red-cell count in 10^12 cells/L (= 10^6 cells/uL)")],
+     outputs=[_o("MCV", "mean corpuscular volume in fL"), _o("MCH", "mean corpuscular hemoglobin in pg"),
+              _o("MCHC", "mean corpuscular hemoglobin concentration in g/dL")],
+     primary="MCV", conditions=["0 < Hct < 1", "Hb, RBC > 0"],
+     method="MCV = Hct x 1000 / RBC; MCH = Hb x 10 / RBC; MCHC = Hb / Hct",
+     latex=r"MCV = \frac{Hct}{RBC},\quad MCH = \frac{Hb}{RBC},\quad MCHC = \frac{Hb}{Hct}",
+     run=red_cell_indices, reference=ref_red_cell_indices,
+     wrong=lambda Hct, Hb, RBC: {"MCV": Hct * 10.0 / RBC, "MCH": Hb / RBC, "MCHC": Hb / Hct},
+     rand=lambda rng: {"Hct": _u(rng, 0.2, 0.6, 2), "Hb": _u(rng, 6, 19, 1), "RBC": _u(rng, 2.5, 6.5, 2)},
+     phrases=["red cell indices", "red-cell indices", "MCV MCH MCHC"],
+     examples=[_ex({"Hct": 0.45, "Hb": 15, "RBC": 5}, {"MCV": 90, "MCH": 30, "MCHC": 33.3333333333}),
+               _ex({"Hct": 0.3, "Hb": 8, "RBC": 4}, {"MCV": 75, "MCH": 20, "MCHC": 26.6666666667})],
+     extra_q=[{"q": "red cell indices: Hct = 45%, Hb = 15, RBC = 5", "outputs": {"MCV": 90, "MCH": 30, "MCHC": 33.3333333333}},
+              _bad({"Hct": 0.45, "Hb": 15, "RBC": 0})],
+     level="beginner", weak="the per-cell volume and hemoglobin mass in SI (MCHC as MCH/MCV), the same definitions")
+
+
+def ecg_heart_rate(RR=None, small_boxes=None, large_boxes=None, speed=None):
+    given = 0
+    for v in (RR, small_boxes, large_boxes):
+        if v is not None:
+            given += 1
+    _need(given == 1, "give exactly one of the R-R interval RR, the number of small boxes or the number of large boxes")
+    sp = 25.0 if speed is None else _pos(speed, "speed")
+    if RR is not None:
+        rr = _pos(RR, "RR")
+    elif small_boxes is not None:
+        rr = _pos(small_boxes, "small_boxes") * 1.0 / sp
+    else:
+        rr = _pos(large_boxes, "large_boxes") * 5.0 / sp
+    hr = 60.0 / rr
+    _need(20.0 <= hr <= 300.0, "the heart rate must lie between 20 and 300 beats/min")
+    return _rnd({"HR": hr, "RR": rr, "RR_ms": rr * 1000.0})
+
+
+def ref_ecg_heart_rate(RR=None, small_boxes=None, large_boxes=None, speed=None):
+    sp = 25.0 if speed is None else speed
+    if RR is not None:
+        rr = _sx("r - x", "r", x=RR)
+    else:
+        mm = small_boxes * 1.0 if small_boxes is not None else large_boxes * 5.0
+        rr = _sx("r*v - d", "r", v=sp, d=mm)                     # distance on the paper = speed x time
+    return {"HR": _sx("h*r - 60", "h", r=rr), "RR": rr, "RR_ms": rr * 1000.0}
+
+
+def wrong_ecg_heart_rate(RR=None, small_boxes=None, large_boxes=None, speed=None):
+    sp = 25.0 if speed is None else speed
+    if RR is not None:
+        return {"HR": 1.0 / RR, "RR": RR, "RR_ms": RR * 1000.0}                # beats per second reported per minute
+    if small_boxes is not None:
+        rr = small_boxes * 5.0 / sp                                            # small and large boxes confused
+    else:
+        rr = large_boxes * 1.0 / sp
+    return {"HR": 60.0 / rr, "RR": rr, "RR_ms": rr * 1000.0}
+
+
+def _rand_ecg(rng):
+    hr = rng.uniform(40, 180)
+    r = rng.random()
+    if r < 0.34:
+        return {"RR": round(60.0 / hr, 3)}
+    sp = 25 if rng.random() < 0.75 else 50
+    if r < 0.67:
+        d = {"small_boxes": round(60.0 / hr * sp, 1)}
+    else:
+        d = {"large_boxes": round(60.0 / hr * sp / 5.0, 1)}
+    if sp == 50 or rng.random() < 0.5:
+        d["speed"] = sp
+    return d
+
+
+_add("hp_ecg_heart_rate", name="Heart rate from the ECG (R-R interval or grid boxes)", topic="cardiovascular / electrocardiogram",
+     purpose="The heart rate of a regular rhythm from the R-R interval, or from the number of small (1 mm) or large (5 mm) boxes between two R waves at the paper speed (25 mm/s unless stated: 1500/small boxes, 300/large boxes).",
+     inputs=[_n("RR", "R-R interval in s (give one of RR, small_boxes, large_boxes)", required=False),
+             _n("small_boxes", "number of small (1 mm) boxes between two R waves", required=False),
+             _n("large_boxes", "number of large (5 mm) boxes between two R waves", required=False),
+             _n("speed", "paper speed in mm/s (default 25)", required=False)],
+     outputs=[_o("HR", "heart rate in beats/min"), _o("RR", "R-R interval in s"), _o("RR_ms", "R-R interval in ms")],
+     primary="HR", conditions=["exactly one of RR, small boxes, large boxes", "regular rhythm", "20 <= HR <= 300 beats/min",
+                               "1 small box = 1 mm, 1 large box = 5 mm, paper speed 25 mm/s unless stated"],
+     method="HR = 60 / RR; RR = boxes x box length / paper speed (1500/small boxes, 300/large boxes at 25 mm/s)",
+     latex=r"HR = \frac{60}{RR},\quad RR = \frac{n\,\ell_{box}}{v_{paper}}",
+     run=ecg_heart_rate, reference=ref_ecg_heart_rate, wrong=wrong_ecg_heart_rate, rand=_rand_ecg,
+     phrases=["heart rate from the ECG", "ECG heart rate", "heart rate from an ECG"],
+     examples=[_ex({"RR": 0.8}, {"HR": 75, "RR": 0.8, "RR_ms": 800}),
+               _ex({"large_boxes": 4}, {"HR": 75, "RR": 0.8, "RR_ms": 800}),
+               _ex({"small_boxes": 15, "speed": 25}, {"HR": 100, "RR": 0.6, "RR_ms": 600}),
+               _ex({"small_boxes": 20, "speed": 50}, {"HR": 150, "RR": 0.4, "RR_ms": 400})],
+     extra_q=[{"q": "ECG heart rate: RR = 800 ms", "outputs": {"HR": 75, "RR": 0.8, "RR_ms": 800}},
+              _bad({"RR": 0.8, "large_boxes": 4}), _bad({"large_boxes": 0.5})],
+     level="beginner", weak="the defining relations (HR RR = 60, distance = speed x time) re-solved with sympy")
 
 
 # ================================================================================================ levels

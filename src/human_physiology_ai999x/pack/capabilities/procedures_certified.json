@@ -95,9 +95,11 @@
   "hp_hydrostatic_weighing",
   "hp_lean_body_mass_boer",
   "hp_heart_rate_reserve",
-  "hp_elimination_half_life"
+  "hp_elimination_half_life",
+  "hp_red_cell_indices",
+  "hp_ecg_heart_rate"
  ],
- "generated": "2026-11-01",
+ "generated": "2026-11-13",
  "tool": "tools/certify_procedures.py",
  "report": "release/procedure_certification.json",
  "weak_references": {

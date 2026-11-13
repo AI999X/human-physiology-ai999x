@@ -1,8 +1,8 @@
 # human-physiology: the Human Physiology program, user guide
 
-**human-physiology-ai999x 1.1.0**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
+**human-physiology-ai999x 1.6.0**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
-Human Physiology covers cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR, Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate (computed values, not medical advice). This guide is about `human-physiology`, the model as a self-contained program for Windows and Linux: 96 capabilities in 7 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/human-physiology-ai999x/); the Python package (`pip install human-physiology-ai999x`) has its own guide. Every command output printed here is what the program printed.
+Human Physiology covers cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR, Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate (computed values, not medical advice). This guide is about `human-physiology`, the model as a self-contained program for Windows and Linux: 98 capabilities in 8 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/human-physiology-ai999x/); the Python package (`pip install human-physiology-ai999x`) has its own guide. Every command output printed here is what the program printed.
 
 ## Contents
 
@@ -17,37 +17,37 @@ Human Physiology covers cardiac output, blood pressure, vascular resistance and 
 
 ## 1. Get it
 
-Version 1.5.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
+Version 1.6.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
 
 | what | system | download |
 |---|---|---|
-| Desktop app: Human Physiology | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-windows-x86_64.zip |
-| Desktop app: Human Physiology | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz |
-| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-windows-x86_64.zip |
-| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz |
-| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-windows-x86_64.zip |
-| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz |
+| Desktop app: Human Physiology | Windows x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-windows-x86_64.zip |
+| Desktop app: Human Physiology | Linux x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz |
+| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-windows-x86_64.zip |
+| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz |
+| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-windows-x86_64.zip |
+| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz |
 
 ### Desktop app
 
-Human Physiology in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-human-physiology-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-human-physiology.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
+Human Physiology in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-human-physiology-1.6.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-human-physiology.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-human-physiology-1.5.0-linux-x86_64.tar.gz
-./ai999x-human-physiology-1.5.0-linux-x86_64/ai999x-human-physiology
+tar xzf ai999x-human-physiology-1.6.0-linux-x86_64.tar.gz
+./ai999x-human-physiology-1.6.0-linux-x86_64/ai999x-human-physiology
 ```
 
-It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
+It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.6.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-1.5.0-linux-x86_64.tar.gz
-./ai999x-1.5.0-linux-x86_64/ai999x
+tar xzf ai999x-1.6.0-linux-x86_64.tar.gz
+./ai999x-1.6.0-linux-x86_64/ai999x
 ```
 
 ### Command line: Linux
@@ -55,11 +55,11 @@ tar xzf ai999x-1.5.0-linux-x86_64.tar.gz
 The bundle holds one program per model; `human-physiology` is this one. The checksum line should print OK.
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.5.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.5.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.6.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.6.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 human-physiology --version
 ```
 
@@ -68,12 +68,12 @@ human-physiology --version
 The fourth line should print True.
 
 ```powershell
-$F = "ai999x-cli-1.5.0-windows-x86_64.zip"
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/$F" -OutFile $F
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.6.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.5.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.6.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 human-physiology --version
 ```
@@ -96,7 +96,7 @@ Prints the model, its version and that this is the Rust build.
 
 ```shell
 $ human-physiology --version
-human-physiology-ai999x 1.5.0 (Rust build, ax-engine 1.5.0)
+human-physiology-ai999x 1.6.0 (Rust build, ax-engine 1.6.0)
 ```
 
 ### 2.2 Ask in words
@@ -125,8 +125,8 @@ hp_cardiac_index                     Cardiac index and stroke volume index  (car
 hp_stroke_work                       Stroke work and cardiac power  (cardiovascular / cardiac work)
 hp_stroke_volume_ef                  Stroke volume and ejection fraction  (cardiovascular / cardiac output)
 hp_qt_correction                     Heart-rate corrected QT interval (Bazett, Fridericia, Framingham)  (cardiovascular / electrocardiogram)
-hp_heart_rate_reserve                Maximal heart rate, heart rate reserve and Karvonen target  (metabolism / exercise)
 hp_fick_cardiac_output               Cardiac output by the Fick principle  (cardiovascular / cardiac output)
+hp_heart_rate_reserve                Maximal heart rate, heart rate reserve and Karvonen target  (metabolism / exercise)
 hp_fick_saturations                  Fick cardiac output from hemoglobin, saturations and PO2  (cardiovascular / cardiac output)
 … 12 more
 ```
@@ -145,7 +145,7 @@ hp_anion_gap                             Serum anion gap and albumin-corrected a
 hp_atwater_energy                        Food energy by the Atwater factors
 hp_barometric_altitude                   Barometric pressure and inspired PO2 at altitude
 hp_bernoulli_pressure_drop               Bernoulli pressure drop across a narrowing
-… 88 more
+… 90 more
 ```
 
 ### 2.5 What a capability needs
@@ -285,6 +285,43 @@ The same model is a WebAssembly module, `human_physiology_ai999x.wasm` (https://
 ## 8. Every capability
 
 By topic. For each: what it does, what it needs and gives, when it applies, and a command with what the program printed for it. `human-physiology info <id>` shows the same inputs and outputs in the terminal.
+
+### Blood (1)
+
+<a id="hp_red_cell_indices"></a>
+
+#### Red-cell indices: MCV, MCH and MCHC, `hp_red_cell_indices`
+
+Mean corpuscular volume MCV = Hct/RBC, mean corpuscular hemoglobin MCH = Hb/RBC and mean corpuscular hemoglobin concentration MCHC = Hb/Hct, from the hematocrit, hemoglobin and red-cell count.
+
+$$
+MCV = \frac{Hct}{RBC},\quad MCH = \frac{Hb}{RBC},\quad MCHC = \frac{Hb}{Hct}
+$$
+
+| symbol |  | meaning | SI unit |
+|---|---|---|---|
+| `Hct` | in | hematocrit (fraction) | - |
+| `Hb` | in | hemoglobin in g/dL | - |
+| `RBC` | in | red-cell count in 10^12 cells/L (= 10^6 cells/uL) | - |
+| `MCV` | out | mean corpuscular volume in fL | - |
+| `MCH` | out | mean corpuscular hemoglobin in pg | - |
+| `MCHC` | out | mean corpuscular hemoglobin concentration in g/dL | - |
+
+**Applies when:** 0 < Hct < 1; Hb, RBC > 0.
+
+```shell
+$ human-physiology solve hp_red_cell_indices Hct=0.45 Hb=15 RBC=5
+MCV = 90
+MCH = 30
+MCHC = 33.33333333
+  by: Red-cell indices: MCV, MCH and MCHC  (MCV = Hct x 1000 / RBC; MCH = Hb x 10 / RBC; MCHC = Hb / Hct)
+  Hct = 0.45
+  Hb = 15
+  RBC = 5
+  assumes: 0 < Hct < 1; Hb, RBC > 0
+```
+
+In the worked example, Hct = 0.45, Hb = 15, RBC = 5 go through the equation above and give MCV = 90, MCH = 30, MCHC = 33.33333333. It applies only when 0 < Hct < 1; Hb, RBC > 0: outside that it says what is wrong instead of returning a number.
 
 ### Body composition (5)
 
@@ -664,7 +701,7 @@ ECF = 14.66666667
 
 **What the worked example means:** This calculation determines the new equilibrium state of body fluids after a solution is added to the extracellular compartment. Starting from an initial total body water of 42 L and osmolality of 290, the addition of 2 L liters of fluid containing solute at a concentration of 0 mOsm per liter changes the system. The model assumes that the added solute remains in the extracellular space while water moves freely across cell membranes until osmotic balance is reached. Consequently, the final osmolality becomes 276.818. This shift causes water to move into or out of cells, resulting in a final intracellular volume of 29.3333 and a final extracellular volume of 14.6667.
 
-### Cardiovascular (26)
+### Cardiovascular (27)
 
 <a id="hp_bernoulli_pressure_drop"></a>
 
@@ -902,6 +939,40 @@ CvO2 = 15.195
 ```
 
 **What the worked example means:** This calculation determines cardiac output by dividing total oxygen consumption by the difference between arterial and mixed venous oxygen content. The arterial oxygen content, computed as 19.983, reflects the amount of oxygen carried by hemoglobin and dissolved in plasma at the arterial side. Similarly, the mixed venous oxygen content, 15.195, represents the remaining oxygen after tissue extraction. The resulting cardiac output of 5.22139 indicates the volume of blood the heart pumps per minute to meet the metabolic demand specified by 250 mL/min.
+
+<a id="hp_ecg_heart_rate"></a>
+
+#### Heart rate from the ECG (R-R interval or grid boxes), `hp_ecg_heart_rate`
+
+The heart rate of a regular rhythm from the R-R interval, or from the number of small (1 mm) or large (5 mm) boxes between two R waves at the paper speed (25 mm/s unless stated: 1500/small boxes, 300/large boxes).
+
+$$
+HR = \frac{60}{RR},\quad RR = \frac{n\,\ell_{box}}{v_{paper}}
+$$
+
+| symbol |  | meaning | SI unit |
+|---|---|---|---|
+| `RR` | in | R-R interval (e.g. in s) (give one of RR, small_boxes, large_boxes) (optional) | s |
+| `small_boxes` | in | number of small (1 mm) boxes between two R waves (optional) | - |
+| `large_boxes` | in | number of large (5 mm) boxes between two R waves (optional) | - |
+| `speed` | in | paper speed in mm/s (default 25) (optional) | - |
+| `HR` | out | heart rate in beats/min | - |
+| `RR` | out | R-R interval in s | - |
+| `RR_ms` | out | R-R interval in ms | - |
+
+**Applies when:** exactly one of RR, small boxes, large boxes; regular rhythm; 20 <= HR <= 300 beats/min; 1 small box = 1 mm, 1 large box = 5 mm, paper speed 25 mm/s unless stated.
+
+```shell
+$ human-physiology solve hp_ecg_heart_rate "RR=0.8 s"
+HR = 75
+RR = 0.8
+RR_ms = 800
+  by: Heart rate from the ECG (R-R interval or grid boxes)  (HR = 60 / RR; RR = boxes x box length / paper speed (1500/small boxes, 300/large boxes at 25 mm/s))
+  RR = 0.8 s
+  assumes: exactly one of RR, small boxes, large boxes; regular rhythm; 20 <= HR <= 300 beats/min; 1 small box = 1 mm, 1 large box = 5 mm, paper speed 25 mm/s unless stated
+```
+
+In the worked example, RR = 0.8 s go through the equation above and give HR = 75, RR = 0.8, RR_ms = 800. It applies only when exactly one of RR, small boxes, large boxes; regular rhythm; 20 <= HR <= 300 beats/min; 1 small box = 1 mm, 1 large box = 5 mm, paper speed 25 mm/s unless stated: outside that it says what is wrong instead of returning a number.
 
 <a id="hp_qt_correction"></a>
 
