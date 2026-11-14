@@ -1859,7 +1859,7 @@ $$
 | `PF_ratio` | PaO2/FiO2 in mmHg |
 
 - **Method:** A-a = FiO2 (PB - PH2O) - PaCO2/R - PaO2
-- **Assumes:** 0 < FiO2 <= 1; computed PAO2 > 0
+- **Assumes:** 0 < FiO2 <= 1; computed PAO2 > 0; PaO2 <= computed PAO2
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
 ![Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-aa-gradient-curve)
@@ -4888,7 +4888,7 @@ $$
 | `fat_Brozek` | body fat in % (Brozek) |
 
 - **Method:** two-compartment models
-- **Assumes:** 0.9 < density < 1.2
+- **Assumes:** 0.9 < density <= 1.1
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
 ![fat_Siri (body fat in % (Siri)) against density (body density (e](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-body-fat-from-density-fat-siri-vs-density.svg)
@@ -4917,7 +4917,7 @@ human_physiology_ai999x.solve('hp_body_fat_from_density', density=1070.000000000
 | body fat from density: density = 1.07 g/mL | SOLVED | fat_Siri = 12.6168, fat_Brozek = 12.9028 |
 | body fat from density:  | NEEDS_INPUT | hp_body_fat_from_density needs density (body density (e.g. in g/mL)). Example: solve('hp_body_fat_from_density', density |
 | body fat from density: density = 1.05 g/mL, zz = 1 | UNRECOGNIZED_FORMAT | I could not match this question to a documented form, so I will not guess. Every form: human_physiology_ai999x.templates |
-| body fat from density: density = 2 g/mL | INVALID_INPUT | Body fat from body density (Siri and Brozek): body density must be between 0.9 and 1.2 g/mL. |
+| body fat from density: density = 2 g/mL | INVALID_INPUT | Body fat from body density (Siri and Brozek): body density must be above 0.9 and at most 1.1 g/mL (the two-compartment e |
 
 <a id="hp_hydrostatic_weighing"></a>
 
@@ -4944,7 +4944,7 @@ $$
 | `fat_Siri` | body fat in % (Siri) |
 
 - **Method:** Archimedes' principle, then Siri
-- **Assumes:** mass_water < mass_air; computed density $0.9-1.2$
+- **Assumes:** mass_water < mass_air; computed density $0.9-1.1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
 ![fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hydrostatic-weighing-curve)

@@ -1453,6 +1453,9 @@ def aa_gradient(FiO2, Patm, PH2O, PaCO2, PaO2, RQ):
     _need(Patm > PH2O, "the barometric pressure must exceed the water vapour pressure")
     pa = FiO2 * (Patm - PH2O) - PaCO2 / RQ
     _need(pa > 0, "the computed alveolar PO2 is not positive")
+    # arterial PO2 cannot exceed the alveolar PO2 it equilibrates with: a negative gradient means the inputs disagree
+    # (review 2026-11-14: a sweep of FiO2 gave A-a gradients of -80 mmHg)
+    _need(PaO2 <= pa, "the arterial PO2 exceeds the computed alveolar PO2: check FiO2, PaCO2 or the respiratory quotient")
     return _rnd({"PAO2": pa, "Aa_gradient": pa - PaO2, "a_A_ratio": PaO2 / pa, "PF_ratio": PaO2 / FiO2})
 
 
@@ -1468,7 +1471,7 @@ _add("hp_aa_gradient", name="Alveolar-arterial oxygen gradient, a/A ratio and P/
              _n("PaCO2", "arterial PCO2 in mmHg"), _n("PaO2", "arterial PO2 in mmHg"), _n("RQ", "respiratory quotient")],
      outputs=[_o("PAO2", "alveolar PO2 in mmHg"), _o("Aa_gradient", "A-a gradient in mmHg"), _o("a_A_ratio", "PaO2/PAO2"),
               _o("PF_ratio", "PaO2/FiO2 in mmHg")],
-     primary="Aa_gradient", conditions=["0 < FiO2 <= 1", "computed PAO2 > 0"], method="A-a = FiO2 (PB - PH2O) - PaCO2/R - PaO2",
+     primary="Aa_gradient", conditions=["0 < FiO2 <= 1", "computed PAO2 > 0", "PaO2 <= computed PAO2"], method="A-a = FiO2 (PB - PH2O) - PaCO2/R - PaO2",
      latex=r"A\!-\!a = P_AO_2 - P_aO_2", run=aa_gradient, reference=ref_aa,
      wrong=lambda FiO2, Patm, PH2O, PaCO2, PaO2, RQ: (lambda pa: {"PAO2": pa, "Aa_gradient": pa - PaO2, "a_A_ratio": PaO2 / pa, "PF_ratio": PaO2 * FiO2})(FiO2 * Patm - PaCO2 / RQ),
      rand=lambda rng: (lambda f: {"FiO2": f, "Patm": 760, "PH2O": 47, "PaCO2": _u(rng, 30, 50, 0),
@@ -3067,7 +3070,8 @@ _add("hp_atwater_energy", name="Food energy by the Atwater factors", topic="meta
 
 def body_fat_density(density):
     D = _num(density, "density")
-    _need(0.9 < D < 1.2, "body density must be between 0.9 and 1.2 g/mL")
+    # above 1.1 g/mL both equations give a negative body fat (Siri is 0 at 1.1): no human body (review 2026-11-14)
+    _need(0.9 < D <= 1.1, "body density must be above 0.9 and at most 1.1 g/mL (the two-compartment equations give 0-100 % fat there)")
     return _rnd({"fat_Siri": 495.0 / D - 450.0, "fat_Brozek": 457.0 / D - 414.2})
 
 
@@ -3075,7 +3079,7 @@ _add("hp_body_fat_from_density", name="Body fat from body density (Siri and Broz
      purpose="Percent body fat by Siri (495/D - 450) and Brozek (457/D - 414.2) from whole-body density.",
      inputs=[_n("density", "body density in g/mL")],
      outputs=[_o("fat_Siri", "body fat in % (Siri)"), _o("fat_Brozek", "body fat in % (Brozek)")],
-     primary="fat_Siri", conditions=["0.9 < density < 1.2"], method="two-compartment models", latex=r"\%BF = \frac{495}{D} - 450",
+     primary="fat_Siri", conditions=["0.9 < density <= 1.1"], method="two-compartment models", latex=r"\%BF = \frac{495}{D} - 450",
      run=body_fat_density,
      reference=lambda density: {"fat_Siri": _sx("p - 495/D + 450", "p", D=density), "fat_Brozek": _sx("p - 457/D + 4142/10", "p", D=density)},
      wrong=lambda density: {"fat_Siri": 450 / density - 495, "fat_Brozek": 414.2 / density - 457},
@@ -3091,7 +3095,7 @@ def hydrostatic_weighing(mass_air, mass_water, water_density, RV, GI=0.1):
     V = (Ma - Mw) / rho - RV - GI
     _need(V > 0, "the computed body volume is not positive")
     D = Ma / V
-    _need(0.9 < D < 1.2, "the computed density is outside 0.9-1.2 g/mL")
+    _need(0.9 < D <= 1.1, "the computed density is outside 0.9-1.1 g/mL (Siri gives a body fat outside 0-100 %)")
     return _rnd({"volume": V, "density": D, "fat_Siri": 495.0 / D - 450.0})
 
 
@@ -3108,7 +3112,7 @@ _add("hp_hydrostatic_weighing", name="Body density and fat by hydrostatic weighi
      inputs=[_n("mass_air", "body mass in air in kg"), _n("mass_water", "underwater mass in kg"), _n("water_density", "water density in g/mL"),
              _n("RV", "residual lung volume in L"), _n("GI", "gastrointestinal gas in L (optional; the customary estimate if omitted)", required=False)],
      outputs=[_o("volume", "body volume in L"), _o("density", "body density in g/mL"), _o("fat_Siri", "body fat in % (Siri)")],
-     primary="fat_Siri", conditions=["mass_water < mass_air", "computed density 0.9-1.2"], method="Archimedes' principle, then Siri",
+     primary="fat_Siri", conditions=["mass_water < mass_air", "computed density 0.9-1.1"], method="Archimedes' principle, then Siri",
      latex=r"D_b = \frac{M_a}{\frac{M_a - M_w}{\rho_w} - RV - V_{GI}}", run=hydrostatic_weighing, reference=ref_hydrostatic_weighing,
      wrong=lambda mass_air, mass_water, water_density, RV, GI=0.1: (lambda V: {"volume": V, "density": mass_air / V, "fat_Siri": 495 / (mass_air / V) - 450})((mass_air - mass_water) / water_density),
      rand=lambda rng: (lambda Ma: {"mass_air": Ma, "mass_water": round(Ma * rng.uniform(0.025, 0.06), 2), "water_density": _u(rng, 0.993, 0.998, 4),

@@ -1,5 +1,5 @@
 {
- "package": "1.6.0",
+ "package": "1.6.1",
  "pack": "1.0.0",
  "knowledge_db": null,
  "files": {
@@ -7,8 +7,8 @@
   "dictionary/terms.json": "3781eac9e78cc74a52dfbb7f7c6ecd5f218e2a208be5aad6dabd1094f82ddc60",
   "knowledge/relations.json": "ea22e45f5b9ea74dfd36089cb4c16d890ba43576c2ae4b958e8208e7c3c96a91",
   "knowledge/reference_cases.json": "7414a14e2c4202a7fae8cdd14e1a2ef7267f35a9665b0633001349c698d4e4e7",
-  "capabilities/procedures.py": "7555cbca06cc208c3d483e37fb56a9bb34690b8d503b9537a43ee8af1528df3c",
-  "capabilities/procedures_certified.json": "aac778b762a554021039dd284a6f69793dc3654c56faecaf206baef13e45a493",
+  "capabilities/procedures.py": "6c2afb790563aa3c3882c9eba223af38980e7f3a287e377615e7ca91091fd223",
+  "capabilities/procedures_certified.json": "41b938c4ab18328c81498a8dac68a9bae149e2022d61fc6a5a4b4432389a2312",
   "human_physiology_knowledge_public.sqlite": "df5a947276514a2fcca1e3be45c5e118a18f3a1588d178dc5fab5453f097d9e7"
  },
  "engine": [

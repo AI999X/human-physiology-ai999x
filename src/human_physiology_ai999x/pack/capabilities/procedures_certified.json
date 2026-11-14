@@ -99,7 +99,7 @@
   "hp_red_cell_indices",
   "hp_ecg_heart_rate"
  ],
- "generated": "2026-11-13",
+ "generated": "2026-11-14",
  "tool": "tools/certify_procedures.py",
  "report": "release/procedure_certification.json",
  "weak_references": {

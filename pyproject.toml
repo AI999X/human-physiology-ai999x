@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "human-physiology-ai999x"
-version = "1.6.0"
+version = "1.6.1"
 description = "Offline human physiology calculator: cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR (CKD-EPI 2021), Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate, with steps, LaTeX and honest refusals (computed values, not medical advice)"
 readme = "README.md"
 requires-python = ">=3.10"

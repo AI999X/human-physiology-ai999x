@@ -4,7 +4,7 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/human-physiology-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/human-physiology-ai999x/)** · **[Guides](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.0
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.1
 
 Field: **Life Sciences** · Tasks: Question Answering
 
@@ -278,7 +278,7 @@ _What this means:_ Body mass index is calculated by dividing weight in kilograms
 
 | Property | Value |
 |---|---|
-| Package | `human-physiology-ai999x` 1.6.0 (import `human_physiology_ai999x`) |
+| Package | `human-physiology-ai999x` 1.6.1 (import `human_physiology_ai999x`) |
 | Type | Deterministic neuro-symbolic human physiology engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 98 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -312,7 +312,7 @@ human_physiology.ask("Who created you?").message
 # -> human-physiology-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.6.0.
+The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.6.1.
 
 ## How every answer is verified
 
@@ -451,10 +451,10 @@ _dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), w
 ## Citation
 
 ```bibtex
-@software{human_physiology_ai999x_1_6_0,
+@software{human_physiology_ai999x_1_6_1,
   title  = {human-physiology-ai999x: an offline, verified human physiology solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.6.0},
+  year   = {2026}, version = {1.6.1},
   url    = {https://huggingface.co/AI999X/human-physiology-ai999x}
 }
 ```
@@ -471,7 +471,7 @@ Created and engineered by **Ibnul Jaif Farabi** · **[AI999X](https://huggingfac
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.0`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.6.0) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.1`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.6.1) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 
