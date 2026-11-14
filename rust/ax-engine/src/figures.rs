@@ -716,6 +716,9 @@ struct Knob {
     tracks: Vec<Track>,
     /// the verdict this input changes (shaded bands), if any
     cat: Option<String>,
+    /// the verdict this input changes whichever answer the sweep follows: the colours of the decision map (the bands
+    /// of a sweep are left out when its followed answer is not that verdict's own, the map is not)
+    verdict: Option<String>,
     /// a wider range (three times the value either side): the answer changes only further away
     wide: bool,
     /// an entry of a matrix input: `base` holds the matrix row by row, this many columns
@@ -731,7 +734,7 @@ struct Knob {
 impl Knob {
     fn plain(sym: &str, x0: f64, int: bool, label: String, unit: String) -> Knob {
         Knob { sym: sym.to_string(), idx: None, x0, int, rest: String::new(), label, unit, base: vec![], lo_lim: None,
-               hi_lim: None, text: None, step: None, tracks: vec![], cat: None, wide: false, mat_cols: None,
+               hi_lim: None, text: None, step: None, tracks: vec![], cat: None, verdict: None, wide: false, mat_cols: None,
                logwide: false, scan: false, pts: None }
     }
 }
@@ -946,6 +949,12 @@ fn knobs(specs: &[InSpec], given: &[(String, Input)]) -> Vec<Knob> {
                 // a node is a label, not a quantity: a node input ("node_b" = 0) is never varied, and in a netlist only
                 // the element values are (the node numbers after each element's name stay; electrical review,
                 // 2026-11-14: curves over "the number 1 marked [ ] in netlist" and over node_b were meaningless)
+                // the coefficients of a reaction equation are the reaction itself, not a quantity: varied with K held
+                // fixed they drew reactions that do not exist (chemistry verification, 2026-11-14)
+                if ["->", "→", "⇌", "<=>", "<->", "="].iter().any(|w| t.contains(w)) && t.chars().any(|c| c.is_ascii_uppercase())
+                    && (ml.contains("reaction") || ml.contains("chemical equation")) {
+                    continue;
+                }
                 let netlist = ml.contains("node") && (ml.contains("elements separated") || ml.contains("netlist"));
                 if ml.contains("node") && !netlist {
                     continue;
@@ -992,8 +1001,20 @@ fn knobs(specs: &[InSpec], given: &[(String, Input)]) -> Vec<Knob> {
             lens.push((e.sym.clone(), e.base.len()));
         }
     }
-    let paired: Vec<String> = lens.iter().filter(|(_, n)| *n >= 2 && lens.iter().filter(|(_, m)| m == n).count() >= 2)
-        .map(|(s, _)| s.clone()).collect();
+    // ... but lists that are each ONE geometric object (two vectors, two points, two sides) are no measured series: the
+    // entries of u in u.v or of a point in a distance are its coordinates, and the sweep of one of them is the
+    // textbook picture (the rule had taken the published sweeps of the dot product, the angle and distance between
+    // vectors and the parallelogram area; linear algebra crate test, 2026-11-14)
+    let one_object = |sym: &str| -> bool {
+        let m = specs.iter().find(|s| s.sym == sym).map(|s| s.meaning.to_lowercase()).unwrap_or_default();
+        let words: Vec<&str> = m.split(|c: char| !c.is_alphanumeric()).collect();
+        ["vector", "point", "side"].iter().any(|w| words.contains(w))
+            && !m.contains("point load") && !m.contains("hand side")
+    };
+    let paired: Vec<String> = lens.iter().filter(|(_, n)| {
+        let group: Vec<&String> = lens.iter().filter(|(_, m)| m == n).map(|(s, _)| s).collect();
+        *n >= 2 && group.len() >= 2 && !group.iter().all(|s| one_object(s))
+    }).map(|(s, _)| s.clone()).collect();
     elems.retain(|e| !(e.text.is_none() && paired.contains(&e.sym)));
     // single numbers first; entries of lists and numbers inside texts after (at most a few of them)
     let room = MAX_KNOBS.saturating_sub(out.len()).min(8);
@@ -1395,6 +1416,7 @@ fn figures_from(p: &Pack, key: &str, given: &[(String, Input)], target: Option<&
         if let Some(mut k) = ks.into_iter().next() {
             k.tracks = b.tracks.clone();
             k.cat = b.cat.clone();
+            k.verdict = b.cat.clone();
             if k.int && k.x0 >= 16.0 && k.text.is_none() && k.idx.is_none() && cx.room() < 3 {
                 // fewer solves than the usual steps: smaller whole numbers, halving (where the work grows with the
                 // number, they cost little together; the work allowed stops the rest)
@@ -1530,6 +1552,7 @@ fn figures_from(p: &Pack, key: &str, given: &[(String, Input)], target: Option<&
             }
             k.cat = (0..cat_cands.len()).find(|j| changed[*j]).and_then(|j| cat_cands[j].clone())
                 .or_else(|| b.cat.clone());
+            k.verdict = k.cat.clone();
             // with several verdicts, the shading must be the followed answer's own: the one whose name it shares the
             // longest start with (total_variance -> total_variance_type); none related, no shading (the bands of the
             // spending variance under a curve of the total variance read "favourable" where the total was not;
@@ -1582,9 +1605,13 @@ fn figures_from(p: &Pack, key: &str, given: &[(String, Input)], target: Option<&
             push(&mut figs, kind, f);
         }
     }
-    if knobs_ranked.len() >= 2 && knobs_ranked[0].cat.is_some() && knobs_ranked[0].idx.is_none()
+    // the map is coloured by the verdict the first input changes, even when that input's sweep follows another answer
+    // and so is not shaded by it: the shading rule (several verdicts, 2026-11-14) had taken the map of "circumpolar"
+    // over latitude and declination away with the bands (astronomy crate test, 2026-11-14)
+    if knobs_ranked.len() >= 2 && knobs_ranked[0].verdict.is_some() && knobs_ranked[0].idx.is_none()
         && knobs_ranked[1].idx.is_none() && knobs_ranked[0].text.is_none() && knobs_ranked[1].text.is_none() {
-        push(&mut figs, "decision", fig_grid(&mut cx, &b, &knobs_ranked[0], &knobs_ranked[1]));
+        let k1 = Knob { cat: knobs_ranked[0].verdict.clone(), ..knobs_ranked[0].clone() };
+        push(&mut figs, "decision", fig_grid(&mut cx, &b, &k1, &knobs_ranked[1]));
     }
     if knobs_ranked.len() > swept && figs.len() < MAX_FIGS {
         for k in knobs_ranked.iter().skip(swept).take(2) {
