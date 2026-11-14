@@ -4,7 +4,7 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/human-physiology-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/human-physiology-ai999x/)** · **[Guides](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/human-physiology-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.1
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.2
 
 Field: **Life Sciences** · Tasks: Question Answering
 
@@ -185,7 +185,7 @@ fat_Siri = 16.63893384
   mass_water = 3 kg
   water_density = 995.7 kg/m^3
   RV = 0.0012 m^3
-  assumes: mass_water < mass_air; computed density 0.9-1.2
+  assumes: mass_water < mass_air; computed density 0.9-1.1
 ```
 
 Python:
@@ -213,7 +213,7 @@ fat_Siri = 21.42857143
 fat_Brozek = 21.03809524
   by: Body fat from body density (Siri and Brozek)  (two-compartment models)
   density = 1050 kg/m^3
-  assumes: 0.9 < density < 1.2
+  assumes: 0.9 < density <= 1.1
 ```
 
 Python:
@@ -278,7 +278,7 @@ _What this means:_ Body mass index is calculated by dividing weight in kilograms
 
 | Property | Value |
 |---|---|
-| Package | `human-physiology-ai999x` 1.6.1 (import `human_physiology_ai999x`) |
+| Package | `human-physiology-ai999x` 1.6.2 (import `human_physiology_ai999x`) |
 | Type | Deterministic neuro-symbolic human physiology engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 98 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -312,7 +312,7 @@ human_physiology.ask("Who created you?").message
 # -> human-physiology-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.6.1.
+The Python package also installs a Python command, `human-physiology-ai999x "<question>"`; for the native program use `human-physiology` (above). The outputs above were produced by running this exact code on human-physiology-ai999x 1.6.2.
 
 ## How every answer is verified
 
@@ -413,7 +413,7 @@ _E (equilibrium potential in mV) against Cout (extracellular concentration in mM
 
 ![Body fat from body density (Siri and Brozek), computed by human-physiology-ai999x](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-body-fat-from-density-fat-siri-vs-density.svg)
 
-_fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)). 9 points computed by human-physiology-ai999x; marked: density = 1050, fat_Siri = 21.4286._
+_fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)). 6 points computed by human-physiology-ai999x; marked: density = 1050, fat_Siri = 21.4286._
 
 **Two-compartment fluid shift after adding a solution (Darrow-Yannet)**
 
@@ -451,10 +451,10 @@ _dP_mmHg (pressure drop in mmHg) against v1 (upstream velocity (e.g. in m/s)), w
 ## Citation
 
 ```bibtex
-@software{human_physiology_ai999x_1_6_1,
+@software{human_physiology_ai999x_1_6_2,
   title  = {human-physiology-ai999x: an offline, verified human physiology solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.6.1},
+  year   = {2026}, version = {1.6.2},
   url    = {https://huggingface.co/AI999X/human-physiology-ai999x}
 }
 ```
@@ -471,7 +471,7 @@ Created and engineered by **Ibnul Jaif Farabi** · **[AI999X](https://huggingfac
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.1`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.6.1) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/human-physiology-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.2`; the [GitHub release](https://github.com/AI999X/human-physiology-ai999x/releases/tag/v1.6.2) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 

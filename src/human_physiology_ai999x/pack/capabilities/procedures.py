@@ -1412,6 +1412,9 @@ def alveolar_gas(FiO2, Patm, PH2O, PaCO2, RQ):
     _need(RQ <= 1.5, "RQ must be at most 1.5")
     pio2 = FiO2 * (Patm - PH2O)
     simp = pio2 - PaCO2 / RQ
+    # an alveolar PO2 cannot be negative: the inputs are outside the equation's use (as in hp_aa_gradient; verify
+    # 2026-11-14: PaCO2 150 mmHg on room air gave PAO2 = -37.8 mmHg)
+    _need(simp > 0, "the computed alveolar PO2 is not positive: the PaCO2 is too high for this inspired O2")
     return _rnd({"PiO2": pio2, "PAO2": simp, "PAO2_full": simp + PaCO2 * FiO2 * (1.0 - RQ) / RQ})
 
 
@@ -1436,7 +1439,7 @@ _add("hp_alveolar_gas_equation", name="Alveolar gas equation", topic="respirator
              _n("PaCO2", "arterial PCO2 in mmHg"), _n("RQ", "respiratory quotient")],
      outputs=[_o("PiO2", "inspired PO2 in mmHg"), _o("PAO2", "alveolar PO2, simplified equation, in mmHg"),
               _o("PAO2_full", "alveolar PO2, full equation, in mmHg")],
-     primary="PAO2", conditions=["0 < FiO2 <= 1", "Patm > PH2O", "0 < RQ <= 1.5"], method="PAO2 = PiO2 - PaCO2/R (+ PaCO2 FiO2 (1 - R)/R)",
+     primary="PAO2", conditions=["0 < FiO2 <= 1", "Patm > PH2O", "0 < RQ <= 1.5", "computed PAO2 > 0"], method="PAO2 = PiO2 - PaCO2/R (+ PaCO2 FiO2 (1 - R)/R)",
      latex=r"P_AO_2 = F_iO_2(P_B - P_{H_2O}) - \frac{P_aCO_2}{R}\left[1 - F_iO_2(1 - R)\right]",
      run=alveolar_gas, reference=ref_alveolar_gas,
      wrong=lambda FiO2, Patm, PH2O, PaCO2, RQ: {"PiO2": FiO2 * Patm, "PAO2": FiO2 * Patm - PaCO2 / RQ, "PAO2_full": FiO2 * Patm - PaCO2 * RQ},

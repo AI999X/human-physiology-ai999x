@@ -1,6 +1,6 @@
 # human-physiology: the Human Physiology program, user guide
 
-**human-physiology-ai999x 1.6.0**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
+**human-physiology-ai999x 1.6.1**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
 Human Physiology covers cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR, Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate (computed values, not medical advice). This guide is about `human-physiology`, the model as a self-contained program for Windows and Linux: 98 capabilities in 8 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/human-physiology-ai999x/); the Python package (`pip install human-physiology-ai999x`) has its own guide. Every command output printed here is what the program printed.
 
@@ -346,7 +346,7 @@ $$
 | `density` | out | body density in g/mL | - |
 | `fat_Siri` | out | body fat in % (Siri) | - |
 
-**Applies when:** mass_water < mass_air; computed density 0.9-1.2.
+**Applies when:** mass_water < mass_air; computed density 0.9-1.1.
 
 ```shell
 $ human-physiology solve hp_hydrostatic_weighing "mass_air=70 kg" "mass_water=3 kg" "water_density=0.9957 g/mL" "RV=1.2 L"
@@ -358,7 +358,7 @@ fat_Siri = 16.63893384
   mass_water = 3 kg
   water_density = 995.7 kg/m^3
   RV = 0.0012 m^3
-  assumes: mass_water < mass_air; computed density 0.9-1.2
+  assumes: mass_water < mass_air; computed density 0.9-1.1
 ```
 
 **What the worked example means:** This calculation determines body composition by applying Archimedes' principle. The total body volume is derived from the difference between mass in air and underwater mass, adjusted for residual lung volume and gastrointestinal gas. Dividing the mass in air by this corrected volume gives the body density, which is then converted to a body fat percentage using the Siri equation. A result of 16.6389 percent indicates the proportion of adipose tissue relative to total body mass based on these physical measurements.
@@ -379,7 +379,7 @@ $$
 | `fat_Siri` | out | body fat in % (Siri) | - |
 | `fat_Brozek` | out | body fat in % (Brozek) | - |
 
-**Applies when:** 0.9 < density < 1.2.
+**Applies when:** 0.9 < density <= 1.1.
 
 ```shell
 $ human-physiology solve hp_body_fat_from_density "density=1.05 g/mL"
@@ -387,7 +387,7 @@ fat_Siri = 21.42857143
 fat_Brozek = 21.03809524
   by: Body fat from body density (Siri and Brozek)  (two-compartment models)
   density = 1050 kg/m^3
-  assumes: 0.9 < density < 1.2
+  assumes: 0.9 < density <= 1.1
 ```
 
 **What the worked example means:** This calculation determines body fat percentage using two-compartment models based on whole-body density. The Siri formula yields 21.4286 while the Brozek formula yields 21.0381, both derived from an input density of 1.05 g/mL. These values represent the estimated proportion of total body mass that is adipose tissue, assuming constant densities for fat and lean tissues.
@@ -2825,7 +2825,7 @@ $$
 | `a_A_ratio` | out | PaO2/PAO2 | - |
 | `PF_ratio` | out | PaO2/FiO2 in mmHg | - |
 
-**Applies when:** 0 < FiO2 <= 1; computed PAO2 > 0.
+**Applies when:** 0 < FiO2 <= 1; computed PAO2 > 0; PaO2 <= computed PAO2.
 
 ```shell
 $ human-physiology solve hp_aa_gradient FiO2=0.21 "Patm=760 mmHg" "PH2O=47 mmHg" "PaCO2=40 mmHg" "PaO2=90 mmHg" RQ=0.8
@@ -2840,10 +2840,10 @@ PF_ratio = 428.5714286
   PaCO2 = 5332.895497 Pa
   PaO2 = 11999.01487 Pa
   RQ = 0.8
-  assumes: 0 < FiO2 <= 1; computed PAO2 > 0
+  assumes: 0 < FiO2 <= 1; computed PAO2 > 0; PaO2 <= computed PAO2
 ```
 
-In the worked example, FiO2 = 0.21, Patm = 760 mmHg, PH2O = 47 mmHg, PaCO2 = 40 mmHg, PaO2 = 90 mmHg, RQ = 0.8 go through the equation above and give PAO2 = 99.73, Aa_gradient = 9.73, a_A_ratio = 0.9024365788, PF_ratio = 428.5714286. It applies only when 0 < FiO2 <= 1; computed PAO2 > 0: outside that it says what is wrong instead of returning a number.
+In the worked example, FiO2 = 0.21, Patm = 760 mmHg, PH2O = 47 mmHg, PaCO2 = 40 mmHg, PaO2 = 90 mmHg, RQ = 0.8 go through the equation above and give PAO2 = 99.73, Aa_gradient = 9.73, a_A_ratio = 0.9024365788, PF_ratio = 428.5714286. It applies only when 0 < FiO2 <= 1; computed PAO2 > 0; PaO2 <= computed PAO2: outside that it says what is wrong instead of returning a number.
 
 <a id="hp_oxygen_content"></a>
 

@@ -1805,7 +1805,7 @@ $$
 | `PAO2_full` | alveolar PO2, full equation, in mmHg |
 
 - **Method:** PAO2 = PiO2 - PaCO2/R (+ PaCO2 FiO2 (1 - R)/R)
-- **Assumes:** 0 < FiO2 <= 1; Patm > PH2O; $0 < RQ  \leq  1.5$
+- **Assumes:** 0 < FiO2 <= 1; Patm > PH2O; $0 < RQ  \leq  1.5$; computed PAO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
 ![PAO2 (alveolar PO2, simplified equation, in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-gas-equation-curve)
@@ -1864,7 +1864,7 @@ $$
 
 ![Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-aa-gradient-curve)
 
-*Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0.4 to 1.2. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 50662.5 Pa, 202650 Pa. Other inputs as in the worked example: FiO2 = 0.21, PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa, PaO2 = 11999.01486735 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RQ = 0.8, Aa_gradient = 9.73.*
+*Aa_gradient (A-a gradient in mmHg) against RQ (respiratory quotient) from 0.4 to 1.2. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 202650 Pa. Other inputs as in the worked example: FiO2 = 0.21, PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa, PaO2 = 11999.01486735 Pa. 20 points per curve computed by human-physiology-ai999x; marked: the worked example, RQ = 0.8, Aa_gradient = 9.73.*
 
 ```python
 human_physiology_ai999x.solve('hp_aa_gradient', FiO2=0.21, Patm=101325.01443540001, PH2O=6266.152208505, PaCO2=5332.8954966, PaO2=11999.01486735, RQ=0.8)
@@ -4893,11 +4893,11 @@ $$
 
 ![fat_Siri (body fat in % (Siri)) against density (body density (e](https://huggingface.co/AI999X/human-physiology-ai999x/resolve/main/figures/hp-body-fat-from-density-fat-siri-vs-density.svg)
 
-*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)). 9 points computed by human-physiology-ai999x; marked: density = 1050, fat_Siri = 21.4286.*
+*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)). 6 points computed by human-physiology-ai999x; marked: density = 1050, fat_Siri = 21.4286.*
 
 ![fat_Siri (body fat in % (Siri)) against density (body density (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-body-fat-from-density-curve)
 
-*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)) from 945 kg/m^3 to 1155 kg/m^3. 31 points computed by human-physiology-ai999x; marked: the worked example, density = 1050 kg/m^3, fat_Siri = 21.4286.*
+*fat_Siri (body fat in % (Siri)) against density (body density (e.g. in g/mL)) from 945 kg/m^3 to 1155 kg/m^3. 23 points computed by human-physiology-ai999x; marked: the worked example, density = 1050 kg/m^3, fat_Siri = 21.4286.*
 
 ```python
 human_physiology_ai999x.solve('hp_body_fat_from_density', density=1050.0000000000002)
@@ -4949,7 +4949,7 @@ $$
 
 ![fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-hydrostatic-weighing-curve)
 
-*fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of mass_water (underwater mass (e.g. in kg)): 3 kg, 1.5 kg, 6 kg. Other inputs as in the worked example: water_density = 995.7000000000002 kg/m^3, RV = 0.0012 m^3. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, mass_air = 70 kg, fat_Siri = 16.6389.*
+*fat_Siri (body fat in % (Siri)) against mass_air (body mass in air (e.g. in kg)) from 35 kg to 105 kg. One curve for each value of mass_water (underwater mass (e.g. in kg)): 3 kg, 1.5 kg, 6 kg. Other inputs as in the worked example: water_density = 995.7000000000002 kg/m^3, RV = 0.0012 m^3. 26 points per curve computed by human-physiology-ai999x; marked: the worked example, mass_air = 70 kg, fat_Siri = 16.6389.*
 
 ```python
 human_physiology_ai999x.solve('hp_hydrostatic_weighing', mass_air=70.0, mass_water=3.0, water_density=995.7000000000002, RV=0.0012)

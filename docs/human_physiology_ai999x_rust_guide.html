@@ -21,7 +21,7 @@ figcaption{font-size:9pt;color:#555}
 .pb{page-break-after:always}
 </style></head><body>
 <h1>human-physiology: the Human Physiology program, user guide</h1>
-<p><strong>human-physiology-ai999x 1.6.0</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
+<p><strong>human-physiology-ai999x 1.6.1</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
 <p>Human Physiology covers cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR, Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate (computed values, not medical advice). This guide is about <code>human-physiology</code>, the model as a self-contained program for Windows and Linux: 98 capabilities in 8 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model&#x27;s page (https://www.ai999x.com/models/human-physiology-ai999x/); the Python package (<code>pip install human-physiology-ai999x</code>) has its own guide. Every command output printed here is what the program printed.</p>
 <h2>Contents</h2>
 <ul><li>1. Get it: desktop app, command line, browser, Python</li><li>2. Quick start</li><li>3. Writing inputs</li><li>4. Outcomes and exit codes</li><li>5. Scripts and agents: batch and JSON</li><li>6. Figures</li><li>7. In a web page or Node.js: WebAssembly</li><li>8. Every capability</li></ul>
@@ -187,7 +187,7 @@ MCHC = 33.33333333
 <p>Body volume (Ma - Mw)/rho_w - RV - GI gas, body density and Siri percent fat.</p>
 <div class="math">\[D_b = \frac{M_a}{\frac{M_a - M_w}{\rho_w} - RV - V_{GI}}\]</div>
 <table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>mass_air</code></td><td>in</td><td>body mass in air (e.g. in kg)</td><td>kg</td></tr><tr><td><code>mass_water</code></td><td>in</td><td>underwater mass (e.g. in kg)</td><td>kg</td></tr><tr><td><code>water_density</code></td><td>in</td><td>water density (e.g. in g/mL)</td><td>kg/m^3</td></tr><tr><td><code>RV</code></td><td>in</td><td>residual lung volume (e.g. in L)</td><td>m^3</td></tr><tr><td><code>GI</code></td><td>in</td><td>gastrointestinal gas (e.g. in L) (optional; the customary estimate if omitted) (optional)</td><td>m^3</td></tr><tr><td><code>volume</code></td><td>out</td><td>body volume in L</td><td>, </td></tr><tr><td><code>density</code></td><td>out</td><td>body density in g/mL</td><td>, </td></tr><tr><td><code>fat_Siri</code></td><td>out</td><td>body fat in % (Siri)</td><td>, </td></tr></tbody></table>
-<p><strong>Applies when:</strong> mass_water &lt; mass_air; computed density 0.9-1.2.</p>
+<p><strong>Applies when:</strong> mass_water &lt; mass_air; computed density 0.9-1.1.</p>
 <pre><code class="shell">$ human-physiology solve hp_hydrostatic_weighing &quot;mass_air=70 kg&quot; &quot;mass_water=3 kg&quot; &quot;water_density=0.9957 g/mL&quot; &quot;RV=1.2 L&quot;
 volume = 65.98934418
 density = 1.060777325
@@ -197,19 +197,19 @@ fat_Siri = 16.63893384
   mass_water = 3 kg
   water_density = 995.7 kg/m^3
   RV = 0.0012 m^3
-  assumes: mass_water &lt; mass_air; computed density 0.9-1.2</code></pre>
+  assumes: mass_water &lt; mass_air; computed density 0.9-1.1</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines body composition by applying Archimedes&#x27; principle. The total body volume is derived from the difference between mass in air and underwater mass, adjusted for residual lung volume and gastrointestinal gas. Dividing the mass in air by this corrected volume gives the body density, which is then converted to a body fat percentage using the Siri equation. A result of 16.6389 percent indicates the proportion of adipose tissue relative to total body mass based on these physical measurements.</p>
 <h4 id="hp_body_fat_from_density">Body fat from body density (Siri and Brozek), <code>hp_body_fat_from_density</code></h4>
 <p>Percent body fat by Siri (495/D - 450) and Brozek (457/D - 414.2) from whole-body density.</p>
 <div class="math">\[\%BF = \frac{495}{D} - 450\]</div>
 <table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>density</code></td><td>in</td><td>body density (e.g. in g/mL)</td><td>kg/m^3</td></tr><tr><td><code>fat_Siri</code></td><td>out</td><td>body fat in % (Siri)</td><td>, </td></tr><tr><td><code>fat_Brozek</code></td><td>out</td><td>body fat in % (Brozek)</td><td>, </td></tr></tbody></table>
-<p><strong>Applies when:</strong> 0.9 &lt; density &lt; 1.2.</p>
+<p><strong>Applies when:</strong> 0.9 &lt; density &lt;= 1.1.</p>
 <pre><code class="shell">$ human-physiology solve hp_body_fat_from_density &quot;density=1.05 g/mL&quot;
 fat_Siri = 21.42857143
 fat_Brozek = 21.03809524
   by: Body fat from body density (Siri and Brozek)  (two-compartment models)
   density = 1050 kg/m^3
-  assumes: 0.9 &lt; density &lt; 1.2</code></pre>
+  assumes: 0.9 &lt; density &lt;= 1.1</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines body fat percentage using two-compartment models based on whole-body density. The Siri formula yields 21.4286 while the Brozek formula yields 21.0381, both derived from an input density of 1.05 g/mL. These values represent the estimated proportion of total body mass that is adipose tissue, assuming constant densities for fat and lean tissues.</p>
 <h4 id="hp_bmi">Body mass index, <code>hp_bmi</code></h4>
 <p>BMI = weight/height^2 (kg/m^2).</p>
@@ -1236,7 +1236,7 @@ VA = 4.314735493
 <p>PAO2 from the simplified alveolar gas equation, the A-a gradient PAO2 - PaO2, the a/A ratio and PaO2/FiO2.</p>
 <div class="math">\[A\!-\!a = P_AO_2 - P_aO_2\]</div>
 <table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>FiO2</code></td><td>in</td><td>inspired O2 fraction</td><td>, </td></tr><tr><td><code>Patm</code></td><td>in</td><td>barometric pressure (e.g. in mmHg)</td><td>Pa</td></tr><tr><td><code>PH2O</code></td><td>in</td><td>water vapour pressure (e.g. in mmHg)</td><td>Pa</td></tr><tr><td><code>PaCO2</code></td><td>in</td><td>arterial PCO2 (e.g. in mmHg)</td><td>Pa</td></tr><tr><td><code>PaO2</code></td><td>in</td><td>arterial PO2 (e.g. in mmHg)</td><td>Pa</td></tr><tr><td><code>RQ</code></td><td>in</td><td>respiratory quotient</td><td>, </td></tr><tr><td><code>PAO2</code></td><td>out</td><td>alveolar PO2 in mmHg</td><td>, </td></tr><tr><td><code>Aa_gradient</code></td><td>out</td><td>A-a gradient in mmHg</td><td>, </td></tr><tr><td><code>a_A_ratio</code></td><td>out</td><td>PaO2/PAO2</td><td>, </td></tr><tr><td><code>PF_ratio</code></td><td>out</td><td>PaO2/FiO2 in mmHg</td><td>, </td></tr></tbody></table>
-<p><strong>Applies when:</strong> 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0.</p>
+<p><strong>Applies when:</strong> 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0; PaO2 &lt;= computed PAO2.</p>
 <pre><code class="shell">$ human-physiology solve hp_aa_gradient FiO2=0.21 &quot;Patm=760 mmHg&quot; &quot;PH2O=47 mmHg&quot; &quot;PaCO2=40 mmHg&quot; &quot;PaO2=90 mmHg&quot; RQ=0.8
 PAO2 = 99.73
 Aa_gradient = 9.73
@@ -1249,8 +1249,8 @@ PF_ratio = 428.5714286
   PaCO2 = 5332.895497 Pa
   PaO2 = 11999.01487 Pa
   RQ = 0.8
-  assumes: 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0</code></pre>
-<p>In the worked example, FiO2 = 0.21, Patm = 760 mmHg, PH2O = 47 mmHg, PaCO2 = 40 mmHg, PaO2 = 90 mmHg, RQ = 0.8 go through the equation above and give PAO2 = 99.73, Aa_gradient = 9.73, a_A_ratio = 0.9024365788, PF_ratio = 428.5714286. It applies only when 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0: outside that it says what is wrong instead of returning a number.</p>
+  assumes: 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0; PaO2 &lt;= computed PAO2</code></pre>
+<p>In the worked example, FiO2 = 0.21, Patm = 760 mmHg, PH2O = 47 mmHg, PaCO2 = 40 mmHg, PaO2 = 90 mmHg, RQ = 0.8 go through the equation above and give PAO2 = 99.73, Aa_gradient = 9.73, a_A_ratio = 0.9024365788, PF_ratio = 428.5714286. It applies only when 0 &lt; FiO2 &lt;= 1; computed PAO2 &gt; 0; PaO2 &lt;= computed PAO2: outside that it says what is wrong instead of returning a number.</p>
 <h4 id="hp_oxygen_content">Arterial oxygen content, <code>hp_oxygen_content</code></h4>
 <p>CaO2 = 1.34 x Hb x SaO2 + 0.003 x PaO2 (hemoglobin-bound plus dissolved oxygen).</p>
 <div class="math">\[C_aO_2 = 1.34\,Hb\,S_aO_2 + 0.003\,P_aO_2\]</div>
