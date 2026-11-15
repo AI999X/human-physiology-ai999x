@@ -1808,9 +1808,9 @@ $$
 - **Assumes:** 0 < FiO2 <= 1; Patm > PH2O; $0 < RQ  \leq  1.5$; computed PAO2 > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![PAO2 (alveolar PO2, simplified equation, in mmHg) against RQ (respiratory quotient) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-gas-equation-curve)
+![PAO2 (alveolar PO2, simplified equation, in mmHg) against FiO2 (inspired O2 fraction) from 0](https://www.ai999x.com/?ax_fig=human-physiology-ai999x/hp-alveolar-gas-equation-curve)
 
-*PAO2 (alveolar PO2, simplified equation, in mmHg) against RQ (respiratory quotient) from 0.4 to 1.2. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 50662.5 Pa, 202650 Pa. Other inputs as in the worked example: FiO2 = 0.21, PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa. 31 points per curve computed by human-physiology-ai999x; marked: the worked example, RQ = 0.8, PAO2 = 99.73.*
+*PAO2 (alveolar PO2, simplified equation, in mmHg) against FiO2 (inspired O2 fraction) from 0.02 to 0.98. One curve for each value of Patm (barometric pressure (e.g. in mmHg)): 101325 Pa, 50662.5 Pa, 202650 Pa. Other inputs as in the worked example: PH2O = 6266.152208505 Pa, PaCO2 = 5332.8954966 Pa, RQ = 0.8. 38 points per curve computed by human-physiology-ai999x; marked: the worked example, FiO2 = 0.21, PAO2 = 99.73.*
 
 ```python
 human_physiology_ai999x.solve('hp_alveolar_gas_equation', FiO2=0.21, Patm=101325.01443540001, PH2O=6266.152208505, PaCO2=5332.8954966, RQ=0.8)

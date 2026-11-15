@@ -1,6 +1,6 @@
 # human-physiology: the Human Physiology program, user guide
 
-**human-physiology-ai999x 1.6.1**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
+**human-physiology-ai999x 1.6.3**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
 Human Physiology covers cardiac output, blood pressure, vascular resistance and Poiseuille flow, lung volumes, ventilation and the alveolar gas equation, oxygen content and binding, acid-base, renal clearance and eGFR, Nernst and Goldman-Hodgkin-Katz potentials, cable properties, body composition and metabolic rate (computed values, not medical advice). This guide is about `human-physiology`, the model as a self-contained program for Windows and Linux: 98 capabilities in 8 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/human-physiology-ai999x/); the Python package (`pip install human-physiology-ai999x`) has its own guide. Every command output printed here is what the program printed.
 
@@ -96,7 +96,7 @@ Prints the model, its version and that this is the Rust build.
 
 ```shell
 $ human-physiology --version
-human-physiology-ai999x 1.6.0 (Rust build, ax-engine 1.6.0)
+human-physiology-ai999x 1.6.3 (Rust build, ax-engine 1.6.3)
 ```
 
 ### 2.2 Ask in words
@@ -208,7 +208,7 @@ One JSON request per line in, one JSON answer per line out, in order: for script
 ```shell
 $ human-physiology batch < cases.jsonl
 {"outcome":"SOLVED","message":"","value":5.04,"unit":"","solved_for":"CO","si":[["HR",72.0],["SV",0.00007]],"values":[["CO",5.04,""],["CO_mL",5040.0,""]],"target":"CO","phrase":"cardiac output in L/min","assumptions":["HR > 0","SV > 0"],"name":"Cardiac output from heart rate and stroke volume","equation":"CO = HR SV / 1000"}
-{"outcome":"SOLVED","message":"","value":99.73,"unit":"","solved_for":"PAO2","si":[["FiO2",0.21],["Patm",101325.01443540001],["PH2O",6266.152208505],["PaCO2",5332.8954966],["RQ",0.8]],"values":[["PiO2",149.73,""],["PAO2",99.73,""],["PAO2_full",101.83,""]],"target":"PAO2","phrase":"inspired PO2 in mmHg","assumptions":["0 < FiO2 <= 1","Patm > PH2O","0 < RQ <= 1.5"],"name":"Alveolar gas equation","equation":"PAO2 = PiO2 - PaCO2/R (+ PaCO2 FiO2 (1 - R)/R)"}
+{"outcome":"SOLVED","message":"","value":99.73,"unit":"","solved_for":"PAO2","si":[["FiO2",0.21],["Patm",101325.01443540001],["PH2O",6266.152208505],["PaCO2",5332.8954966],["RQ",0.8]],"values":[["PiO2",149.73,""],["PAO2",99.73,""],["PAO2_full",101.83,""]],"target":"PAO2","phrase":"inspired PO2 in mmHg","assumptions":["0 < FiO2 <= 1","Patm > PH2O","0 < RQ <= 1.5","computed PAO2 > 0"],"name":"Alveolar gas equation","equation":"PAO2 = PiO2 - PaCO2/R (+ PaCO2 FiO2 (1 - R)/R)"}
 ```
 
 ## 3. Writing inputs
@@ -2755,7 +2755,7 @@ $$
 | `PAO2` | out | alveolar PO2, simplified equation, in mmHg | - |
 | `PAO2_full` | out | alveolar PO2, full equation, in mmHg | - |
 
-**Applies when:** 0 < FiO2 <= 1; Patm > PH2O; 0 < RQ <= 1.5.
+**Applies when:** 0 < FiO2 <= 1; Patm > PH2O; 0 < RQ <= 1.5; computed PAO2 > 0.
 
 ```shell
 $ human-physiology solve hp_alveolar_gas_equation FiO2=0.21 "Patm=760 mmHg" "PH2O=47 mmHg" "PaCO2=40 mmHg" RQ=0.8
@@ -2768,7 +2768,7 @@ PAO2_full = 101.83
   PH2O = 6266.152209 Pa
   PaCO2 = 5332.895497 Pa
   RQ = 0.8
-  assumes: 0 < FiO2 <= 1; Patm > PH2O; 0 < RQ <= 1.5
+  assumes: 0 < FiO2 <= 1; Patm > PH2O; 0 < RQ <= 1.5; computed PAO2 > 0
 ```
 
 **What the worked example means:** This calculation determines the partial pressure of oxygen in the alveoli using the alveolar gas equation. It starts by computing the inspired oxygen partial pressure, which is 149.73, based on the fraction of inspired oxygen at 0.21 and the barometric pressure of 760 mmHg minus the water vapor pressure of 47 mmHg. The simplified alveolar oxygen partial pressure, 99.73, is then derived by subtracting the arterial carbon dioxide partial pressure of 40 mmHg divided by the respiratory quotient of 0.8 from the inspired value. This result estimates the oxygen available for diffusion into the blood.
