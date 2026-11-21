@@ -10,8 +10,8 @@ Human Physiology covers cardiac output, blood pressure, vascular resistance and 
 
 | | |
 |---|---|
-| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-human-physiology-1.6.5-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-human-physiology-1.6.5-linux-x86_64.tar.gz) |
-| **Command line** `human-physiology` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-linux-x86_64.tar.gz) |
+| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-human-physiology-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-human-physiology-1.6.6-linux-x86_64.tar.gz) |
+| **Command line** `human-physiology` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-linux-x86_64.tar.gz) |
 | **Browser** (any device) | [Try it on the model page](https://www.ai999x.com/models/human-physiology-ai999x/#capabilities) |
 | **Python** 3.10+ | `pip install human-physiology-ai999x`: on Windows and Linux (x86-64) `pip` installs the same compiled engine; on other systems (macOS, ARM) it installs a pure-Python build that gives the same answers |
 
@@ -214,108 +214,6 @@ $ human-physiology solve hp_alveolar_ventilation_co2 "VCO2=200 mL/min" "PaCO2=40
 VA = 4.314735493
 ```
 
-## Rust library: 15 examples
-
-The crate `human-physiology-ai999x` (in `rust/` of the GitHub repository) answers a JSON request with `human_physiology_ai999x::solve_json`. Each call below was compiled and run on this release; the comment under it is what it printed. The whole program is `rust/human-physiology/examples/readme.rs`: `cd rust && cargo run --release --example readme -p human-physiology-ai999x`.
-
-```rust
-use serde_json::{json, Value};
-
-fn show(request: Value) {
-    let answer: Value = serde_json::from_str(&human_physiology_ai999x::solve_json(&request.to_string())).unwrap();
-    println!("{}", answer["outcome"].as_str().unwrap_or(""));
-    for v in answer["values"].as_array().into_iter().flatten() {
-        let unit = v[2].as_str().unwrap_or("");
-        let unit = if unit.is_empty() || unit == "1" { String::new() } else { format!(" {unit}") };
-        println!("{} = {}{}", v[0].as_str().unwrap_or(""), v[1], unit);
-    }
-}
-
-show(json!({"key": "hp_red_cell_indices", "inputs": {"Hct": "0.45", "Hb": "15", "RBC": "5"}}));
-// SOLVED
-// MCV = 90.0
-// MCH = 30.0
-// MCHC = 33.3333333333
-
-show(json!({"key": "hp_hydrostatic_weighing", "inputs": {"mass_air": "70 kg", "mass_water": "3 kg", "water_density": "0.9957 g/mL", "RV": "1.2 L"}}));
-// SOLVED
-// volume = 65.98934418
-// density = 1.06077732503
-// fat_Siri = 16.6389338441
-
-show(json!({"key": "hp_body_fluid_compartments", "inputs": {"weight": "70 kg"}}));
-// SOLVED
-// TBW = 42.0
-// ICF = 28.0
-// ECF = 14.0
-// ISF = 10.5
-// plasma = 3.5
-
-show(json!({"key": "hp_bernoulli_pressure_drop", "inputs": {"v1": "1 m/s", "v2": "4 m/s", "rho": "1060 kg/m^3"}}));
-// SOLVED
-// dP = 7950.0
-// dP_mmHg = 59.6298952797
-// dP_simplified = 64.0
-
-show(json!({"key": "hp_bmr_harris_benedict", "inputs": {"weight": "70 kg", "height": "175 cm", "age": "30", "sex": "male", "version": "original"}}));
-// SOLVED
-// BMR = 1702.0125
-// BMR_kJ = 7121.2203
-
-show(json!({"key": "hp_membrane_charge", "inputs": {"Cm": "1 uF/cm^2", "dV": "100 mV", "area": "1000 um^2"}}));
-// SOLVED
-// Q_pC = 1.0
-// ions = 6241509.07446
-
-show(json!({"key": "hp_plasma_osmolality", "inputs": {"Na": "140 mmol/L", "glucose": "90", "BUN": "14"}}));
-// SOLVED
-// calculated = 290.0
-// effective = 285.0
-
-show(json!({"key": "hp_alveolar_gas_equation", "inputs": {"FiO2": "0.21", "Patm": "760 mmHg", "PH2O": "47 mmHg", "PaCO2": "40 mmHg", "RQ": "0.8"}}));
-// SOLVED
-// PiO2 = 149.73
-// PAO2 = 99.73
-// PAO2_full = 101.83
-
-show(json!({"key": "hp_body_fat_from_density", "inputs": {"density": "1.05 g/mL"}}));
-// SOLVED
-// fat_Siri = 21.4285714286
-// fat_Brozek = 21.0380952381
-
-show(json!({"key": "hp_gibbs_donnan", "inputs": {"A": "20", "c": "150 mmol/L"}}));
-// SOLVED
-// Na_in = 160.332963784
-// Cl_in = 140.332963784
-// r = 1.06888642522
-// V_mV = -1.78046007183
-// osmotic_excess = 0.665927567458
-
-show(json!({"key": "hp_cardiac_index", "inputs": {"CO": "5.04 L/min", "BSA": "1.8 m^2", "HR": "72"}}));
-// SOLVED
-// CI = 2.8
-// SVI = 38.8888888889
-// SV = 70.0
-
-show(json!({"key": "hp_bmr_katch_mcardle", "inputs": {"weight": "70 kg", "body_fat": "0.2"}}));
-// SOLVED
-// LBM = 56.0
-// BMR = 1579.6
-
-show(json!({"key": "hp_conduction_velocity_scaling", "inputs": {"v1": "60 m/s", "d1": "10 um", "d2": "5 um", "fiber": "myelinated"}}));
-// SOLVED
-// v2 = 30.0
-// ratio = 0.5
-
-show(json!({"key": "hp_cockcroft_gault", "inputs": {"age": "60", "weight": "72 kg", "Scr": "1", "sex": "male"}}));
-// SOLVED
-// CrCl = 80.0
-
-show(json!({"key": "hp_alveolar_ventilation_co2", "inputs": {"VCO2": "200 mL/min", "PaCO2": "40 mmHg"}}));
-// SOLVED
-// VA = 4.31473549332
-```
-
 ## Guides
 
 - Desktop app guide: the window, every calculation, scenes and charts: [PDF](https://huggingface.co/AI999X/human-physiology-ai999x/blob/main/docs/human_physiology_ai999x_desktop_guide.pdf) · [HTML](https://huggingface.co/AI999X/human-physiology-ai999x/blob/main/docs/human_physiology_ai999x_desktop_guide.html) · [Markdown](https://huggingface.co/AI999X/human-physiology-ai999x/blob/main/docs/human_physiology_ai999x_desktop_guide.md)
@@ -324,7 +222,7 @@ show(json!({"key": "hp_alveolar_ventilation_co2", "inputs": {"VCO2": "200 mL/min
 
 Every calculation, with its formula, a worked example and its figures: **[Human Physiology on ai999x.com](https://www.ai999x.com/models/human-physiology-ai999x/)**. Install guides for the app and the command line: [https://www.ai999x.com/desktop-cli/](https://www.ai999x.com/desktop-cli/).
 
-Version 1.6.4 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
+Version 1.6.6 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
 
 *The Future Is Self-Improving.*
 
